@@ -48,7 +48,6 @@ else:
         ## Baby video
         baby_list = glob.glob(f"{vid_path}/{child}_baby*.mp4")
         baby_vid = VideoFileClip(baby_list[0])
-        ## Get start time of baby video
         t_baby = baby_list[0][-10:-5]
         t_baby = t_baby.replace("M", ":")
         t_baby = datetime.strptime(t_baby, "%M:%S")
@@ -56,7 +55,6 @@ else:
         screen_list = glob.glob(f"{vid_path}/{child}_screen*.mp4")
         screen_vid = VideoFileClip(screen_list[0])
         screen_vid = screen_vid.resize(0.25).margin(5) ##downsize video to 25% and add a 5px border
-        ## Get start time of screen video
         t_screen = screen_list[0][-10:-5]
         t_screen = t_screen.replace("M", ":")
         t_screen = datetime.strptime(t_screen, "%M:%S")
