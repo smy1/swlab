@@ -1,13 +1,13 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: Peekaboo (aka Omi2)
 #### Date: 21.06.2024 (long count: 13.0.11.12.0, 5 Ajpu')
-#### Author: MY Sia (with lots of help from the web, see README.txt for more)
+#### Author: MY Sia (with lots of help from the web, see README.md for more)
 
 #### Aim of script: Concatenate short videos into a long one; batch process several cameras (BABY, SCREEN, & 3 SBRs) of several children
 ##Input: Multiple videos (each has a duration of 1 minute) stored in a folder (one folder for each camera)
 ##Output: A single video per camera per child
 ##Recommended directory: project folder -> child folder -> camera folder -> short videos (e.g., <desktop>/Peekaboo/P01/BABY/<videos>)
-##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README.txt for more.
+##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README.md for more.
 
 ########################################
 #### START HERE:
