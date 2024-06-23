@@ -1,13 +1,13 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: Peekaboo (aka Omi2)
 #### Date: 21.06.2024 (long count: 13.0.11.12.0, 5 Ajpu')
-#### Author: MY Sia (with lots of help from the web, see README for more)
+#### Author: MY Sia (with lots of help from the web, see README.md for more)
 
 #### Aim of script: Sync and overlay a downsized SCREEN video on a BABY video for gaze coding
 ##Input: A video showing the child's face (BABY video) and a video showing the screen that the child is watching (SCREEN video)
 ##Output: A single video per child with the BABY video as the main video and the SCREEN video overlaid on the top left corner
 ##Recommended directory: project folder -> child folder -> videos (e.g., <desktop>/Peekaboo/P01/<videos>)
-##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README for more.
+##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README.md for more.
 
 ########################################
 #### START HERE:
