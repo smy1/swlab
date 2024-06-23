@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: Peekaboo (aka Omi2)
-#### Date: 21.06.2024 (long count: 13.0.11.12.0, 5 Ajpu')
+#### Date: 23.06.2024 (long count: 13.0.11.12.2, 7 Iq')
 #### Author: MY Sia (with lots of help from the web, see README.md for more)
 
 #### Aim of script: Sync and overlay a downsized SCREEN video on a BABY video for gaze coding
@@ -23,26 +23,26 @@ folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project fo
 
 ########################################
 #### LOOP THROUGH SEVERAL BABIES:
-group = ["062", "063"] ##which child folder are we processing?
-start = [7, 19] ##the seconds at which the experiment STARTED in the SCREEN video
-end = [473, 637] ##the seconds at which the experiment ENDED in the SCREEN video
+children = ["071", "072"] ##which child folder are we processing?
+start = [55, 39] ##the seconds at which the experiment STARTED in the SCREEN video
+end = [162, 380] ##the seconds at which the experiment ENDED in the SCREEN video
 
-## To correct for out-of-sync videos:
-corr = [-0.2, 0]
+## Manually correct out-of-sync baby videos:
+corr = [-1.1, -1.3]
 ##This is used only in the corrective rounds (i.e., second attempt or later)
-##If the baby video lags behind the screen video, give a positive number; otherwise, give a negative number
-##a larger absolute number will introduce a larger time difference between the baby and screen videos
+##if the BABY video LAGS BEHIND the screen video, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
+##a larger absolute number will introduce a larger time difference between the two videos
 attempts = int(input(f"Please enter the attempt number in merging videos. "))
 
 n = 0
-if len(start) != len(group):
+if len(start) != len(children):
     print("The number of 'START' does not match the number of 'GROUP'.")
-elif len(end) != len(group):
+elif len(end) != len(children):
     print("The number of 'END' does not match the number of 'GROUP'.")
-elif attempts > 1 and len(corr) != len(group):
+elif attempts > 1 and len(corr) != len(children):
     print("The number of 'CORR' does not match the number of 'GROUP'.")
 else:
-    for child in group:
+    for child in children:
         ## (a)Prepare videos:
         vid_path = Path(f"{folder}/{child}/")
         ## Baby video
@@ -62,31 +62,16 @@ else:
         diff = t_screen - t_baby
         diff = diff.total_seconds()
         ## (b)Overlay screen video on baby video at the top left corner:
-        ## Sync the FIRST ROUND:
-        if attempts == 1:
-            if diff < 0: ##screen started recording before baby
-                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]-abs(diff), end[n]-abs(diff)),
-                                            screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-            elif diff > 0: ##screen started recording after baby
-                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
-                                            screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-            else: ##no difference in recording time
-                all_vid = CompositeVideoClip([baby_vid.subclip(start[n], end[n]),
+        if attempts == 1: ##first round
+            x = 0 ##no manual correction
+            all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
                                         screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-        ## Sync the CORRECTIVE ROUND:
-        elif attempts > 1:
-            if diff < 0: ##screen started recording before baby
-                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]-abs(diff), end[n]-abs(diff)),
-                                            screen_vid.subclip(start[n]+(corr[n]*-1), end[n]+(corr[n]*-1)).set_position((0, 50))])
-            elif diff > 0: ##screen started recording after baby
-                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
-                                            screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-            else: ##no difference in recording time
-                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+corr[n], end[n]+corr[n]),
+        elif attempts > 1: ##corrective round
+            x = corr[n]
+            all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
                                         screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-        ## (c)Save composite video
-        all_vid.write_videofile(f"{folder}/{child}/{child}_OMI_merged{attempts}_{start[n]}_{end[n]}_{diff}.mp4")
-        winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+        ## (c)Save composite video:
+        all_vid.write_videofile(f"{folder}/{child}/{child}_OMI_merged{attempts}_corr={x}.mp4")
         winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
         n += 1 ##now, do the next one
 
