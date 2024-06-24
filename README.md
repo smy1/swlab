@@ -1,21 +1,23 @@
 # swlab
-This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. 
-The codes are stored in their respective project folders.
-As of 22.06.2024 (long count: 13.0.11.12.1, 6 Imox), the repo only has one project folder, "Peekaboo".
+This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. The codes are stored in their respective 
+project folders.  
+As of 24.06.2024 (long count: 13.0.11.12.3, 8 Aq'ab'al), the repo only has one project folder, "Peekaboo".  
 [!NOTE]
-- The repo and this readme are still under construction and will be constantly updated.
+  - The repo and this readme are still under construction and will be constantly updated.
 
-## List of codes within each project folder (assuming that I will add more folders in the future)
+## List of codes within each project folder
 1. Peekaboo
- - merge-videos.py
- - merge-clips.py
- - omi-sync-videos.py
+   - merge-videos.py
+   - merge-clips.py
+   - omi-sync-videos.py
+   - sbr-sync-2videos.py
+   - sbr-sync-3videos.py
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
 size, and whether this relationship is mediated by children's predictive brain signal as measured using fNIRS. This project is a follow-up study of this
-[this paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272438). As we video recorded children during the experiment, we have to 
-process the videos (e.g., concatenate, sync, etc) before we can code the videos. The python scripts uploaded to this project folder allows us to automatise 
+[paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272438). As we video recorded children during the experiment, we have to 
+process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The python scripts uploaded to this project folder allows us to automatise 
 the task of processing videos.
 
 ### General requirements
@@ -35,10 +37,10 @@ I might improvise the code to deal with this problem in the future.
 
 ### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
-- [how to overlay videos, etc](https://zulko.github.io/moviepy/getting_started/compositing.html)
-- [how to calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
-- [how to loop through several videos in a folder](https://stackoverflow.com/a/75788036)
-- [how to combine videos one after another](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
+- how to [overlay videos, etc](https://zulko.github.io/moviepy/getting_started/compositing.html)
+- how to [loop several videos in a folder](https://stackoverflow.com/a/75788036)
+- how to [join videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
+- how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 
 ### Script: merge-videos.py
 - **What it does**: Concatenate short videos in each camera folder into a long complete video.
@@ -56,3 +58,14 @@ I relied heavily on the links below when writing these codes. You might also fin
 ### Script: omi-sync-videos.py
 - **What it does**: Downsize the screen video to 25%, then overlay (and sync) it on the baby video on the top left corner
 - **Why I wrote it**: We need to code infants' gaze per trial to determine for each trial whether the infants were looking at the screen.
+
+### Script: sbr-sync-3videos.py
+- **What it does**: Synchronise and display the main SBR (shared book reading) video on the left and two (downsized) minor SBR videos on the right (one on top and the other on the bottom)
+- **Why I wrote it**: We need to code parent-child interaction during SBR. We have three cameras positions at different locations of the lab to capture different
+  angles of the parent-child dyads (so that they are free to move around, change position, etc. while we still manage to record their interaction without physically
+  moving the camera).
+  
+### Script: sbr-sync-2videos.py
+- **What it does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
+- **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes, one of the cameras failed
+  to record the reading session or is problematic, hence, it has to be excluded from the final video.
