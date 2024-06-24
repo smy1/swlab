@@ -5,7 +5,7 @@ As of 24.06.2024 (long count: 13.0.11.12.3, 8 Aq'ab'al), the repo only has one p
 construction and will be constantly updated.
 
 ## List of codes within each project folder
-<font size="5">1. Peekaboo</font>
+<font size=5>1. Peekaboo</font>
    - [merge-videos.py](#merge-videospy)
    - [merge-clips.py](#merge-clipspy)
    - [omi-sync-videos.py](#omi-sync-videospy)
