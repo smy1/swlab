@@ -5,12 +5,12 @@ As of 24.06.2024 (long count: 13.0.11.12.3, 8 Aq'ab'al), the repo only has one p
 construction and will be constantly updated.
 
 ## List of codes within each project folder
-1. Peekaboo
-   - [merge-videos.py](#script-merge-videospy)
-   - [merge-clips.py](#script-merge-clipspy)
-   - [omi-sync-videos.py](#script-omi-sync-videospy)
-   - [sbr-sync-3videos.py](#script-sbr-sync-3videospy)
-   - [sbr-sync-2videos.py](#script-sbr-sync-2videospy)
+<font size="5">1. Peekaboo</font>
+   - [merge-videos.py](#merge-videospy)
+   - [merge-clips.py](#merge-clipspy)
+   - [omi-sync-videos.py](#omi-sync-videospy)
+   - [sbr-sync-3videos.py](#sbr-sync-3videospy)
+   - [sbr-sync-2videos.py](#sbr-sync-2videospy)
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
@@ -41,12 +41,12 @@ I relied heavily on the links below when writing these codes. You might also fin
 - how to [join videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 
-### Script: merge-videos.py
+### merge-videos.py
 - **What it does**: Concatenate short videos in each camera folder into a long complete video.
 - **Why I wrote it**: The cameras that we are currently using to video record our test sessions store the recorded videos in short clips of one minute
   duration each. Hence, we need to combine these short videos into one complete and coherent video for each participant.
 
-### Script: merge-clips.py
+### merge-clips.py
 - **What it does**: Concatenate short videos in sub-folders which are stored in a camera folder into a long complete video
 - **Why I wrote it**: The same reason as why I wrote _merge-videos.py_. We need a slightly different script because there is a camera that stores the recorded
   videos in short clips of three seconds each. These super short video clips are stored in folders that indicate the minute of the recording, e.g., a
@@ -54,17 +54,17 @@ I relied heavily on the links below when writing these codes. You might also fin
   several three-second-long clips recorded at the 10th minute of the hour of experiment. Hence, we need to first combine the super short clips in each
   "minute" folder before combining them into one complete and coherent video for each participant.
 
-### Script: omi-sync-videos.py
+### omi-sync-videos.py
 - **What it does**: Downsize the screen video to 25%, then overlay (and sync) it on the baby video on the top left corner
 - **Why I wrote it**: We need to code infants' gaze per trial to determine for each trial whether the infants were looking at the screen.
 
-### Script: sbr-sync-3videos.py
+### sbr-sync-3videos.py
 - **What it does**: Synchronise and display the main SBR (shared book reading) video on the left and two (downsized) minor SBR videos on the right (one on top and the other on the bottom)
 - **Why I wrote it**: We need to code parent-child interaction during SBR. We have three cameras positions at different locations of the lab to capture different
   angles of the parent-child dyads (so that they are free to move around, change position, etc. while we still manage to record their interaction without physically
   moving the camera).
   
-### Script: sbr-sync-2videos.py
+### sbr-sync-2videos.py
 - **What it does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
-  one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final JOINED video.
+  one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
