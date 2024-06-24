@@ -6,11 +6,11 @@ construction and will be constantly updated.
 
 ## List of codes within each project folder
 1. Peekaboo
-   - [merge-videos.py](Script:-merge-videos.py)
-   - [merge-clips.py](Script:-merge-clips.py)
-   - [omi-sync-videos.py](Script:-omi-sync-videos.py)
-   - [sbr-sync-3videos.py](Script:-sbr-sync-3videos.py)
-   - [sbr-sync-2videos.py](Script:-sbr-sync-2videos.py)
+   - [merge-videos.py](#Script:-merge-videos.py)
+   - [merge-clips.py](#Script:-merge-clips.py)
+   - [omi-sync-videos.py](#Script:-omi-sync-videos.py)
+   - [sbr-sync-3videos.py](#Script:-sbr-sync-3videos.py)
+   - [sbr-sync-2videos.py](#Script:-sbr-sync-2videos.py)
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
