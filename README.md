@@ -37,16 +37,18 @@ I might improvise the code to deal with this problem in the future.
 ### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
 - how to [overlay videos, etc](https://zulko.github.io/moviepy/getting_started/compositing.html)
-- how to [loop several videos in a folder](https://stackoverflow.com/a/75788036)
-- how to [join videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
+- how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
+- how to [join multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 
 ### merge-videos.py
+- [The script](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py)
 - **What it does**: Concatenate short videos in each camera folder into a long complete video.
 - **Why I wrote it**: The cameras that we are currently using to video record our test sessions store the recorded videos in short clips of one minute
   duration each. Hence, we need to combine these short videos into one complete and coherent video for each participant.
 
 ### merge-clips.py
+- [The script](https://github.com/smy1/swlab/blob/main/peekaboo/merge-clips.py)
 - **What it does**: Concatenate short videos in sub-folders which are stored in a camera folder into a long complete video
 - **Why I wrote it**: The same reason as why I wrote _merge-videos.py_. We need a slightly different script because there is a camera that stores the recorded
   videos in short clips of three seconds each. These super short video clips are stored in folders that indicate the minute of the recording, e.g., a
@@ -55,16 +57,19 @@ I relied heavily on the links below when writing these codes. You might also fin
   "minute" folder before combining them into one complete and coherent video for each participant.
 
 ### omi-sync-videos.py
+- [The script](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py)
 - **What it does**: Downsize the screen video to 25%, then overlay (and sync) it on the baby video on the top left corner
 - **Why I wrote it**: We need to code infants' gaze per trial to determine for each trial whether the infants were looking at the screen.
 
 ### sbr-sync-3videos.py
+- [The script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py)
 - **What it does**: Synchronise and display the main SBR (shared book reading) video on the left and two (downsized) minor SBR videos on the right (one on top and the other on the bottom)
 - **Why I wrote it**: We need to code parent-child interaction during SBR. We have three cameras positions at different locations of the lab to capture different
   angles of the parent-child dyads (so that they are free to move around, change position, etc. while we still manage to record their interaction without physically
   moving the camera).
   
 ### sbr-sync-2videos.py
+- [The script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py)
 - **What it does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
