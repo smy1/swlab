@@ -22,9 +22,10 @@ import winsound ##not necessary, just to get Python to notify me when it is done
 folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project folder
 
 ########################################
-#### Enter information
 dur = 334 ##duration of the SBR is fixed: 5min 34sec
 problem = [] ##empty holder to store problematic IDs
+
+#### Enter information
 children = ["059", "065", "070", "071"] ##which child folder are we looping?
 main = [3, 1, 3, 2] ##the number of the MAIN SBR video (1, 2, or 3)
 start = [28, 48, 6, 53] ##the seconds at which SBR STARTED in the MAIN video
@@ -43,7 +44,7 @@ if len(main) != len(children):
     print("The number of 'MAIN' does not match the number of 'CHILDREN'.")
 elif len(start) != len(children):
     print("The number of 'START' does not match the number of 'CHILDREN'.")
-elif attempts > 1 and len(corr1) != len(children) or len(corr2) != len(children):
+elif attempts > 1 and (len(corr1) != len(children) or len(corr2) != len(children)):
     print("The number of 'CORR1' or 'CORR2' does not match the number of 'CHILDREN'.")
 else:
     #### Loop through several babies
