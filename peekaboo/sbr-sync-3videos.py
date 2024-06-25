@@ -92,7 +92,7 @@ else:
             else:
                 major_vid = major_vid.subclip(start[n], end)
             if attempts == 1: ##first round
-                x = 0 ##no manual correction
+                x = "corr=0" ##no manual correction
                 if end+diff1 > minor_vid1.duration:
                     minor_vid1 = minor_vid1.subclip(start[n]+diff1, minor_vid1.duration)
                 else:
