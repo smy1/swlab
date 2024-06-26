@@ -123,8 +123,8 @@ else:
 
 #### Were there any problematic camera folders?
 if len(problem) > 0:
-    for x in problem:
-        print(x)
+    for i in problem:
+        print(i)
 else:
     print("All the videos were concatenated successfully.")
 

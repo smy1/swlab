@@ -22,15 +22,16 @@ import winsound ##not necessary, just to get Python to notify me when it is done
 folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project folder
 
 ########################################
-#### Enter information
 dur = 334 ##duration of the SBR is fixed: 5min 34sec
+problem = [] ##empty holder to store problematic IDs
+
+#### Enter information
 children = ["035", "038", "051", "066"] ##which child folder are we looping?
-major = [1, 2, 3, 2] ##the camera number that has the best view of the parent-child dyad
-minor = [2, 1, 1, 1] ##the other camera number
+major = [1, 2, 3, 2] ##the camera (1, 2, or 3) that has the best view of the parent-child dyad
 start = [20, 60, 25, 5] ##the seconds at which SBR STARTED in the MAIN video
 
 ## Manually correct out-of-sync minor videos:
-corr = [2, 1]
+corr = [2, 1, -1.7, 1.3]
 ##this is used only in the corrective rounds (i.e., second attempt or later)
 ##if the MINOR video LAGS BEHIND, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
 ##a larger absolute number given will introduce a larger time difference between the videos
@@ -40,8 +41,6 @@ n = 0
 #### Check entry of information
 if len(major) != len(children):
     print("The number of 'MAJOR' does not match the number of 'CHILDREN'.")
-elif len(minor) != len(children):
-    print("The number of 'MINOR' does not match the number of 'CHILDREN'.")
 elif len(start) != len(children):
     print("The number of 'START' does not match the number of 'CHILDREN'.")
 elif attempts > 1 and len(corr) != len(children):
@@ -51,16 +50,28 @@ else:
     for child in children:
         ## (a)Prepare videos:
         vid_path = Path(f"{folder}/{child}/")
+        vid_list = glob.glob(f"{vid_path}/{child}_sbr*.mp4")
+        ## Check for problematic cases
+        if len(vid_list) != 2:
+            x = f"There should only be 3 SBR videos in {child}'s folder."
+            problem.append(x)
+            n += 1 ##skip this problematic case
+        else:
+            ## Identify main and minor videos
+            if vid_list[0][-15:-11] == f"sbr{major[n]}":
+                maj_n = 0
+                min_n = 1
+            else:
+                maj_n = 1
+                min_n = 0
         ## The main video
-        major_list = glob.glob(f"{vid_path}/{child}_sbr{major[n]}*.mp4")
-        major_vid = VideoFileClip(major_list[0])
-        t_major = major_list[0][-10:-5]
+        major_vid = VideoFileClip(vid_list[maj_n])
+        t_major = major_list[maj_n][-10:-5]
         t_major = t_major.replace("M", ":")
         t_major = datetime.strptime(t_major, "%M:%S")
         ## The minor video
-        minor_list = glob.glob(f"{vid_path}/{child}_sbr{minor[n]}*.mp4")
-        minor_vid = VideoFileClip(minor_list[0], audio=False)
-        t_minor = minor_list[0][-10:-5]
+        minor_vid = VideoFileClip(vid_list[min_n], audio=False)
+        t_minor = minor_list[min_n][-10:-5]
         t_minor = t_minor.replace("M", ":")
         t_minor = datetime.strptime(t_minor, "%M:%S")
         ## Get time difference between videos
@@ -92,5 +103,12 @@ else:
         final_sbr.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_corr={x}.mp4")
         winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
         n += 1 ##now, do the next one
+
+#### Were there any problematic camera folders?
+if len(problem) > 0:
+    for i in problem:
+        print(i)
+else:
+    print("All the videos were concatenated successfully.")
 
 #### END OF SCRIPT ####
