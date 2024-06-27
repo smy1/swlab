@@ -21,7 +21,7 @@ print("Remember to MOVE CAPPING videos in the BABY folder to a sub-folder.")
 folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project folder
 
 ########################################
-children = ["007", "P6"] ##which child folder are we processing?
+children = ["031", "038", "042", "063", "071"] ##which child folder are we processing?
 camera = ["BABY", "SCREEN", "SBR1", "SBR2", "SBR3"] ##which camera folder are we processing?
 problem = [] ##empty holder to store problematic IDs
 
@@ -44,9 +44,10 @@ for child in children:
                 video_list.append(clip)
             ## (c)Merge & save the output:
             joined = concatenate_videoclips(video_list)
-            joined2 = joined.set_fps(fps=30) ##standardise frame per second for all videos
+            joined = joined.set_fps(fps=30) ##standardise frame per second for all videos
             first_frame = file_list[0][-21:-15]
-            joined2.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
+            cam2 = cam.lower()
+            joined.write_videofile(f"{folder}/{child}/{child}_{cam2}_{first_frame}.mp4")
             winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
 
 #### Were there any problematic camera folders?

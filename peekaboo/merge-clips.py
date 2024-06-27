@@ -61,8 +61,9 @@ for child in children:
     first_frame = mini_file_list[0][-21:-15]
     ## (3)Merge & save the final output:
     joined = concatenate_videoclips(video_list)
-    joined2 = joined.set_fps(fps=30) ##standardise frame per second for all videos
-    joined2.write_videofile(f"{folder}/{child}/{child}_{camera}_{first_frame}.mp4")
+    joined = joined.set_fps(fps=30) ##standardise frame per second for all videos
+    cam = camera.lower()
+    joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
     n += 1 ##now do the next one
 
