@@ -117,7 +117,7 @@ else:
             final_all = clips_array([[major_vid.resize(height=720).volumex(3).margin(5), ##increase volume
                                       final_min.resize(height=720).volumex(0).margin(4)], ])
             ## (d)Save the output:
-            final_all.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_{x}.mp4")
+            final_all.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_{start[n]}_{x}.mp4")
             winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
             n += 1 ##now, do the next one
 
