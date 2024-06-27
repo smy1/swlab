@@ -100,7 +100,7 @@ else:
         minor_vid = minor_vid.resize(0.4).margin(8)
         final_sbr = clips_array([[major_vid, minor_vid], ])
         ## (c)Save the output:
-        final_sbr.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_corr={x}.mp4")
+        final_sbr.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_{start[n]}_corr={x}.mp4")
         winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
         n += 1 ##now, do the next one
 
