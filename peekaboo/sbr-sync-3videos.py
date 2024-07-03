@@ -112,10 +112,29 @@ else:
                 else:
                     minor_vid2 = minor_vid2.subclip(start[n]+diff2+corr2[n], end+diff2+corr2[n])
             ## (c)Resize videos:
-            final_min = clips_array([[minor_vid1.resize(width=480).margin(4)], ##add a border
-                                     [minor_vid2.resize(width=480).margin(4)]])
-            final_all = clips_array([[major_vid.resize(height=720).volumex(3).margin(5), ##increase volume
-                                      final_min.resize(height=720).volumex(0).margin(4)], ])
+            ##!!CHANGED HERE:
+            #move up to after n=0
+                vol_mj = 0
+                vol_mn1 = 0
+                vol_mn2 = 0
+            #move up to reading major vid as a video clip
+            if vid_list[major][-15:-11] == "sbr2":
+                vol_mj = 4
+            elif vid_list[minor1][-15:-11] == "sbr2":
+                vol_mn1 = 4
+            elif vid_list[minor2][-15:-11] == "sbr2":
+                vol_mn2 = 4     
+            #stay put
+            #blue RGB: color =[100, 100, 255]
+            #might be helpful: https://www.geeksforgeeks.org/moviepy-creating-color-clip/
+            #sounds useful: https://moviepy-tburrows13.readthedocs.io/en/improve-docs/ref/videofx.html
+            #that's the one we need: https://moviepy-tburrows13.readthedocs.io/en/improve-docs/ref/videofx/moviepy.video.fx.margin.html#moviepy.video.fx.margin
+            #if the colour code below works, move it up like volume
+            final_min = clips_array([[minor_vid1.resize(width=480).volumex(vol_mn1).margin(margin_size=4, color=(0, 0, 255))], ##add a border
+                                     [minor_vid2.resize(width=480).volumex(vol_mn2).margin(4)]])
+            final_all = clips_array([[major_vid.resize(height=720).volumex(vol_mj).margin(5), ##increase volume
+                                      final_min.resize(height=720).margin(4)], ])
+            ##!!END OF CHANGE
             ## (d)Save the output:
             final_all.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_{start[n]}_{x}.mp4")
             winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
