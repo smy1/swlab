@@ -22,19 +22,19 @@ import winsound ##not necessary, just to get Python to notify me when it is done
 folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project folder
 
 ########################################
-#### LOOP THROUGH SEVERAL BABIES:
-children = ["071", "072"] ##which child folder are we processing?
-start = [55, 39] ##the seconds at which the experiment STARTED in the SCREEN video
-end = [162, 380] ##the seconds at which the experiment ENDED in the SCREEN video
-
+#### Enter information
+attempts = 4 ##the number of attempts in merging videos
+children = ["076", "078"] ##which child folder are we processing?
+start = [20, 19] ##the seconds at which the experiment STARTED in the SCREEN video
+end = [238, 609] ##the seconds at which the experiment ENDED in the SCREEN video
 ## Manually correct out-of-sync baby videos:
-corr = [-1.1, -1.3]
+corr = [-1, 0.9]
 ##This is used only in the corrective rounds (i.e., second attempt or later)
 ##if the BABY video LAGS BEHIND the screen video, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
 ##a larger absolute number will introduce a larger time difference between the two videos
-attempts = int(input(f"Please enter the attempt number in merging videos. "))
 
 n = 0
+#### Check entry of information
 if len(start) != len(children):
     print("The number of 'START' does not match the number of 'GROUP'.")
 elif len(end) != len(children):
@@ -42,6 +42,7 @@ elif len(end) != len(children):
 elif attempts > 1 and len(corr) != len(children):
     print("The number of 'CORR' does not match the number of 'GROUP'.")
 else:
+    #### Loop through several babies
     for child in children:
         ## (a)Prepare videos:
         vid_path = Path(f"{folder}/{child}/")
