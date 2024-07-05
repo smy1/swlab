@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: Peekaboo (aka Omi2)
-#### Date: 23.06.2024 (long count: 13.0.11.12.2, 7 Iq')
+#### Date: 05.07.2024 (long count: 13.0.11.12.14, 6 Ix')
 #### Author: MY Sia (with lots of help from the web, see README.md for more)
 
 #### Aim of script: Sync and combine three SBR (shared book reading) videos for PEER coding
@@ -22,24 +22,32 @@ import winsound ##not necessary, just to get Python to notify me when it is done
 folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project folder
 
 ########################################
-dur = 334 ##duration of the SBR is fixed: 5min 34sec
+#### Set default values
+dur = 334 ##duration of the SBR: 5min 34sec
 problem = [] ##empty holder to store problematic IDs
+## Set audio volume as 0 and border colour (RGB) as black
+## - will be updated in the codes later
+vol_mj = 0
+vol_mn1 = 0
+vol_mn2 = 0
+col_mj = (0, 0, 0)
+col_mn1 = (0, 0, 0)
+col_mn2 = (0, 0, 0)
 
 #### Enter information
-children = ["059", "065", "070", "071"] ##which child folder are we looping?
-main = [3, 1, 3, 2] ##the number of the MAIN SBR video (1, 2, or 3)
-start = [28, 48, 6, 53] ##the seconds at which SBR STARTED in the MAIN video
-
+attempts = 4 ##the number of attempts in merging videos
+children = ["013", "074"] ##which child folder are we looping?
+main = [3, 2] ##the camera number (1, 2, or 3) that has the best view of the parent-child dyad
+start = [35, 29] ##the seconds at which SBR STARTED in the MAIN video
 ## Manually correct out-of-sync minor videos:
-corr1 = [-2.5, -2, -1, 0] ##to correct the minor-1 video (top right corner)
-corr2 = [-2.5, 0.6, -2, 0] ##to correct the minor-2 video (bottom right corner)
-##these are used only in the corrective rounds (i.e., second attempt or later)
-##if the MINOR video LAGS BEHIND, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
-##a larger absolute number given will introduce a larger time difference between the videos
-attempts = int(input(f"Please enter the attempt number in merging videos. "))
+corr1 = [1.4, 1] ##to correct the minor-1 video (top right corner)
+corr2 = [1, 1.2] ##to correct the minor-2 video (bottom right corner)
+## - these are used only in the corrective rounds (i.e., second attempt or later)
+## - if the MINOR video LAGS BEHIND, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
+## - a larger absolute number given will introduce a larger time difference between the videos
 
-n = 0
 #### Check entry of information
+n = 0 ##to loop the information entered above
 if len(main) != len(children):
     print("The number of 'MAIN' does not match the number of 'CHILDREN'.")
 elif len(start) != len(children):
@@ -64,18 +72,30 @@ else:
             allowed.remove(major)
             minor1 = allowed[0]
             minor2 = allowed[1]
+            ## Search for SBR2-camera, which happened to have the clearest audio
+            ## - retain only SBR2's audio, the rest will be muted
+            ## - add a blue border to SBR2-camera
             ## The main video
             major_vid = VideoFileClip(vid_list[major])
+            if vid_list[major][-15:-11] == "sbr2":
+                vol_mj = 6 ##increase the volume by 6
+                col_mj = (0, 0, 255)
             t_major = vid_list[major][-10:-5]
             t_major = t_major.replace("M", ":")
             t_major = datetime.strptime(t_major, "%M:%S")
             ## The first minor video (top right)
             minor_vid1 = VideoFileClip(vid_list[minor1])
+            if vid_list[minor1][-15:-11] == "sbr2":
+                vol_mn1 = 6
+                col_mn1 = (0, 0, 255)
             t_minor1 = vid_list[minor1][-10:-5]
             t_minor1 = t_minor1.replace("M", ":")
             t_minor1 = datetime.strptime(t_minor1, "%M:%S")
             ## The second minor video (bottom right)
             minor_vid2 = VideoFileClip(vid_list[minor2])
+            if vid_list[minor2][-15:-11] == "sbr2":
+                vol_mn2 = 6
+                col_mn2 = (0, 0, 255)
             t_minor2 = vid_list[minor2][-10:-5]
             t_minor2 = t_minor2.replace("M", ":")
             t_minor2 = datetime.strptime(t_minor2, "%M:%S")
@@ -111,30 +131,11 @@ else:
                     minor_vid2 = minor_vid2.subclip(start[n]+diff2+corr2[n], minor_vid2.duration)
                 else:
                     minor_vid2 = minor_vid2.subclip(start[n]+diff2+corr2[n], end+diff2+corr2[n])
-            ## (c)Resize videos:
-            ##!!CHANGED HERE:
-            #move up to after n=0
-                vol_mj = 0
-                vol_mn1 = 0
-                vol_mn2 = 0
-            #move up to reading major vid as a video clip
-            if vid_list[major][-15:-11] == "sbr2":
-                vol_mj = 4
-            elif vid_list[minor1][-15:-11] == "sbr2":
-                vol_mn1 = 4
-            elif vid_list[minor2][-15:-11] == "sbr2":
-                vol_mn2 = 4     
-            #stay put
-            #blue RGB: color =[100, 100, 255]
-            #might be helpful: https://www.geeksforgeeks.org/moviepy-creating-color-clip/
-            #sounds useful: https://moviepy-tburrows13.readthedocs.io/en/improve-docs/ref/videofx.html
-            #that's the one we need: https://moviepy-tburrows13.readthedocs.io/en/improve-docs/ref/videofx/moviepy.video.fx.margin.html#moviepy.video.fx.margin
-            #if the colour code below works, move it up like volume
-            final_min = clips_array([[minor_vid1.resize(width=480).volumex(vol_mn1).margin(margin_size=4, color=(0, 0, 255))], ##add a border
-                                     [minor_vid2.resize(width=480).volumex(vol_mn2).margin(4)]])
-            final_all = clips_array([[major_vid.resize(height=720).volumex(vol_mj).margin(5), ##increase volume
-                                      final_min.resize(height=720).margin(4)], ])
-            ##!!END OF CHANGE
+            ## (c)Resize videos, add borders:
+            final_min = clips_array([[minor_vid1.resize(width=480).volumex(vol_mn1).margin(8, color=col_mn1)],
+                                     [minor_vid2.resize(width=480).volumex(vol_mn2).margin(8, color=col_mn2)]])
+            final_all = clips_array([[major_vid.resize(height=720).volumex(vol_mj).margin(8, color=col_mj),
+                                      final_min.resize(height=720)], ])
             ## (d)Save the output:
             final_all.write_videofile(f"{folder}/{child}/{child}_allSBR{attempts}_{start[n]}_{x}.mp4")
             winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
