@@ -25,7 +25,7 @@ If the child was not looking at the screen for a particular trial (coded from th
    - [remove_stim.m](#remove_stimm)
 
 ## Python scripts
-### General requirements (Python)
+### General requirements
 In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
 ```
@@ -40,7 +40,7 @@ cases, there could be a video recording that started at the 59th minute (e.g., 0
 10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. 
 I might improvise the code to deal with this problem in the future.
 
-### Very helpful resources (Python)
+### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
 - how to [overlay videos, etc](https://zulko.github.io/moviepy/getting_started/compositing.html)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
@@ -76,16 +76,17 @@ I relied heavily on the links below when writing these codes. You might also fin
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
 
 ## MATLAB script
-### General requirements (MATLAB)
+### General requirements
 - Download and install MATLAB (you'll need an institution account). Online tutorials suggest that Homer3 is only compatible with MATLAB R2017b.
 - Download and add Homer3 to the MATLAB path. Link [here](https://github.com/BUNPC/Homer3/wiki/Download-and-Installation)
 
-### Very helpful resources (MATLAB)
+### Very helpful resources
 - Introduction to MATLAB: [youtube link](https://www.youtube.com/watch?v=MYRkBoojh_Y&list=PLx_IWc-RN82tw_J9nYqIc0tjvaMjowRVi&pp=iAQB)
-- Documentation on [.snirf](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
-- Documentation on [Homer3](https://github.com/BUNPC/Homer3/wiki/)
-- Various Homer3 video tutorials: [NIRx](https://www.youtube.com/watch?v=I_eH0_ed8I4), [Prof. CF Lu](https://www.youtube.com/watch?v=bHhn2vBXF0Y) (slides in English, explanation in Mandarin)
+- SNIRF: [documentation](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
+- Homer3: [documentation](https://github.com/BUNPC/Homer3/wiki/), video tutorials by [NIRx](https://www.youtube.com/watch?v=I_eH0_ed8I4),
+  [Prof. CF Lu](https://www.youtube.com/watch?v=bHhn2vBXF0Y) (slides in English, explanation in Mandarin)
 
 ### remove_stim.m
-- **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) does**: Reject stimuli of snirf data files based on an excel file
-- **Why I wrote it**: The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files.
+- **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) does**: Reject stimuli in snirf data files based on an excel file
+- **Why I wrote it**: The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, 
+  her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
