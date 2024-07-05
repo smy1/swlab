@@ -1,17 +1,12 @@
 # swlab
 This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. The codes are stored in their respective 
 project folders.  
+
 As of 05.07.2024 (long count: 13.0.11.12.14, 6 Ix'), the repo only has one project folder, "Peekaboo". The repo and this readme are still under 
 construction and will be constantly updated.
 
-## List of codes within each project folder
-1. Peekaboo
-   - [merge-videos.py](#merge-videospy)
-   - [merge-clips.py](#merge-clipspy)
-   - [omi-sync-videos.py](#omi-sync-videospy)
-   - [sbr-sync-3videos.py](#sbr-sync-3videospy)
-   - [sbr-sync-2videos.py](#sbr-sync-2videospy)
-   - [remove_stim.m](#remove_stimm)
+## List of project folders
+1. [Peekaboo](#1peekaboo)
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
@@ -19,9 +14,17 @@ size, and whether this relationship is mediated by children's predictive brain s
 [paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272438). As we video recorded children during the experiment, we have to 
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
 the task of processing videos.  
-There is also a MATLAB script (I didn't write this from scratch, see below for details) which toggles off rejected stimuli in .snirf files to be further processed in Homer3.
+   - [merge-videos.py](#merge-videospy)
+   - [merge-clips.py](#merge-clipspy)
+   - [omi-sync-videos.py](#omi-sync-videospy)
+   - [sbr-sync-3videos.py](#sbr-sync-3videospy)
+   - [sbr-sync-2videos.py](#sbr-sync-2videospy)
 
-### Python scripts
+There is also a MATLAB script (I didn't write this from scratch, see below for details) which toggles off rejected stimuli in .snirf files to be further processed in Homer3. 
+If the child was not looking at the screen for a particular trial (coded from the merged videos mentioned above), the trial (i.e., the stimulus in .snirf files) will be removed from future analysis.
+   - [remove_stim.m](#remove_stimm)
+
+## Python scripts
 ### General requirements (Python)
 In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
@@ -72,7 +75,7 @@ I relied heavily on the links below when writing these codes. You might also fin
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
 
-### MATLAB script
+## MATLAB script
 ### General requirements (MATLAB)
 - Download and install MATLAB (you'll need an institution account). Online tutorials suggest that Homer3 is only compatible with MATLAB R2017b.
 - Download and add Homer3 to the MATLAB path. Link [here](https://github.com/BUNPC/Homer3/wiki/Download-and-Installation)
