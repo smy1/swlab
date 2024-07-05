@@ -1,7 +1,7 @@
 # swlab
 This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. The codes are stored in their respective 
 project folders.  
-As of 24.06.2024 (long count: 13.0.11.12.3, 8 Aq'ab'al), the repo only has one project folder, "Peekaboo". The repo and this readme are still under 
+As of 05.07.2024 (long count: 13.0.11.12.14, 6 Ix'), the repo only has one project folder, "Peekaboo". The repo and this readme are still under 
 construction and will be constantly updated.
 
 ## List of codes within each project folder
@@ -11,15 +11,18 @@ construction and will be constantly updated.
    - [omi-sync-videos.py](#omi-sync-videospy)
    - [sbr-sync-3videos.py](#sbr-sync-3videospy)
    - [sbr-sync-2videos.py](#sbr-sync-2videospy)
+   - [remove_stim.m](#remove_stimm)
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
 size, and whether this relationship is mediated by children's predictive brain signal as measured using fNIRS. This project is a follow-up study of this
 [paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272438). As we video recorded children during the experiment, we have to 
-process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The python scripts uploaded to this project folder allows us to automatise 
-the task of processing videos.
+process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
+the task of processing videos.  
+There is also a MATLAB script (I didn't write this from scratch, see below for details) which toggles off rejected stimuli in .snirf files to be further processed in Homer3.
 
-### General requirements
+### Python scripts
+### General requirements (Python)
 In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
 ```
@@ -34,7 +37,7 @@ cases, there could be a video recording that started at the 59th minute (e.g., 0
 10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. 
 I might improvise the code to deal with this problem in the future.
 
-### Very helpful resources
+### Very helpful resources (Python)
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
 - how to [overlay videos, etc](https://zulko.github.io/moviepy/getting_started/compositing.html)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
@@ -68,3 +71,17 @@ I relied heavily on the links below when writing these codes. You might also fin
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
+
+### MATLAB script
+### General requirements (MATLAB)
+- Download and install MATLAB (you'll need an institution account). Online tutorials suggest that Homer3 is only compatible with MATLAB R2017b.
+- Download and add Homer3 to the MATLAB path. Link [here](https://github.com/BUNPC/Homer3/wiki/Download-and-Installation)
+
+### Very helpful resources (MATLAB)
+- Introduction to MATLAB: [youtube link](https://www.youtube.com/watch?v=MYRkBoojh_Y&list=PLx_IWc-RN82tw_J9nYqIc0tjvaMjowRVi&pp=iAQB)
+- Information about [.snirf](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
+- Information about [Homer3](https://github.com/BUNPC/Homer3/wiki/)
+
+### remove_stim.m
+- **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) does**: Reject stimuli of snirf data files based on an excel file
+- **Why I wrote it**: The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files.
