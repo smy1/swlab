@@ -14,7 +14,8 @@
 % - Homer3 v1.80.2 was used, not sure if the script is compatible with other versions
 
 %% START HERE:
-cd = uigetdir(pwd, 'Select the folder that contains .snirf files.');
+clear all
+cd = 'C:\Users\users\Desktop\PEEKABOO\peekanirs\peek_021';
 
 % start Homer3 to create groupResults.mat, if the .mat file already exists, skip this
 Homer3
@@ -23,8 +24,8 @@ Homer3
 %% PREPARE THE EXCEL FILE:
 % One sheet "nirs2ID" that matches snirf file name to participant ID
 % Another sheet "gaze" that codes for each trial whether the child was looking at the screen
-[n1, t1, nirs2ID] = xlsread('code0702.xlsx', 'nirs2ID'); %use the raw file so that we can read IDs as characters
-[gaze, t2, r2] = xlsread('code0702.xlsx', 'gaze'); %use the number file so that the gaze coding is treated as a double
+[n1, t1, nirs2ID] = xlsread('peeka021.xlsx', 'nirs2ID'); %use the raw file so that we can read IDs as characters
+[gaze, t2, r2] = xlsread('peeka021.xlsx', 'gaze'); %use the number file so that the gaze coding is treated as a double
 
 % Regardless of children's gaze:
 % - we want to retain only the first training trial to make it a "block design"
