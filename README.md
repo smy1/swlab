@@ -82,8 +82,9 @@ I relied heavily on the links below when writing these codes. You might also fin
 
 ### Very helpful resources (MATLAB)
 - Introduction to MATLAB: [youtube link](https://www.youtube.com/watch?v=MYRkBoojh_Y&list=PLx_IWc-RN82tw_J9nYqIc0tjvaMjowRVi&pp=iAQB)
-- Information about [.snirf](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
-- Information about [Homer3](https://github.com/BUNPC/Homer3/wiki/)
+- Documentation on [.snirf](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
+- Documentation on [Homer3](https://github.com/BUNPC/Homer3/wiki/)
+- Homer3 video tutorials by [NIRx](https://www.youtube.com/watch?v=7obWfg9C4Z8), [Prof. CF Lu](https://www.youtube.com/watch?v=bHhn2vBXF0Y) (slides in English, explanation in Mandarin)
 
 ### remove_stim.m
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) does**: Reject stimuli of snirf data files based on an excel file
