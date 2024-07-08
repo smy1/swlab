@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: Peekaboo (aka Omi2)
-#### Date: 05.07.2024 (long count: 13.0.11.12.14, 6 Ix')
+#### Date: 08.07.2024 (long count: 13.0.11.12.17, 9 No'j)
 #### Author: MY Sia (with lots of help from the web, see README.md for more)
 
 #### Aim of script: Sync and combine three SBR (shared book reading) videos for PEER coding
@@ -25,23 +25,15 @@ folder = "C:/Users/user/Desktop/peekaboo/peekadata" ##set path to the project fo
 #### Set default values
 dur = 334 ##duration of the SBR: 5min 34sec
 problem = [] ##empty holder to store problematic IDs
-## Set audio volume as 0 and border colour (RGB) as black
-## - will be updated in the codes later
-vol_mj = 0
-vol_mn1 = 0
-vol_mn2 = 0
-col_mj = (0, 0, 0)
-col_mn1 = (0, 0, 0)
-col_mn2 = (0, 0, 0)
 
 #### Enter information
-attempts = 4 ##the number of attempts in merging videos
-children = ["013", "074"] ##which child folder are we looping?
-main = [3, 2] ##the camera number (1, 2, or 3) that has the best view of the parent-child dyad
-start = [35, 29] ##the seconds at which SBR STARTED in the MAIN video
+attempts = 2 ##the number of attempts in merging videos
+children = ["079", "080", "081", "082", "083", "084", "085", "086"] ##which child folder are we looping?
+main = [3, 3, 1, 3, 3, 3, 3, 2] ##the camera number (1, 2, or 3) that has the best view of the parent-child dyad
+start = [34.5, 22, 55, 51.5, 19, 60, 35, 31] ##the seconds at which SBR STARTED in the MAIN video
 ## Manually correct out-of-sync minor videos:
-corr1 = [1.4, 1] ##to correct the minor-1 video (top right corner)
-corr2 = [1, 1.2] ##to correct the minor-2 video (bottom right corner)
+corr1 = [1, 0.8, -0.8, 2, 1, 1, 2, 0] ##to correct the minor-1 video (top right corner)
+corr2 = [-1, -0.8, 0.8, 1, 2, 1, 1, -1] ##to correct the minor-2 video (bottom right corner)
 ## - these are used only in the corrective rounds (i.e., second attempt or later)
 ## - if the MINOR video LAGS BEHIND, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
 ## - a larger absolute number given will introduce a larger time difference between the videos
@@ -66,19 +58,20 @@ else:
             n += 1 ##skip this problematic case
         else:
             ## (a)Prepare videos:
+            ## Initial video settings: muted + black borders
+            vol_mj = vol_mn1 = vol_mn2 = 0
+            col_mj = col_mn1 = col_mn2 = (0, 0, 0)
             ## Identify the main video and the other two will be the minor videos
             allowed = [0, 1, 2]
             major = main[n] - 1
             allowed.remove(major)
-            minor1 = allowed[0]
-            minor2 = allowed[1]
+            minor1, minor2 = allowed[0], allowed[1]
             ## Search for SBR2-camera, which happened to have the clearest audio
-            ## - retain only SBR2's audio, the rest will be muted
-            ## - add a blue border to SBR2-camera
+            ## - retain only SBR2's audio, & add a blue border to SBR2-camera
             ## The main video
             major_vid = VideoFileClip(vid_list[major])
             if vid_list[major][-15:-11] == "sbr2":
-                vol_mj = 6 ##increase the volume by 6
+                vol_mj = 6
                 col_mj = (0, 0, 255)
             t_major = vid_list[major][-10:-5]
             t_major = t_major.replace("M", ":")
@@ -131,7 +124,7 @@ else:
                     minor_vid2 = minor_vid2.subclip(start[n]+diff2+corr2[n], minor_vid2.duration)
                 else:
                     minor_vid2 = minor_vid2.subclip(start[n]+diff2+corr2[n], end+diff2+corr2[n])
-            ## (c)Resize videos, add borders:
+            ## (c)Resize videos, change volume, add borders:
             final_min = clips_array([[minor_vid1.resize(width=480).volumex(vol_mn1).margin(8, color=col_mn1)],
                                      [minor_vid2.resize(width=480).volumex(vol_mn2).margin(8, color=col_mn2)]])
             final_all = clips_array([[major_vid.resize(height=720).volumex(vol_mj).margin(8, color=col_mj),
