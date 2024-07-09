@@ -83,10 +83,10 @@ else:
             else:
                 major_vid = major_vid.subclip(start[n], end)
             ## Resize, set volumes, & border colour
-            if vid_list[maj_n][-15:-11] == f"sbr2":
+            if vid_list[maj_n][-15:-11] == "sbr2":
                 vol_maj, vol_min = 6, 0
                 col_maj, col_min = (0, 0, 255), (0, 0, 0)
-            elif vid_list[min_n][-15:-11] == f"sbr2":
+            elif vid_list[min_n][-15:-11] == "sbr2":
                 vol_maj, vol_min = 0, 6
                 col_maj, col_min = (0, 0, 0), (0, 0, 255)
             else:
