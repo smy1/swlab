@@ -6,8 +6,8 @@ As of 05.02.2025, the repo has two project folders: "Peekaboo" and "Mochi". The 
 construction and will be constantly updated.
 
 ## List of project folders
-1. [Peekaboo](#1peekaboo)
-2. [Mochi](#2mochi)
+1. [Peekaboo](#1-peekaboo)
+2. [Mochi](#2-mochi)
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
