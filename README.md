@@ -2,11 +2,12 @@
 This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. The codes are stored in their respective 
 project folders.  
 
-As of 05.07.2024 (long count: 13.0.11.12.14, 6 Ix'), the repo only has one project folder, "Peekaboo". The repo and this readme are still under 
+As of 05.02.2025, the repo has two project folders: "Peekaboo" and "Mochi". The repo and this readme are still under 
 construction and will be constantly updated.
 
 ## List of project folders
 1. [Peekaboo](#1peekaboo)
+2. [Mochi](#2mochi)
 
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
@@ -74,6 +75,8 @@ I relied heavily on the links below when writing these codes. You might also fin
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
+
+## 2. Mochi
 
 ## MATLAB script
 ### General requirements
