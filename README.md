@@ -25,6 +25,8 @@ There is also a MATLAB script (I didn't write this from scratch, see below for d
 If the child was not looking at the screen for a particular trial (coded from the merged videos mentioned above), the trial (i.e., the stimulus in .snirf files) will be removed from future analysis.
    - [remove_stim.m](#remove_stimm)
 
+## 2. Mochi
+
 ## Python scripts
 ### General requirements
 In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
@@ -75,8 +77,6 @@ I relied heavily on the links below when writing these codes. You might also fin
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
-
-## 2. Mochi
 
 ## MATLAB script
 ### General requirements
