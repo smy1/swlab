@@ -10,7 +10,7 @@ construction and will be constantly updated.
 2. [Mochi](#2-mochi)
 
 ## 1. Peekaboo
-In this project, we examine whether interactive shared reading, is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
+In this project, we examine whether interactive shared reading is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
 the task of processing videos.  
    - [merge-videos.py](#merge-videospy)
