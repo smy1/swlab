@@ -10,9 +10,7 @@ construction and will be constantly updated.
 2. [Mochi](#2-mochi)
 
 ## 1. Peekaboo
-In this project, we examine whether interactive shared reading, also known as dialogic reading, is positively linked to children's productive vocabulary
-size, and whether this relationship is mediated by children's predictive brain signal as measured using fNIRS. This project is a follow-up study of this
-[paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272438). As we video recorded children during the experiment, we have to 
+In this project, we examine whether interactive shared reading, is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
 the task of processing videos.  
    - [merge-videos.py](#merge-videospy)
@@ -26,6 +24,8 @@ If the child was not looking at the screen for a particular trial (coded from th
    - [remove_stim.m](#remove_stimm)
 
 ## 2. Mochi
+In this project, we examine interpersonal neural synchrony between parent-child dyads during shared reading and solo reading. The dyads participated in both tasks, one after another. 
+   - [solo-sbr-video.py](#solo-sbr-videopy) 
 
 ## Python scripts
 ### General requirements
@@ -45,10 +45,11 @@ I might improvise the code to deal with this problem in the future.
 
 ### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
-- how to [overlay videos, etc](https://zulko.github.io/moviepy/getting_started/compositing.html)
+- how to [overlay videos, etc](https://zulko.github.io/moviepy/)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
+- how to [crop a video](https://stackoverflow.com/a/74586686)
 
 ### merge-videos.py
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) does**: Concatenate short videos in each camera folder into a long complete video.
@@ -77,6 +78,11 @@ I relied heavily on the links below when writing these codes. You might also fin
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
 - **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
   one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
+
+### solo-sbr-video.py
+- **What [the script](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) does**: Crop and extract the front video for both solo and SBR conditions, then extract the side video for the SBR condition.
+  Two videos will be rendered: the front video for the solo condition and a concatenated front-side video for the SBR condition.
+- **Why I wrote it**: This script adds a new feature, which is cropping of the front video. The syncing of front and side videos for SBR is similar to previous scripts (e.g., _sbr-sync-2videos.py_).
 
 ## MATLAB script
 ### General requirements
