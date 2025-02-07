@@ -1,8 +1,10 @@
 # swlab
-This repo contains codes (mostly Python) that I wrote to automatise some video-editing tasks for various projects that I lead as a postdoc in SW-Lab. The repo and this readme are still under construction and will be constantly updated. _Last update: 07.02.2025_
+This repo contains codes (mostly Python) that I wrote to automatise some video-editing tasks for various projects that I lead as a postdoc in SW-Lab. The repo and this readme are still under construction and will be constantly updated. 
+
+_Last update: 07.02.2025_
 
 ## List of scripts
-1. Python: [Merging videos](#1-merging-videos)
+1. [Python](#python-scripts): [Merging videos](#1-merging-videos)
 2. Python: [Syncing videos](#2-syncing-videos)
 3. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 4. Jupyter: [Transcribe audio files](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
@@ -48,7 +50,7 @@ In our projects, we often video-record children (and their parents) during the e
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos for every participant so that we see the recordings from different angles. 
    - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the screen video to 25%, then overlay it on the baby video at the top left corner. This way, we can see the child's face clearly (and where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
    - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other on the bottom) so that we capture parents' shared reading practice from all angles. (_Note_: _SBR_ stands for shared book reading)
-   - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This scripts is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to start recording).
+   - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to start recording).
    - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) This script adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. It also renders two videos: one for each reading condition. (_Note_: _solo_ stands for solo-reading condition)
 
 ---
@@ -56,7 +58,7 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
 ## MATLAB script
 There is also a MATLAB script (I didn't write this from scratch, see below for details) which toggles off rejected stimuli in .snirf files to be further processed in Homer3. 
 If the child was not looking at the screen for a particular trial (coded from the merged videos mentioned above), the trial (i.e., the stimulus in .snirf files) will be removed from future analysis.
-   - [remove_stim.m](#remove_stimm)
+   - [remove_stim.m](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) This script rejects stimuli in snirf data files based on an excel file. The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
 
 ### General requirements
 - Download and install MATLAB (you'll need an institution account). Online tutorials suggest that Homer3 is only compatible with MATLAB R2017b.
@@ -67,8 +69,3 @@ If the child was not looking at the screen for a particular trial (coded from th
 - SNIRF: [documentation](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
 - Homer3: [documentation](https://github.com/BUNPC/Homer3/wiki/), video tutorials by [NIRx](https://www.youtube.com/watch?v=I_eH0_ed8I4),
   [Prof. CF Lu](https://www.youtube.com/watch?v=bHhn2vBXF0Y) (slides in English, explanation in Mandarin)
-
-### remove_stim.m
-- **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) does**: Reject stimuli in snirf data files based on an excel file
-- **Why I wrote it**: The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, 
-  her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
