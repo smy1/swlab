@@ -35,7 +35,7 @@ cases, there could be a video recording that started at the 59th minute (e.g., 0
 I might improvise the code to deal with this problem in the future.
 
 ### 1. Merging videos
-In our projects, we often video-record children (and their parents) during the experiment. Before we can code their behaviour, we have to process the videos (e.g., concatenate, synchronise, etc) because our video-recorder stores these videos as short clips. 
+In our projects, we often video-record children (and their parents) during the experiment. Before we can code their behaviour, we have to process the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recrdings as short clips. 
    - [merge-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) This script concatenates short videos in each camera folder into a long complete video.
    - [merge-clips.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-clips.py) This script concatenates short videos which are stored in sub-folders of the camera folder. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment. 
 
