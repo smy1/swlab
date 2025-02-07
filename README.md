@@ -2,17 +2,27 @@
 This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. The codes are stored in their respective 
 project folders.  
 
-As of 05.02.2025, the repo has two project folders: "Peekaboo" and "Mochi". The repo and this readme are still under 
+As of 07.02.2025, the repo has two project folders: "Peekaboo" and "Mochi". The repo and this readme are still under 
 construction and will be constantly updated.
 
 ## List of project folders
 1. [Peekaboo](#1-peekaboo)
 2. [Mochi](#2-mochi)
 
+## Very helpful resources
+I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
+- the main page of [moviepy](https://zulko.github.io/moviepy/)
+- how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
+- how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
+- how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
+- how to [crop a video](https://stackoverflow.com/a/74586686)
+<br>---<br>
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
-the task of processing videos.  
+the task of processing videos. 
+[!NOTE]
+The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy has been updated to v2.x. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more.
    - [merge-videos.py](#merge-videospy)
    - [merge-clips.py](#merge-clipspy)
    - [omi-sync-videos.py](#omi-sync-videospy)
@@ -25,6 +35,8 @@ If the child was not looking at the screen for a particular trial (coded from th
 
 ## 2. Mochi
 In this project, we examine interpersonal neural synchrony between parent-child dyads during shared reading and solo reading. The dyads participated in both tasks, one after another. 
+[!NOTE]
+The following python script uses moviepy v2.0.
    - [solo-sbr-video.py](#solo-sbr-videopy) 
 
 ## Python scripts
@@ -32,24 +44,17 @@ In this project, we examine interpersonal neural synchrony between parent-child 
 In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
 ```
-python --version ##check python version
+python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
 pip install moviepy ## https://zulko.github.io/moviepy/install.html
 pip install opencv-python ## https://pypi.org/project/opencv-python/
+pip show moviepy ## check the package version
 ```
 
 When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some special
 cases, there could be a video recording that started at the 59th minute (e.g., 09:58am) and the other recordings that started in the next hour (e.g., 
 10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. 
 I might improvise the code to deal with this problem in the future.
-
-### Very helpful resources
-I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
-- how to [overlay videos, etc](https://zulko.github.io/moviepy/)
-- how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
-- how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
-- how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
-- how to [crop a video](https://stackoverflow.com/a/74586686)
 
 ### merge-videos.py
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) does**: Concatenate short videos in each camera folder into a long complete video.
