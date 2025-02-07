@@ -25,6 +25,7 @@ process the videos (e.g., concatenate, synchronise, etc) before we can code the 
 the task of processing videos. 
 >[!NOTE]
 >The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy has been updated to v2.x. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more.
+
    - [merge-videos.py](#merge-videospy)
    - [merge-clips.py](#merge-clipspy)
    - [omi-sync-videos.py](#omi-sync-videospy)
@@ -37,8 +38,6 @@ If the child was not looking at the screen for a particular trial (coded from th
 
 ## 2. Mochi
 In this project, we examine interpersonal neural synchrony between parent-child dyads during shared reading and solo reading. The dyads participated in both tasks, one after another. 
->[!NOTE]
->The following python script uses moviepy v2.0.
    - [solo-sbr-video.py](#solo-sbr-videopy) 
 
 ---
@@ -50,7 +49,8 @@ Installation can be done in the command prompt (for Windows users, type "command
 ```
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
-pip install moviepy ## https://zulko.github.io/moviepy/install.html
+pip install moviepy ## this installs the latest version
+pip3.12 install moviepy==1.0.3
 pip install opencv-python ## https://pypi.org/project/opencv-python/
 pip show moviepy ## check the package version
 ```
