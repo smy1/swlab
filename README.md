@@ -7,7 +7,10 @@ This repo contains codes (mostly Python) that I wrote to automatise some video-e
 3. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 4. Jupyter: [Transcribe audio files](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
 
-### Very helpful resources
+---
+
+## Python scripts
+### Very helpful Python resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
 - the main page of [moviepy](https://zulko.github.io/moviepy/)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
@@ -43,10 +46,10 @@ In our projects, we often video-record children (and their parents) during the e
 
 ### 2. Syncing videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos for every participant so that we see the recordings from different angles. 
-   - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the screen video to 25%, then overlay it on the baby video at the top left corner. This way, we can see the child's face clearly (and where they are looking) as well as what is presented on the screen.
-   - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other on the bottom) so that we capture parents' shared reading practice from all angles.
+   - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the screen video to 25%, then overlay it on the baby video at the top left corner. This way, we can see the child's face clearly (and where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
+   - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other on the bottom) so that we capture parents' shared reading practice from all angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This scripts is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to start recording).
-   - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) This script adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. It also renders two videos: one for each reading condition.
+   - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) This script adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. It also renders two videos: one for each reading condition. (_Note_: _solo_ stands for solo-reading condition)
 
 ---
 
