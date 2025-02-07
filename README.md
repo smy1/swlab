@@ -41,6 +41,8 @@ In this project, we examine interpersonal neural synchrony between parent-child 
 >The following python script uses moviepy v2.0.
    - [solo-sbr-video.py](#solo-sbr-videopy) 
 
+---
+
 ## Python scripts
 ### General requirements
 In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
@@ -90,6 +92,8 @@ I might improvise the code to deal with this problem in the future.
 - **What [the script](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) does**: Crop and extract the front video for both solo and SBR conditions, then extract the side video for the SBR condition.
   Two videos will be rendered: the front video for the solo condition and a concatenated front-side video for the SBR condition.
 - **Why I wrote it**: This script adds a new feature, which is cropping of the front video. The syncing of front and side videos for SBR is similar to previous scripts (e.g., _sbr-sync-2videos.py_).
+
+---
 
 ## MATLAB script
 ### General requirements
