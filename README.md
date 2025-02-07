@@ -46,7 +46,7 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
    - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the screen video to 25%, then overlay it on the baby video at the top left corner. This way, we can see the child's face clearly (and where they are looking) as well as what is presented on the screen.
    - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other on the bottom) so that we capture parents' shared reading practice from all angles.
    - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This scripts is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to start recording).
-   - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) This script crops and extracts the front video for both solo and SBR conditions, then extract the side video to be displayed beside the front video for the SBR condition. In short, it adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. Two videos will be rendered: the front video for the solo condition and a juxtaposed front-side video for the SBR condition.
+   - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) This script adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. It also renders two videos: one for each reading condition.
 
 ---
 
