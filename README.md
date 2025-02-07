@@ -4,8 +4,8 @@ This repo contains codes (mostly Python) that I wrote to automatise some video-e
 ## List of scripts
 1. Python: [Merging videos](#1-merging-videos)
 2. Python: [Syncing videos](#2-syncing-videos)
-3. MATLAB: [Reject unwanted stimuli in snirf](#matlab-script)
-4. Jupyter: [Transcribe audio files](#)
+3. MATLAB: [Toggle stimuli in snirf](#matlab-script)
+4. Jupyter: [Transcribe audio files](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
 
 ### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
