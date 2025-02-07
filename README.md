@@ -16,13 +16,15 @@ I relied heavily on the links below when writing these codes. You might also fin
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 - how to [crop a video](https://stackoverflow.com/a/74586686)
-<br>---<br>
+<br>
+---
+<br>
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
 the task of processing videos. 
-[!NOTE]
-The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy has been updated to v2.x. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more.
+>[!NOTE]
+>The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy has been updated to v2.x. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more.
    - [merge-videos.py](#merge-videospy)
    - [merge-clips.py](#merge-clipspy)
    - [omi-sync-videos.py](#omi-sync-videospy)
@@ -35,8 +37,8 @@ If the child was not looking at the screen for a particular trial (coded from th
 
 ## 2. Mochi
 In this project, we examine interpersonal neural synchrony between parent-child dyads during shared reading and solo reading. The dyads participated in both tasks, one after another. 
-[!NOTE]
-The following python script uses moviepy v2.0.
+>[!NOTE]
+>The following python script uses moviepy v2.0.
    - [solo-sbr-video.py](#solo-sbr-videopy) 
 
 ## Python scripts
