@@ -6,8 +6,8 @@ _Last update: 07.02.2025_
 ## List of scripts
 1. Python: [Merging videos](#1-merging-videos)
 2. Python: [Syncing videos](#2-syncing-videos)
-3. MATLAB: [Toggle stimuli in snirf](#matlab-script)
-4. Jupyter: [Transcribe audio files](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
+3. Jupyter: [Transcribe audio files](#3-transcribing-audio-files)
+4. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 
 ---
 
@@ -19,7 +19,7 @@ In our projects, we often video-record children (and their parents) during the e
    - [merge-clips.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-clips.py) This script concatenates short videos which are stored in sub-folders of the camera folder. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment. 
 
 ### 2. Syncing videos
-Once we have single, merged videos from each camera, we can sync and juxtapose these videos for every participant so that we see the recordings from different angles. 
+Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings from different angles for every participant. 
    - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the screen video to 25%, then overlay it on the baby video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
    - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading practice from all angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to start recording).
@@ -27,6 +27,9 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
 
 >[!NOTE]
 >When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some special cases, there could be a video recording that started at the 59th minute (e.g., 09:58am) and the other recordings that started in the next hour (e.g., 10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. I might improvise the code to deal with this problem in the future.
+
+### 3. Transcribing audio files
+The [script](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
 
 ### General requirements
 In order to run the python scripts, Python and the relevant modules need to be installed. The codes were written in Python 3.12.4.
@@ -39,13 +42,13 @@ pip install opencv-python ## https://pypi.org/project/opencv-python/
 pip show moviepy ## check the package version
 ```
 >[!NOTE]
->The video-editing python scripts were written using _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
+>The video-editing python scripts used _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
 
 ### Helpful resources
-I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
+I relied heavily on the links below when writing these codes:
 - the main page of [moviepy](https://zulko.github.io/moviepy/)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
