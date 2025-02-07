@@ -2,8 +2,7 @@
 This repo contains codes (mostly Python) that I wrote for various projects that I lead as a postdoc in SW-Lab. The codes are stored in their respective 
 project folders.  
 
-As of 07.02.2025, the repo has two project folders: "Peekaboo" and "Mochi". The repo and this readme are still under 
-construction and will be constantly updated.
+As of 07.02.2025, the repo has two project folders: "Peekaboo" and "Mochi". The repo and this readme are still under construction and will be constantly updated.
 
 ## List of project folders
 1. [Peekaboo](#1-peekaboo)
@@ -20,11 +19,9 @@ I relied heavily on the links below when writing these codes. You might also fin
 ---
 
 ## 1. Peekaboo
-In this project, we examine whether interactive shared reading is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
-process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
-the task of processing videos. 
+In this project, we examine whether interactive shared reading is related to children's predictive brain signal. As we video-recorded children during the experiment, we have to process the videos (e.g., concatenate, synchronise, etc) before we can code children's behaviour. The Python scripts uploaded to this project folder allow us to automatise the task of processing videos. 
 >[!NOTE]
->The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy v2.x has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
+>The following python scripts were written using _moviepy v1.0.3_. As of 2025, moviepy v2.x has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
@@ -63,36 +60,22 @@ I might improvise the code to deal with this problem in the future.
 
 ### merge-videos.py
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) does**: Concatenate short videos in each camera folder into a long complete video.
-- **Why I wrote it**: The cameras that we are currently using to video record our test sessions store the recorded videos in short clips of one minute
-  duration each. Hence, we need to combine these short videos into one complete and coherent video for each participant.
 
 ### merge-clips.py
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/merge-clips.py) does**: Concatenate short videos in sub-folders which are stored in a camera folder into a long complete video
-- **Why I wrote it**: The same reason as why I wrote _merge-videos.py_. We need a slightly different script because there is a camera that stores the recorded
-  videos in short clips of three seconds each. These super short video clips are stored in folders that indicate the minute of the recording, e.g., a
-  folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment while another folder named "10" contains
-  several three-second-long clips recorded at the 10th minute of the hour of experiment. Hence, we need to first combine the super short clips in each
-  "minute" folder before combining them into one complete and coherent video for each participant.
+- **Why I wrote it**: For cameras that store the recordings in short clips of three seconds. These super short video clips are stored in sub-folders that indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment. Hence, we need to first combine the super short clips in each "minute" folder before combining them into one complete and coherent video for each participant.
 
 ### omi-sync-videos.py
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) does**: Downsize the screen video to 25%, then overlay (and sync) it on the baby video at the top left corner
-- **Why I wrote it**: We need to code infants' gaze per trial to determine for each trial whether the infants were looking at the screen.
 
 ### sbr-sync-3videos.py
 - **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and two (downsized) minor SBR videos on the right (one on top and the other on the bottom)
-- **Why I wrote it**: We need to code parent-child interaction during SBR. We have three cameras positions at different locations of the lab to capture different
-  angles of the parent-child dyads (so that they are free to move around, change position, etc. while we still manage to record their interaction without physically
-  moving the camera).
   
 ### sbr-sync-2videos.py
-- **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right
-- **Why I wrote it**: The same reason as why I wrote _sbr-sync-3videos.py_. The difference is that this script syncs only two of our three cameras. Sometimes,
-  one of the cameras failed to record the reading session or is problematic, hence, it has to be excluded from the final joined video.
+- **What [the script](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) does**: Synchronise and display the main SBR (shared book reading) video on the left and the (downsized) minor SBR video on the right. In other words, it is a 2-video version of the _sbr-sync-3videos_ script.
 
 ### solo-sbr-video.py
-- **What [the script](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) does**: Crop and extract the front video for both solo and SBR conditions, then extract the side video for the SBR condition.
-  Two videos will be rendered: the front video for the solo condition and a concatenated front-side video for the SBR condition.
-- **Why I wrote it**: This script adds a new feature, which is cropping of the front video. The syncing of front and side videos for SBR is similar to previous scripts (e.g., _sbr-sync-2videos.py_).
+- **What [the script](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) does**: Crop and extract the front video for both solo and SBR conditions, then extract the side video to be displayed beside the front video for the SBR condition. In short, it adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. Two videos will be rendered: the front video for the solo condition and a juxtaposed front-side video for the SBR condition.
 
 ---
 
