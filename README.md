@@ -24,7 +24,7 @@ In this project, we examine whether interactive shared reading is related to chi
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
 the task of processing videos. 
 >[!NOTE]
->The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy has been updated to v2.x. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more.
+>The following python scripts were written using moviepy v1.0.3. As of 2025, moviepy v2.x has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
