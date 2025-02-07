@@ -4,7 +4,7 @@ This repo contains codes (mostly Python) that I wrote to automatise some video-e
 _Last update: 07.02.2025_
 
 ## List of scripts
-1. [Python](#python-scripts): [Merging videos](#1-merging-videos)
+1. Python: [Merging videos](#1-merging-videos)
 2. Python: [Syncing videos](#2-syncing-videos)
 3. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 4. Jupyter: [Transcribe audio files](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
@@ -12,35 +12,7 @@ _Last update: 07.02.2025_
 ---
 
 ## Python scripts
-### Very helpful resources
-I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
-- the main page of [moviepy](https://zulko.github.io/moviepy/)
-- how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
-- how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
-- how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
-- how to [crop a video](https://stackoverflow.com/a/74586686)
-
-### General requirements
-In order to run the python scripts, you will need to install Python and the relevant modules. The codes were written in Python 3.12.4.
-Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
-```
-python --version ## check python version
-pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
-pip install moviepy ## this installs the latest version
-pip install opencv-python ## https://pypi.org/project/opencv-python/
-pip show moviepy ## check the package version
-```
->[!NOTE]
->The following python scripts were written using _moviepy v1.0.3_. As of 2025, moviepy v2.x has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
->```
->pip install moviepy==1.0.3 ## this installs the older version
->```
-
-When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some special
-cases, there could be a video recording that started at the 59th minute (e.g., 09:58am) and the other recordings that started in the next hour (e.g., 
-10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. 
-I might improvise the code to deal with this problem in the future.
-
+See [general requirements](#general-requirements) and [helpful resources](#helpful-resources) below.
 ### 1. Merging videos
 In our projects, we often video-record children (and their parents) during the experiment. Before we can code their behaviour, we have to process the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recrdings as short clips. 
    - [merge-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) This script concatenates short videos in each camera folder into a long complete video.
@@ -53,6 +25,33 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
    - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to start recording).
    - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/mochi/solo-sbr-video.py) This script adds an additional chunk of codes (i.e., cropping) to the _sbr-sync-2videos_ script. It also renders two videos: one for each reading condition. (_Note_: _solo_ stands for solo-reading condition)
 
+>[!NOTE]
+>When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some special cases, there could be a video recording that started at the 59th minute (e.g., 09:58am) and the other recordings that started in the next hour (e.g., 10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. I might improvise the code to deal with this problem in the future.
+
+### General requirements
+In order to run the python scripts, Python and the relevant modules need to be installed. The codes were written in Python 3.12.4.
+Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
+```
+python --version ## check python version
+pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
+pip install moviepy ## this installs the latest version
+pip install opencv-python ## https://pypi.org/project/opencv-python/
+pip show moviepy ## check the package version
+```
+>[!NOTE]
+>The video-editing python scripts were written using _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for more. To install an earlier version, use the code below.
+>```
+>pip install moviepy==1.0.3 ## this installs the older version
+>```
+
+### Helpful resources
+I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
+- the main page of [moviepy](https://zulko.github.io/moviepy/)
+- how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
+- how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
+- how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
+- how to [crop a video](https://stackoverflow.com/a/74586686)
+
 ---
 
 ## MATLAB script
@@ -64,7 +63,7 @@ If the child was not looking at the screen for a particular trial (coded from th
 - Download and install MATLAB (you'll need an institution account). Online tutorials suggest that Homer3 is only compatible with MATLAB R2017b.
 - Download and add Homer3 to the MATLAB path. Link [here](https://github.com/BUNPC/Homer3/wiki/Download-and-Installation)
 
-### Very helpful resources
+### Helpful resources
 - Introduction to MATLAB: [youtube link](https://www.youtube.com/watch?v=MYRkBoojh_Y&list=PLx_IWc-RN82tw_J9nYqIc0tjvaMjowRVi&pp=iAQB)
 - SNIRF: [documentation](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md)
 - Homer3: [documentation](https://github.com/BUNPC/Homer3/wiki/), video tutorials by [NIRx](https://www.youtube.com/watch?v=I_eH0_ed8I4),
