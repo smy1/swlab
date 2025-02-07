@@ -10,7 +10,7 @@ This repo contains codes (mostly Python) that I wrote to automatise some video-e
 ---
 
 ## Python scripts
-### Very helpful Python resources
+### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
 - the main page of [moviepy](https://zulko.github.io/moviepy/)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
