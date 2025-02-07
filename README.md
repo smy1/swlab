@@ -1,9 +1,11 @@
 # swlab
 This repo contains codes (mostly Python) that I wrote to automatise some video-editing tasks for various projects that I lead as a postdoc in SW-Lab. The repo and this readme are still under construction and will be constantly updated. _Last update: 07.02.2025_
 
-## List of Python scripts
-1. [Merging videos](#1-merging-videos)
-2. [Syncing videos](#2-syncing-videos)
+## List of scripts
+1. Python: [Merging videos](#1-merging-videos)
+2. Python: [Syncing videos](#2-syncing-videos)
+3. MATLAB: [Reject unwanted stimuli in snirf](#matlab-script)
+4. Jupyter: [Transcribe audio files](#)
 
 ### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
