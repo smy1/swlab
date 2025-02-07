@@ -16,9 +16,9 @@ I relied heavily on the links below when writing these codes. You might also fin
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 - how to [crop a video](https://stackoverflow.com/a/74586686)
-<br>
+
 ---
-<br>
+
 ## 1. Peekaboo
 In this project, we examine whether interactive shared reading is related to children's predictive brain signal as measured using fNIRS. As we video-recorded children during the experiment, we have to 
 process the videos (e.g., concatenate, synchronise, etc) before we can code the videos. The Python scripts uploaded to this project folder allows us to automatise 
