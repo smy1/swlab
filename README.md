@@ -2,8 +2,8 @@
 This repo contains codes (mostly Python) that I wrote to automatise some video-editing tasks for various projects that I lead as a postdoc in SW-Lab. The repo and this readme are still under construction and will be constantly updated. _Last update: 07.02.2025_
 
 ## List of Python scripts
-1. [Merging videos](#1merging-videos)
-2. [Syncing videos](#2syncing-videos)
+1. [Merging videos](#1-merging-videos)
+2. [Syncing videos](#2-syncing-videos)
 
 ### Very helpful resources
 I relied heavily on the links below when writing these codes. You might also find them useful in some ways:
@@ -33,8 +33,6 @@ When syncing the videos, I relied on the name of the videos, which contains the 
 cases, there could be a video recording that started at the 59th minute (e.g., 09:58am) and the other recordings that started in the next hour (e.g., 
 10:00am, 10:01am, etc). We will have to manually change the "00" in the file name to 60 so that the "59" recording is placed before the "00" recording. 
 I might improvise the code to deal with this problem in the future.
-
----
 
 ### 1. Merging videos
 In our projects, we often video-record children (and their parents) during the experiment. Before we can code their behaviour, we have to process the videos (e.g., concatenate, synchronise, etc) because our video-recorder stores these videos as short clips. 
