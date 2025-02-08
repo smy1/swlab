@@ -15,21 +15,21 @@ _Last update: 07.02.2025_
 See [general requirements](#general-requirements) and [helpful resources](#helpful-resources) below.
 ### 1. Merge videos
 In our projects, we often video-record children (and their parents) during the experiment. Before we code their behaviour, we have to process the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recrdings as short clips. 
-   - [merge-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) This script concatenates short videos in each camera folder into a long complete video.
-   - [merge-clips.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-clips.py) This script concatenates short videos which are stored in sub-folders of the camera folder. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment. 
+   - [merge-videos.py](https://github.com/smy1/swlab/blob/main/script/merge-videos.py) This script concatenates short videos in each camera folder into a long complete video.
+   - [merge-clips.py](https://github.com/smy1/swlab/blob/main/script/merge-clips.py) This script concatenates short videos which are stored in sub-folders of the camera folder. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment. 
 
 ### 2. Sync videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of every participant from different angles. 
-   - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
-   - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
-   - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
-   - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/peekaboo/solo-sbr-video.py) This script adds an additional chunk of codes to the _sbr-sync-2videos_ script to crop one of the videos. It renders two videos: one for each reading condition. (_Note_: _solo_ stands for solo-reading condition)
+   - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/script/omi-sync-videos.py) This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
+   - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/script/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
+   - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/script/sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
+   - [solo-sbr-video.py](https://github.com/smy1/swlab/blob/main/script/solo-sbr-video.py) This script adds an additional chunk of codes to the _sbr-sync-2videos_ script to crop one of the videos. It renders two videos: one for each reading condition. (_Note_: _solo_ stands for solo-reading condition)
 
 >[!NOTE]
 >When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, there could be a video recording that started at the 59th minute (e.g., 09:59am) and the other recordings that started in the next hour (e.g., 10:00am, 10:01am, etc). For now, we have to manually change the "00" in the file name to "60" so that the "59" recording is placed before the "00" recording. I might improvise the code to deal with this problem in the future.
 
 ### 3. Transcribe audio files
-The [script](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb) transcribes an audio file using Whisper from OpenAI (This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file.
+The [script](https://github.com/smy1/swlab/blob/main/script/audio2xlsx.ipynb) transcribes an audio file using Whisper from OpenAI (This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file.
 
 ### General requirements
 In order to run these python scripts, Python and the relevant modules need to be installed. I wrote these codes in Python 3.12.4.
@@ -60,7 +60,7 @@ I relied heavily on the links below when writing these codes. Except for the mai
 ## MATLAB script
 There is also a MATLAB script (I didn't write this from scratch, see below for details) which toggles off rejected stimuli in .snirf files to be further processed in Homer3. 
 If the child was not looking at the screen for a particular trial (coded from the merged videos mentioned above), the trial (i.e., the stimulus in .snirf files) will be removed from future analysis.
-   - [remove_stim.m](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) This script rejects stimuli in snirf data files based on an excel file. The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
+   - [remove_stim.m](https://github.com/smy1/swlab/blob/main/script/remove_stim.m) This script rejects stimuli in snirf data files based on an excel file. The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
 
 ### General requirements
 - Download and install MATLAB (probably with an institution account). According to online tutorials, Homer3 is only compatible with MATLAB R2017b.
