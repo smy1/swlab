@@ -32,7 +32,7 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
 The [script](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb) transcribes an audio file using Whisper from OpenAI (This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file.
 
 ### General requirements
-In order to run the python scripts, Python and the relevant modules need to be installed. The codes were written in Python 3.12.4.
+In order to run these python scripts, Python and the relevant modules need to be installed. I wrote these codes in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
 ```
 python --version ## check python version
@@ -42,7 +42,7 @@ pip install opencv-python ## https://pypi.org/project/opencv-python/
 pip show moviepy ## check the package version
 ```
 >[!NOTE]
->The video-editing python scripts use _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of moviepy, use the code below.
+>While writing these video-editing scripts, I used _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of moviepy, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
