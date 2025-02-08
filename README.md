@@ -38,18 +38,19 @@ Installation can be done in the command prompt (for Windows users, type "command
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
 pip install moviepy ## this installs the latest version
-pip install opencv-python ## https://pypi.org/project/opencv-python/
 pip show moviepy ## check the package version
+pip install opencv-python ## required for resizing videos if using MoviePy v1.0 https://pypi.org/project/opencv-python/
+pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
 ```
 >[!NOTE]
->While writing these video-editing scripts, I used _MoviePy v1.0.3_. As of 2025, _MoviePy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of MoviePy, use the code below.
+>While writing these video-editing scripts, I used MoviePy v1.0.3. As of 2025, MoviePy v2.0 has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of MoviePy, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
 
 ### Helpful resources
 I relied heavily on the links below when writing these codes. Except for the main page of MoviePy, the other links explain how to use MoviePy v1.0.
-- the main page of [moviepy](https://zulko.github.io/moviepy/)
+- the [main page of MoviePy](https://zulko.github.io/moviepy/) provides explanation on MoviePy v2.0
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
