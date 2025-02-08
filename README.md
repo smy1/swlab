@@ -4,21 +4,21 @@ This repo contains codes that I wrote to automatise some tasks for projects that
 _Last update: 07.02.2025_
 
 ## List of scripts
-1. Python: [Merging videos](#1-merging-videos)
-2. Python: [Syncing videos](#2-syncing-videos)
-3. Jupyter: [Transcribe audio files](#3-transcribing-audio-files)
+1. Python: [Merge videos](#1-merge-videos)
+2. Python: [Sync videos](#2-sync-videos)
+3. Jupyter: [Transcribe audio files](#3-transcribe-audio-files)
 4. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 
 ---
 
 ## Python scripts
 See [general requirements](#general-requirements) and [helpful resources](#helpful-resources) below.
-### 1. Merging videos
+### 1. Merge videos
 In our projects, we often video-record children (and their parents) during the experiment. Before we code their behaviour, we have to process the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recrdings as short clips. 
    - [merge-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-videos.py) This script concatenates short videos in each camera folder into a long complete video.
    - [merge-clips.py](https://github.com/smy1/swlab/blob/main/peekaboo/merge-clips.py) This script concatenates short videos which are stored in sub-folders of the camera folder. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment. 
 
-### 2. Syncing videos
+### 2. Sync videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of every participant from different angles. 
    - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/omi-sync-videos.py) This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
    - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/peekaboo/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
@@ -28,7 +28,7 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
 >[!NOTE]
 >When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, there could be a video recording that started at the 59th minute (e.g., 09:59am) and the other recordings that started in the next hour (e.g., 10:00am, 10:01am, etc). For now, we have to manually change the "00" in the file name to "60" so that the "59" recording is placed before the "00" recording. I might improvise the code to deal with this problem in the future.
 
-### 3. Transcribing audio files
+### 3. Transcribe audio files
 The [script](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb) transcribes an audio file using Whisper from OpenAI (This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file.
 
 ### General requirements
