@@ -29,7 +29,7 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
 >When syncing the videos, I relied on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, there could be a video recording that started at the 59th minute (e.g., 09:59am) and the other recordings that started in the next hour (e.g., 10:00am, 10:01am, etc). For now, we have to manually change the "00" in the file name to "60" so that the "59" recording is placed before the "00" recording. I might improvise the code to deal with this problem in the future.
 
 ### 3. Transcribing audio files
-The [script](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb)
+The [script](https://github.com/smy1/swlab/blob/main/peekaboo/audio2xlsx.ipynb) transcribes an audio file using Whisper from OpenAI (This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file.
 
 ### General requirements
 In order to run the python scripts, Python and the relevant modules need to be installed. The codes were written in Python 3.12.4.
@@ -42,7 +42,7 @@ pip install opencv-python ## https://pypi.org/project/opencv-python/
 pip show moviepy ## check the package version
 ```
 >[!NOTE]
->The video-editing python scripts used _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of moviepy, use the code below.
+>The video-editing python scripts use _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of moviepy, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
