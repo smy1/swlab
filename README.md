@@ -49,8 +49,8 @@ pip install playsound==1.2.2 ## not necessary, only for notification when video 
 >```
 
 ### Helpful resources
-I relied heavily on the links below when writing these codes. Except for the main page of MoviePy, the other links explain how to use MoviePy v1.0.
-- the [main page of MoviePy](https://zulko.github.io/moviepy/) provides explanation on MoviePy v2.0
+I relied heavily on the links below when writing these codes. Except for the main page of MoviePy, the other links use MoviePy v1.0.
+- the [main page of MoviePy](https://zulko.github.io/moviepy/) provides an explanation on MoviePy v2.0
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
