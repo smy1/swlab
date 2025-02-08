@@ -63,8 +63,8 @@ If the child was not looking at the screen for a particular trial (coded from th
    - [remove_stim.m](https://github.com/smy1/swlab/blob/main/peekaboo/remove_stim.m) This script rejects stimuli in snirf data files based on an excel file. The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
 
 ### General requirements
-- Download and install MATLAB (you'll need an institution account). Online tutorials suggest that Homer3 is only compatible with MATLAB R2017b.
-- Download and add Homer3 to the MATLAB path. Link [here](https://github.com/BUNPC/Homer3/wiki/Download-and-Installation)
+- Download and install MATLAB (probably with an institution account). According to online tutorials, Homer3 is only compatible with MATLAB R2017b.
+- Download and add [Homer3](https://github.com/BUNPC/Homer3/wiki/Download-and-Installation) to the MATLAB path.
 
 ### Helpful resources
 - Introduction to MATLAB: [youtube link](https://www.youtube.com/watch?v=MYRkBoojh_Y&list=PLx_IWc-RN82tw_J9nYqIc0tjvaMjowRVi&pp=iAQB)
