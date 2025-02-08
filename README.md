@@ -42,13 +42,13 @@ pip install opencv-python ## https://pypi.org/project/opencv-python/
 pip show moviepy ## check the package version
 ```
 >[!NOTE]
->While writing these video-editing scripts, I used _moviepy v1.0.3_. As of 2025, _moviepy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of moviepy, use the code below.
+>While writing these video-editing scripts, I used _MoviePy v1.0.3_. As of 2025, _MoviePy v2.0_ has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the updates. To install an earlier version of MoviePy, use the code below.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >```
 
 ### Helpful resources
-I relied heavily on the links below when writing these codes. Except for the main page of moviepy, the other links explain how to use moviepy v1.0.
+I relied heavily on the links below when writing these codes. Except for the main page of MoviePy, the other links explain how to use MoviePy v1.0.
 - the main page of [moviepy](https://zulko.github.io/moviepy/)
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
