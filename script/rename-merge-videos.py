@@ -15,7 +15,7 @@
 import os ##to rename files, where necessary
 import glob
 from pathlib import Path
-from moviepy.editor import *
+from moviepy.editor import * ##v1.0.3
 from playsound import playsound ##just for notification
 
 folder = "C:/Users/user/Desktop/mc_vid" ##set path to the project folder
