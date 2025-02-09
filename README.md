@@ -1,12 +1,12 @@
 # swlab
-This repo contains codes that I wrote to automatise some tasks for projects that I lead as a postdoc in SW-Lab. The repo and readme are still under construction and will be constantly updated. 
+This repo contains codes that I wrote to automatise some tasks for projects that I lead as a postdoc in SW-Lab (09.2023 - current). 
 
 _Last update: 09.02.2025_
 
 ## List of scripts
 1. Python: [Merge videos](#1-merge-videos)
 2. Python: [Sync videos](#2-sync-videos)
-3. Jupyter: [Transcribe audio files](#3-transcribe-audio-files)
+3. Jupyter: [Transcribe audio files](#3-jupyter-notebook)
 4. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 
 ---
@@ -24,11 +24,8 @@ Once we have single, merged videos from each camera, we can sync and juxtapose t
    - [omi-sync-videos.py](https://github.com/smy1/swlab/blob/main/script/omi-sync-videos.py) This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
    - [sbr-sync-3videos.py](https://github.com/smy1/swlab/blob/main/script/sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](https://github.com/smy1/swlab/blob/main/script/sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
-   - [crop-sync-2videos.py](https://github.com/smy1/swlab/blob/main/script/crop-sync-2videos.py) This script adds an additional chunk of code to the _sbr-sync-2videos_ script to crop one of the videos before syncing both of them. It also has an additional line to handle exceptions, which usually happens due to the actual video duration being shorter than the duration written in the script.
-   - [sbr-sound.py](https://github.com/smy1/swlab/blob/main/script/sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has a better quality).
-
-### 3. Transcribe audio files
-The [script](https://github.com/smy1/swlab/blob/main/script/audio2xlsx.ipynb) transcribes an audio file using Whisper from OpenAI (This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file.
+   - [crop-sync-2videos.py](https://github.com/smy1/swlab/blob/main/script/crop-sync-2videos.py) This script adds an additional chunk of code to the _sbr-sync-2videos_ script to crop one of the videos before syncing both of them. It also has an additional line to handle exceptions, which usually happen due to the actual video duration being shorter than the duration written in the script.
+   - [sbr-sound.py](https://github.com/smy1/swlab/blob/main/script/sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality).
 
 ### General requirements
 In order to run these python scripts, Python and the relevant modules need to be installed. I wrote these codes in Python 3.12.4.
@@ -54,6 +51,11 @@ I relied heavily on the links below when writing these codes. Note: These links 
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 - how to [crop a video](https://stackoverflow.com/a/74586686)
 - how to [rename files](https://pynative.com/python-rename-file/)
+
+---
+
+### 3. Jupyter notebook
+- [audio2xlsx.ipynb](https://github.com/smy1/swlab/blob/main/script/audio2xlsx.ipynb) This notebook transcribes an audio file using Whisper from OpenAI (_Note_: This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file using Python.
 
 ---
 
