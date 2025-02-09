@@ -52,6 +52,7 @@ I relied heavily on the links below when writing these codes. These links use Mo
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 - how to [crop a video](https://stackoverflow.com/a/74586686)
+- how to [rename files](https://pynative.com/python-rename-file/)
 
 ---
 
