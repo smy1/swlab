@@ -6,7 +6,7 @@ _Last update: 09.02.2025_
 ## List of scripts
 1. Python: [Merge videos](#1-merge-videos)
 2. Python: [Sync videos](#2-sync-videos)
-3. Jupyter: [Transcribe audio files](#3-jupyter-notebook)
+3. Jupyter: [Transcribe audio files](#jupyter-notebook)
 4. MATLAB: [Toggle stimuli in snirf](#matlab-script)
 
 ---
@@ -54,15 +54,13 @@ I relied heavily on the links below when writing these codes. Note: These links 
 
 ---
 
-### 3. Jupyter notebook
+## Jupyter notebook
 - [audio2xlsx.ipynb](https://github.com/smy1/swlab/blob/main/script/audio2xlsx.ipynb) This notebook transcribes an audio file using Whisper from OpenAI (_Note_: This part of the code was not written by me - my lab manager, Yingyu Chen, found it online), then exports the transcript into an excel file using Python.
 
 ---
 
 ## MATLAB script
-There is also a MATLAB script (I didn't write this from scratch, see below for details) which toggles off rejected stimuli in .snirf files to be further processed in Homer3. 
-If the child was not looking at the screen for a particular trial (coded from the merged videos mentioned above), the trial (i.e., the stimulus in .snirf files) will be removed from future analysis.
-   - [remove_stim.m](https://github.com/smy1/swlab/blob/main/script/remove_stim.m) This script rejects stimuli in snirf data files based on an excel file. The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, her input for gaze data was a .mat file and I prefer loading the raw excel file instead.
+   - [remove_stim.m](https://github.com/smy1/swlab/blob/main/script/remove_stim.m) This script rejects stimuli in snirf data files based on gaze data stored as an excel file (e.g., whether the child was looking at the screen). (_Note_: I didn't write this from scratch) The script was originally written by Chi-Chuan Chen to toggle off stimuli. However, her script is for .nirs files, which works slightly differently from .snirf files. Furthermore, her script requires a .mat file for gaze data and I prefer loading the raw excel file instead.
 
 ### General requirements
 - Download and install MATLAB (probably with an institution account). According to online tutorials, Homer3 is only compatible with MATLAB R2017b.
