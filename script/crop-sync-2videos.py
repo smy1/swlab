@@ -82,6 +82,7 @@ else:
             except ValueError:
                 prob = open(f"{child}_solo.txt", "x")
                 prob.close()
+                playsound("C:/Users/user/Desktop/no.mp3")
         ## (c)Extract and render SBR video:
         ## Get time difference
         t_front = front_list[0][-10:-5]
@@ -122,5 +123,6 @@ else:
             prob = open(f"{child}_sbr.txt", "x")
             prob.close()
             n += 1 ##move on to the next one
+            playsound("C:/Users/user/Desktop/no.mp3")
 
 #### END OF SCRIPT ####
