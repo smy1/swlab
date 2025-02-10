@@ -31,14 +31,14 @@ vol_front, vol_side = 0, 10 ##amplify the side camera, mute the other
 col_front, col_side = (0, 0, 0), (0, 0, 225) ##amplified video gets a blue border
 
 #### Enter information
-attempts = 4 ##the number of attempts in merging videos
-dyads = ["a08_c08", "a10_c10"] ##which dyad folder are we looping?
-main = ["side", "front"] ##does the front or the side video have a better recording angle?
-solo_done = "yes" ##if yes, the script will not render the solo videos
-strt_solo = [724, 487] ##the seconds at which the FRONT video STARTED recording the SOLO condition
-strt_sbr = [273, 81] ##the seconds at which the FRONT video STARTED recording the SBR condition
+attempts = 1 ##the number of attempts in merging videos
+dyads = ["a07_c07", "a09_c09", "a11_c11", "a12_c12", "a13_c13", "a14_c14"] ##which dyad folder are we looping?
+main = ["front", "side", "side", "side", "front", "side"] ##does the front or the side video have a better recording angle?
+solo_done = "no" ##if yes, the script will not render the solo videos
+strt_solo = [144, 135, 61, 606, 119, 514] ##the seconds at which the FRONT video STARTED recording the SOLO condition
+strt_sbr = [481, 441, 361, 155, 387, 69] ##the seconds at which the FRONT video STARTED recording the SBR condition
 ## Manually correct out-of-sync side video for SBR:
-corr = [-8.5, 1]
+corr = [-8]
 ## - this is used only in the corrective rounds (i.e., second attempt or later)
 ## - if the SIDE video LAGS BEHIND, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
 ## - a larger absolute number given will introduce a larger time difference between the videos
@@ -59,7 +59,7 @@ else:
         child = dyad[4:7]
         ## For different cropping dimensions
         if child == "c01":
-            x1, y1, x2, y2 = 0, 200, 1000, 1456
+            x1, y1, x2, y2 = 450, 250, 2100, 1400
         elif child == "c02":
             x1, y1, x2, y2 = 250, 440, 1700, 1456
         ## The front video
@@ -80,7 +80,8 @@ else:
                 final_solo.write_videofile(f"{folder}/{dyad}/{child}_solo{attempts}_{x1}_{y1}_{x2}_{y2}.mp4")
                 playsound("C:/Users/user/Desktop/ok.mp3")
             except ValueError:
-                prob = open(f"{child}_solo.txt", "x")
+                prob = open(f"{folder}/{dyad}/{child}_solo.txt", "x")
+                prob.write("The solo video is problematic.")
                 prob.close()
                 playsound("C:/Users/user/Desktop/no.mp3")
         ## (c)Extract and render SBR video:
@@ -120,7 +121,8 @@ else:
             n += 1 ##now, do the next one
             playsound("C:/Users/user/Desktop/done.mp3")
         except ValueError:
-            prob = open(f"{child}_sbr.txt", "x")
+            prob = open(f"{folder}/{dyad}/{child}_sbr.txt", "x")
+            prob.write("The sbr video is problematic.")
             prob.close()
             n += 1 ##move on to the next one
             playsound("C:/Users/user/Desktop/no.mp3")
