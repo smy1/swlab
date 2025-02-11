@@ -1,4 +1,4 @@
-# swlab <img src="./misc/swlogo.jpg" width=auto height="50">
+# swlab   <img src="./misc/swlogo.jpg" width=auto height="50">
 This repo contains codes that I wrote to automatise some tasks for projects that I lead as a postdoc in SW-Lab (09.2023 - current). 
 
 _Last update: 09.02.2025_
