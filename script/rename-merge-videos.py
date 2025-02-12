@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: MoChi
-#### Date: 09.02.2025
+#### Date: 12.02.2025
 #### Author: MY Sia (modified from the Peekaboo project)
 
 #### Aim of script: Concatenate short videos into a long one; batch process several cameras of several dyads
@@ -21,7 +21,7 @@ from playsound import playsound ##just for notification
 folder = "C:/Users/user/Desktop/mc_vid" ##set path to the project folder
 
 ########################################
-dyads = ["a08_c08", "a09_c09", "a10_c10"] ##which dyad folder are we processing?
+dyads = ["a18_c18"] ##which dyad folder are we processing?
 camera = ["front", "side"] ##which camera folder are we processing?
 
 #### Loop through dyad folders
@@ -47,10 +47,10 @@ for dyad in dyads:
                 elif xx == "\\1":
                     new_fname = f"{p1}\\7{p2}"
                     os.rename(f_name, new_fname)
-            ## after renaming videos in both camera folders
-            if cam == "side":
-                dyads.append(dyad) ##add the dyad back to the loop for merging
-                playsound("C:/Users/user/Desktop/ok.mp3")
+            camera.append(cam)
+            # # elif cam == "side":
+            # #     dyads.append(dyad) ##add the dyad back to the loop for merging
+            # #     playsound("C:/Users/user/Desktop/ok.mp3")
         else:
             ## (b)Load mp4 files as videos:
             for i in file_list:
