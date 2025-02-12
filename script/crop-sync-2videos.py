@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: MoChi
-#### Date: 09.02.2025
+#### Date: 13.02.2025
 #### Author: MY Sia (modified from the Peekaboo project)
 
 #### Aim of script: (1) Extract solo reading and (2) sync and combine two videos for SBR
@@ -75,11 +75,12 @@ else:
         ## (b)Extract and render solo video:
         if solo_done == "no":
             final_solo = front_vid.volumex(5)
-            try: ##in case the actual duration is shorter than 183
+            ##in case of any error, don't stop; just move on
+            try: 
                 final_solo = final_solo.subclip(strt_solo[n], strt_solo[n]+dur_solo)
                 final_solo.write_videofile(f"{folder}/{dyad}/{child}_solo{attempts}_{x1}_{y1}_{x2}_{y2}.mp4")
                 playsound("C:/Users/user/Desktop/ok.mp3")
-            except ValueError:
+            except: ##create a text file so that we know why the video was not rendered
                 prob = open(f"{folder}/{dyad}/{child}_solo.txt", "x")
                 prob.write("The solo video is problematic.")
                 prob.close()
@@ -96,7 +97,8 @@ else:
         diff = diff.total_seconds()
         ## Sync the videos
         sbr_front = front_vid.volumex(vol_front) ##mute the video
-        try: ##in case the actual duration is shorter than 305
+        ##in case of any error, don't stop; just move on
+        try:
             sbr_front = front_vid.subclip(strt_sbr[n], strt_sbr[n]+dur_sbr)
             if attempts == 1: ##first round
                 x = 0 ##no manual correction
@@ -120,7 +122,7 @@ else:
             final_sbr.write_videofile(f"{folder}/{dyad}/{child}_sbr{attempts}_{strt_sbr[n]}_corr={x}.mp4")
             n += 1 ##now, do the next one
             playsound("C:/Users/user/Desktop/done.mp3")
-        except ValueError:
+        except: ##create a text file so that we know why the video was not rendered
             prob = open(f"{folder}/{dyad}/{child}_sbr.txt", "x")
             prob.write("The sbr video is problematic.")
             prob.close()
