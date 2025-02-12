@@ -47,10 +47,9 @@ for dyad in dyads:
                 elif xx == "\\1":
                     new_fname = f"{p1}\\7{p2}"
                     os.rename(f_name, new_fname)
+            ## add the folder back to be processed
             camera.append(cam)
-            # # elif cam == "side":
-            # #     dyads.append(dyad) ##add the dyad back to the loop for merging
-            # #     playsound("C:/Users/user/Desktop/ok.mp3")
+            playsound("C:/Users/user/Desktop/ok.mp3")
         else:
             ## (b)Load mp4 files as videos:
             for i in file_list:
