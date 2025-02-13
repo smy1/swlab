@@ -81,7 +81,7 @@ else:
                 final_solo.write_videofile(f"{folder}/{dyad}/{child}_solo{attempts}_{x1}_{y1}_{x2}_{y2}.mp4")
                 playsound("C:/Users/user/Desktop/ok.mp3")
             except: ##create a text file so that we know why the video was not rendered
-                prob = open(f"{folder}/{dyad}/{child}_solo.txt", "x")
+                prob = open(f"{folder}/{dyad}/{child}_solo.txt", "w")
                 prob.write("The solo video is problematic.")
                 prob.close()
                 playsound("C:/Users/user/Desktop/no.mp3")
@@ -123,7 +123,7 @@ else:
             n += 1 ##now, do the next one
             playsound("C:/Users/user/Desktop/done.mp3")
         except: ##create a text file so that we know why the video was not rendered
-            prob = open(f"{folder}/{dyad}/{child}_sbr.txt", "x")
+            prob = open(f"{folder}/{dyad}/{child}_sbr.txt", "w")
             prob.write("The sbr video is problematic.")
             prob.close()
             n += 1 ##move on to the next one
