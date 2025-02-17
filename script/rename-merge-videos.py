@@ -34,6 +34,7 @@ for dyad in dyads:
         ## (a)Check for problematic cases:
         if len(file_list) < 2:
             print(f"Nothing to join in {dyad}'s {cam} folder.")
+            playsound("C:/Users/user/Desktop/no.mp3")
         ## if the recording passed the hour (e.g., 10:59 to 11:00)
         elif  file_list[0][-22:-20] == "\\0" and file_list[-1][-22:-20] == "\\5":
             for f_name in file_list:
@@ -49,7 +50,7 @@ for dyad in dyads:
                     os.rename(f_name, new_fname)
             ## add the folder back to be processed
             camera.append(cam)
-            playsound("C:/Users/user/Desktop/ok.mp3")
+            playsound("C:/Users/user/Desktop/no.mp3")
         else:
             ## (b)Load mp4 files as videos:
             for i in file_list:
@@ -62,6 +63,7 @@ for dyad in dyads:
             first_frame = file_list[0][-21:-15]
             child = dyad[4:7]
             joined.write_videofile(f"{folder}/{dyad}/{cam}_{child}_{first_frame}.mp4")
+            playsound("C:/Users/user/Desktop/ok.mp3")
 
 
 playsound("C:/Users/user/Desktop/done.mp3")
