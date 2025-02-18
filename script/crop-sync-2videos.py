@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: MoChi
-#### Date: 13.02.2025
+#### Date: 17.02.2025
 #### Author: MY Sia (modified from the Peekaboo project)
 
 #### Aim of script: (1) Extract solo reading and (2) sync and combine two videos for SBR
@@ -25,20 +25,20 @@ folder = "C:/Users/user/Desktop/mc_vid" ##set path to the project folder
 #### Set default values
 dur_solo = 183 ##duration of the solo condition + 3sec
 dur_sbr = 305 ##duration of the SBR condition + 5sec
-x1, y1, x2, y2 = 450, 250, 2100, 1456 ##crop the front camera
+x1, y1, x2, y2 = 450, 100, 2300, 1450 ##crop the front camera
 ## - if the position of the dyad is not within this range, give a new dimension below
 vol_front, vol_side = 0, 10 ##amplify the side camera, mute the other
 col_front, col_side = (0, 0, 0), (0, 0, 225) ##amplified video gets a blue border
 
 #### Enter information
 attempts = 1 ##the number of attempts in merging videos
-dyads = ["a07_c07", "a09_c09", "a11_c11", "a12_c12", "a13_c13", "a14_c14"] ##which dyad folder are we looping?
-main = ["front", "side", "side", "side", "front", "side"] ##does the front or the side video have a better recording angle?
+dyads = ["a26_c26", "a28_c28", "a29_c29"] ##which dyad folder are we looping?
+main = ["front", "side", "front"] ##does the front or the side video have a better recording angle?
 solo_done = "no" ##if yes, the script will not render the solo videos
-strt_solo = [144, 135, 61, 606, 119, 514] ##the seconds at which the FRONT video STARTED recording the SOLO condition
-strt_sbr = [481, 441, 361, 155, 387, 69] ##the seconds at which the FRONT video STARTED recording the SBR condition
+strt_solo = [448, 438, 62] ##the seconds at which the FRONT video STARTED recording the SOLO condition
+strt_sbr = [11, 25, 378] ##the seconds at which the FRONT video STARTED recording the SBR condition
 ## Manually correct out-of-sync side video for SBR:
-corr = [-8]
+corr = [-0.9, -0.7, -0.6]
 ## - this is used only in the corrective rounds (i.e., second attempt or later)
 ## - if the SIDE video LAGS BEHIND, give a POSITIVE number; OTHERWISE, give a NEGATIVE number
 ## - a larger absolute number given will introduce a larger time difference between the videos
@@ -58,10 +58,10 @@ else:
         vid_path = Path(f"{folder}/{dyad}/")
         child = dyad[4:7]
         ## For different cropping dimensions
-        if child == "c01":
-            x1, y1, x2, y2 = 450, 250, 2100, 1400
-        elif child == "c02":
-            x1, y1, x2, y2 = 250, 440, 1700, 1456
+        if child == "c13":
+            x1, y1, x2, y2 = 350, 90, 1800, 1400
+        elif child == "c14":
+            x1, y1, x2, y2 = 250, 100, 1700, 1370
         ## The front video
         front_list = glob.glob(f"{vid_path}/front*.mp4")
         front_vid = VideoFileClip(front_list[0])
@@ -76,7 +76,7 @@ else:
         if solo_done == "no":
             final_solo = front_vid.volumex(5)
             ##in case of any error, don't stop; just move on
-            try: 
+            try:
                 final_solo = final_solo.subclip(strt_solo[n], strt_solo[n]+dur_solo)
                 final_solo.write_videofile(f"{folder}/{dyad}/{child}_solo{attempts}_{x1}_{y1}_{x2}_{y2}.mp4")
                 playsound("C:/Users/user/Desktop/ok.mp3")
@@ -96,12 +96,14 @@ else:
         diff = t_front - t_side
         diff = diff.total_seconds()
         ## Sync the videos
-        sbr_front = front_vid.volumex(vol_front) ##mute the video
         ##in case of any error, don't stop; just move on
         try:
             sbr_front = front_vid.subclip(strt_sbr[n], strt_sbr[n]+dur_sbr)
             if attempts == 1: ##first round
                 x = 0 ##no manual correction
+                ##save a copy of the front audio to aid correction of out-of-sync videos
+                audio_front = sbr_front.audio
+                audio_front.write_audiofile(f"{folder}/{dyad}/{child}_front.mp3")
                 side_vid = side_vid.subclip(strt_sbr[n]+diff, strt_sbr[n]+diff+dur_sbr)
             elif attempts > 1: ##corrective round
                 x = corr[n]
@@ -109,6 +111,7 @@ else:
             ## Extract audio (for processing later)
             audio_sbr = side_vid.audio
             audio_sbr.write_audiofile(f"{folder}/{dyad}/{child}_sbr.mp3")
+            sbr_front = sbr_front.volumex(vol_front) ##mute the video
             playsound("C:/Users/user/Desktop/ok.mp3")
             ## Position and resize the videos
             if main[n] == "front":
