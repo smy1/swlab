@@ -1,6 +1,6 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Project: MoChi
-#### Date: 17.02.2025
+#### Date: 18.02.2025
 #### Author: MY Sia (modified from the Peekaboo project)
 
 #### Aim of script: (1) Extract solo reading and (2) sync and combine two videos for SBR
@@ -17,6 +17,7 @@ from pathlib import Path
 from moviepy.editor import * ##v1.0.3
 from datetime import datetime ##to calculate time difference between videos
 import cv2 ##so that videos can be resized properly
+import os ##to delete unwanted files
 from playsound import playsound ##just for notification
 
 folder = "C:/Users/user/Desktop/mc_vid" ##set path to the project folder
@@ -108,6 +109,9 @@ else:
             elif attempts > 1: ##corrective round
                 x = corr[n]
                 side_vid = side_vid.subclip(strt_sbr[n]+diff+corr[n], strt_sbr[n]+diff+dur_sbr+corr[n])
+                ##remove the front audio since it has done its job
+                if os.path.exists(f"{folder}/{dyad}/{child}_front.mp3"):
+                    os.remove(f"{folder}/{dyad}/{child}_front.mp3")
             ## Extract audio (for processing later)
             audio_sbr = side_vid.audio
             audio_sbr.write_audiofile(f"{folder}/{dyad}/{child}_sbr.mp3")
