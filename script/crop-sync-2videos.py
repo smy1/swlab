@@ -131,7 +131,8 @@ else:
             playsound("C:/Users/user/Desktop/done.mp3")
         except: ##create a text file so that we know why the video was not rendered
             prob = open(f"{folder}/{dyad}/{child}_sbr.txt", "w")
-            prob.write("The sbr video is problematic.")
+            prob.write("The sbr video is problematic:")
+            prob.write(f"\nfront video = {t_front}\nside video = {t_side}\ndiff = {diff}\nstart time = {strt_sbr[n]}")
             prob.close()
             n += 1 ##move on to the next one
             playsound("C:/Users/user/Desktop/no.mp3")
