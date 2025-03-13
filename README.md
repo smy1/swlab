@@ -33,7 +33,6 @@ Installation can be done in the command prompt (for Windows users, type "command
 ```
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
-py -m ensurepip --upgrade
 pip install moviepy ## this installs the latest version
 pip show moviepy ## check the package version
 pip install opencv-python ## required for resizing videos if using MoviePy v1.0 https://pypi.org/project/opencv-python/
