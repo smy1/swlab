@@ -1,5 +1,8 @@
 # Python scripts for SW-Lab
-See [general requirements](#general-requirements) and [helpful resources](#helpful-resources) below.
+- [general requirements](#general-requirements)
+- [merge videos](#1-merge-videos)
+- [sync videos](#2-sync-videos)
+- [helpful resources](#helpful-resources)
 
 ## General requirements
 In order to run these python scripts, Python and the relevant modules need to be installed. I wrote these codes in Python 3.12.4.
