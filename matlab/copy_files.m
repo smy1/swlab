@@ -3,17 +3,18 @@
 % Edited by MYSia (20.3.2025) for MoChi
 clear all
 
-%% folder setup
+%% Folder setup
 MainFolder='C:\Users\user\Desktop\matlab\cflu\nirsdata\ori'; %where the subfolders of all data are currently stored
 TargetFolder='C:\Users\user\Desktop\matlab\cflu\nirsdata\alldata'; %where the copied files should be stored
 CFLFolder='C:\Users\user\Desktop\matlab\cflu\nirsdata\for_proflu'; %location to store data folders that should be sent to Prof Lu
 
-%% Copy .snirf and .tri files
+%% Check table - to copy or not to copy
 mdata=readtable('mochi_id.xlsx','Sheet','mochi');
 mdata.solo_ok=str2double(mdata.solo_ok); %this column specifies our data selection criteria
 mdata.test_date=datetime(mdata.test_date,'Format','yyyy-MM-dd'); %this column specifies the date of testing (which is the 1st-layer-subfolder)
 mdata=table2struct(mdata);
 
+% Copy .snirf and .tri files
 for i = 1:length(mdata) %one row per participant
     if mdata(i).solo_ok<=2.5 %data is included even if the child talked to the parent, as long as the parent did not respond
         %for the child data
