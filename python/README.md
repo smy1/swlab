@@ -10,15 +10,15 @@ Installation can be done in the command prompt (for Windows users, type "command
 ```
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
-pip install moviepy ## this installs the latest version
-pip show moviepy ## check the package version
 pip install opencv-python ## required for resizing videos if using MoviePy v1.0 https://pypi.org/project/opencv-python/
 pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
 ```
 >[!NOTE]
->While writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. To install an earlier version of MoviePy, use the code below.
+>While writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier version or the latest version.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
+>pip install moviepy ## this installs the latest version
+>pip show moviepy ## check the package version
 >```
 
 ## 1. Merge videos
