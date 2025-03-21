@@ -1,4 +1,4 @@
-# Python scripts for SW-Lab
+# Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
 - [general requirements](#general-requirements)
 - [merge videos](#1-merge-videos)
 - [sync videos](#2-sync-videos)
