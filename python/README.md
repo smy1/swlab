@@ -38,8 +38,8 @@ In the merge function, we need to enter three information:
 >[!NOTE]
 >If a camera subfolder does not exist within one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
 
-In our projects, we often video-record children (and their parents) during the experiment. Before we code their behaviour, we have to edit the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recordings as short clips. 
-   - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in sub-folders of the video camera. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
+Additional merging script not included in the function: 
+   - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ## 2. Sync videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
