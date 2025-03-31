@@ -23,8 +23,8 @@ pip install playsound==1.2.2 ## not necessary, only for notification when video 
 
 ## 1. Merge videos
 In our projects, we often video-record children (and their parents) during the experiment. Before we code their behaviour, we have to edit the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recordings as short clips. 
-   - [merge-videos.py](./merge-videos.py) This script concatenates short videos of each video camera into a complete video.
-   - [merge-clips.py](./merge-clips.py) This script concatenates short videos which are stored in sub-folders of the video camera. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
+   - merge-videos.py: This script concatenates short videos of each video camera into a complete video.
+   - merge-clips.py: This script concatenates short videos which are stored in sub-folders of the video camera. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
    - [rename-merge-videos.py](./rename-merge-videos.py) This script adds a chunk of "check-and-rename" code to the _merge-videos_ script so that we rename the video files before merging them. This is necessary because when syncing the videos, I rely on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, the recording starts at the 59th minute (e.g., 09:59am) and then continues to the next hour (e.g., 10:00am, 10:01am, etc), which will mess up the sequence of the merging (because 00 will be placed before 59). In the _merge-videos_ script, we have to check and rename the files manually. With the check-and-rename chunk, Python will change the "00" in the file name to "60" so that the "59" recording is placed before the originally-named-as-"00" recording. 
 
 ## 2. Sync videos
