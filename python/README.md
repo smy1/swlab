@@ -1,6 +1,8 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-- [general requirements](#general-requirements)
-- [merge videos](#1-merge-videos)
+The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail below.
+
+- [General requirements](#general-requirements)
+- [Example 1: Merge videos](#1-merge-videos)
 - [sync videos](#2-sync-videos)
 - [helpful resources](#helpful-resources)
 
@@ -10,18 +12,29 @@ Installation can be done in the command prompt (for Windows users, type "command
 ```
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
+pip show <package name> ## check whether a particular package has been install and what version
 pip install opencv-python ## required for resizing videos if using MoviePy v1.0 https://pypi.org/project/opencv-python/
-pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
 ```
 >[!NOTE]
->While writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier version or the latest version.
+>While writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier or the latest version.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >pip install moviepy ## this installs the latest version
->pip show moviepy ## check the package version
 >```
 
-## 1. Merge videos
+### 1. Merge videos
+To concatenate several videos into one long video, we use the following code.
+```
+from editvid import merge
+merge(folder="C:/Users/user/Desktop/mc_vid", ##set path to the project folder
+      children=["a62_c62", "a63_c63", "a64_c64"], ##which child folder are we processing?
+      camera=["BABY", "front", "SBR1", "SCREEN", "影片二"]) ##which camera folder are we processing?
+```
+In the merge function, we need to enter three information:
+- **folder: Where is the main project folder that stores all the videos?** In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
+- **children: What are the names of the first-level subfolders?** These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
+- **camera: What are the names of the second-level subfolders?** These subfolders are stored within the first-level subfolders. These should be the name of the cameras/video recorders. If a camera-subfolder does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera-subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
+
 In our projects, we often video-record children (and their parents) during the experiment. Before we code their behaviour, we have to edit the videos (e.g., concatenate, synchronise, etc) because our video cameras store these recordings as short clips. 
    - merge-videos.py: This script concatenates short videos of each video camera into a complete video.
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in sub-folders of the video camera. The sub-folders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
@@ -42,3 +55,6 @@ I relied heavily on the links below when writing these codes. Note: These links 
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
 - how to [crop a video](https://stackoverflow.com/a/74586686)
 - how to [rename files](https://pynative.com/python-rename-file/)
+
+Previously used unnecessary modules:
+- pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
