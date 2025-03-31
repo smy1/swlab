@@ -30,9 +30,9 @@ pip install opencv-python ## required for resizing videos if using MoviePy v1.0 
 To concatenate several videos into one long video, we use the following code.
 ```
 from editvid import merge
-merge(folder="C:/Users/user/Desktop/mc_vid", ##set path to the project folder
-      children=["a62_c62", "a63_c63", "a64_c64"], ##which child folder are we processing?
-      camera=["BABY", "front", "SBR1", "SCREEN", "影片二"]) ##which camera folder are we processing?
+merge(folder="C:/Users/user/Desktop/mc_vid", 
+      children=["a62_c62", "a63_c63", "a64_c64"], 
+      camera=["BABY", "front", "SBR1", "SCREEN", "影片二"])
 ```
 In the merge function, we need to enter three information:
 - **folder: Where is the main project folder that stores all the videos?** In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
@@ -48,30 +48,30 @@ Additional merging script not included in the function:
 The following code extracts information from an excel file.
 ```
 from editvid import overlay
-overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
-        attempts = 1, ##1: correction info will be disregarded, 2 or higher: correction info will be needed
-        bgcam = "baby", ##name of the background video that python should search for
-        topcam = "screen", ##name of the to-be-overlaid video that python should search for
-        newname = "OMI", ##name of the output video
-        propsize = 0.25, ##resize the to-be-overlaid video
+overlay(folder = "C:/Users/user/Desktop/mc_vid", 
+        attempts = 1, 
+        bgcam = "baby", 
+        topcam = "screen",
+        newname = "OMI", 
+        propsize = 0.25, 
         dur = None,
         excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
-        children=None, start=None, end=None, corr=None) ##enter info as none because they are found in the excel
+        children=None, start=None, end=None, corr=None) 
 ```
 The following code enters information into the function.
 ```
-overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
-        attempts = 1, ##1: correction info will be disregarded, 2 or higher: correction info will be needed
-        bgcam = "baby", ##name of the background video that python should search for
-        topcam = "screen", ##name of the to-be-overlaid video that python should search for
-        newname = "OMI", ##name of the output video
-        propsize = 0.25, ##resize the to-be-overlaid video
+overlay(folder = "C:/Users/user/Desktop/mc_vid", 
+        attempts = 1, 
+        bgcam = "baby", 
+        topcam = "screen", 
+        newname = "OMI", 
+        propsize = 0.25, 
         dur = None,
-        excel = None, ##if not attaching an excel, enter info below
-        children = ["076", "078"], ##which child folder are we processing?
-        start = [20, 19], ##the seconds at which the experiment STARTED
-        end = [238, 609], ##the seconds at which the experiment ENDED
-        corr = [-1, 0.9]) ##manually correct out-of-sync videos
+        excel = None, 
+        children = ["076", "078"],
+        start = [20, 19], 
+        end = [238, 609], 
+        corr = [-1, 0.9]) 
 ```
 
 ### 3. Crop videos
@@ -92,8 +92,8 @@ I relied heavily on the links below when writing these codes. Note: These links 
 - how to [crop a video](https://stackoverflow.com/a/74586686)
 - how to [rename files](https://pynative.com/python-rename-file/)
 
-Previously used unnecessary modules:
+Previously used but actually unnecessary modules:
 - pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
-- merge-videos.py: This script concatenates short videos of each video camera into a complete video.
-- rename-merge-videos.py: This script adds a chunk of "check-and-rename" code to the _merge-videos_ script so that we rename the video files before merging them. This is necessary because when syncing the videos, I rely on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, the recording starts at the 59th minute (e.g., 09:59am) and then continues to the next hour (e.g., 10:00am, 10:01am, etc), which will mess up the sequence of the merging (because 00 will be placed before 59). In the _merge-videos_ script, we have to check and rename the files manually. With the check-and-rename chunk, Python will change the "00" in the file name to "60" so that the "59" recording is placed before the originally-named-as-"00" recording. 
-- omi-sync-videos.py: This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
+- [merge-videos.py](./obsolete/merge-videos.py): This script concatenates short videos of each video camera into a complete video.
+- [rename-merge-videos.py](./obsolete/rename-merge-videos.py): This script adds a chunk of "check-and-rename" code to the _merge-videos_ script so that we rename the video files before merging them. This is necessary because when syncing the videos, I rely on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, the recording starts at the 59th minute (e.g., 09:59am) and then continues to the next hour (e.g., 10:00am, 10:01am, etc), which will mess up the sequence of the merging (because 00 will be placed before 59). In the _merge-videos_ script, we have to check and rename the files manually. With the check-and-rename chunk, Python will change the "00" in the file name to "60" so that the "59" recording is placed before the originally-named-as-"00" recording. 
+- [omi-sync-videos.py](./obsolete/omi-sync-videos.py): This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
