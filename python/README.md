@@ -4,7 +4,7 @@ The previous scripts have now been compiled into a function script called [editv
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
 - [sync videos](#2-sync-videos)
-- [helpful resources](#helpful-resources)
+- [Helpful resources](#helpful-resources)
 
 ## General requirements
 In order to run these python scripts, Python and the relevant modules need to be installed. I wrote these codes in Python 3.12.4.
@@ -23,6 +23,7 @@ pip install opencv-python ## required for resizing videos if using MoviePy v1.0 
 >pip install moviepy ## this installs the latest version
 >```
 
+## Examples
 ### 1. Merge videos
 To concatenate several videos into one long video, we use the following code.
 ```
@@ -41,7 +42,7 @@ In the merge function, we need to enter three information:
 Additional merging script not included in the function: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
-## 2. Sync videos
+### 2. Sync videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - omi-sync-videos.py: This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
