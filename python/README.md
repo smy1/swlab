@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail below.
+The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail below.
 
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
