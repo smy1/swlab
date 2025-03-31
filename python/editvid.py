@@ -1,8 +1,22 @@
+#### Affiliation: SW-Lab, Dept of CFS, NTNU
+#### Date: 31.03.2025
+#### Author: MY Sia (with lots of help from the web, see README.md for more)
+
+#### Import necessary modules
 import glob
 from pathlib import Path
 import os ##to rename files, where necessary
-from moviepy.editor import *
+from moviepy.editor import * ##MoviePy v1.0.3
+##for syncing videos
+from datetime import datetime ##to calculate time difference between videos
+import cv2 ##so that videos can be resized properly
+from openpyxl import load_workbook ##if we extract info from an excel file
 
+#### Aim of function: Concatenate short videos into a long one
+##Date: first written on 23.06.2024, further editing on 12.02.2025
+##Input: Multiple videos stored in a folder (one folder for each camera)
+##Output: A single video per camera per child
+##Required directory: project folder -> child folder -> camera folder -> short videos (e.g., <desktop>/Peekaboo/P01/BABY/<videos>)
 def merge(folder, children, camera):
     #### Loop through child folders
     for child in children:
@@ -41,3 +55,75 @@ def merge(folder, children, camera):
                 first_frame = file_list[0][-21:-15]
                 cam = cam.lower()
                 joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
+
+
+#### Aim of function: Sync and overlay a downsized SCREEN video on a BABY video for gaze coding
+##Date: first written on 23.06.2024
+##Input: A video showing the child's face (BABY video) and a video showing the screen that the child is watching (SCREEN video)
+##Output: A single video per child with the BABY video as the main video and the SCREEN video overlaid on the top left corner
+##Required directory: project folder -> child folder -> videos (e.g., <desktop>/Peekaboo/P01/<videos>)
+def overlay(folder, attempts, bgvid, topvid, propsize, newname,
+            excel=None, children=None, start=None, end=None, corr=None):
+    ### Extract information if we load an excel file
+    if excel != None:
+        wb = load_workbook(excel)
+        sheet = wb["Sheet1"]
+        ##Extract information from excel
+        children=[] ##which child folder are we processing?
+        list_children = sheet["a"]
+        for i in list_children:
+            children.append(i.value)
+        #
+        children.remove("children") ##remove the first row, which is the header
+        start=[] ##the seconds at which the experiment STARTED in the SCREEN video
+        list_start =  sheet["b"]
+        for i in list_start:
+            start.append(i.value)
+        #
+        start.remove("start")
+        end=[] ##the seconds at which the experiment ENDED in the SCREEN video
+        list_end =  sheet["c"]
+        for i in list_end:
+            end.append(i.value)
+        #
+        end.remove("end")
+        corr=[] ## Manually correct out-of-sync baby videos:
+        list_corr =  sheet["d"]
+        for i in list_corr:
+            corr.append(i.value)
+        #
+        corr.remove("corr")
+    ### Loop through several babies
+    n = 0
+    for child in children:
+        ## (a)Prepare videos:
+        vid_path = Path(f"{folder}/{child}/")
+        ## Baby video
+        baby_list = glob.glob(f"{vid_path}/{child}_{bgvid}*.mp4")
+        baby_vid = VideoFileClip(baby_list[0])
+        t_baby = baby_list[0][-10:-5]
+        t_baby = t_baby.replace("M", ":")
+        t_baby = datetime.strptime(t_baby, "%M:%S")
+        ## Screen video
+        screen_list = glob.glob(f"{vid_path}/{child}_{topvid}*.mp4")
+        screen_vid = VideoFileClip(screen_list[0])
+        screen_vid = screen_vid.resize(propsize).margin(5) ##downsize video and add a 5px border
+        t_screen = screen_list[0][-10:-5]
+        t_screen = t_screen.replace("M", ":")
+        t_screen = datetime.strptime(t_screen, "%M:%S")
+        ## Get time difference between videos
+        diff = t_screen - t_baby
+        diff = diff.total_seconds()
+        ## (b)Overlay screen video on baby video at the top left corner:
+        if attempts == 1: ##first round
+            x = 0 ##no manual correction
+            all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
+                                        screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
+        elif attempts > 1: ##corrective round
+            x = corr[n]
+            all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
+                                        screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
+        ## (c)Save composite video:
+        all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_merged{attempts}_corr={x}.mp4")
+        n += 1 ##now, do the next one
+
