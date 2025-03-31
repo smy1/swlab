@@ -13,6 +13,7 @@ Installation can be done in the command prompt (for Windows users, type "command
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
 pip show <package name> ## check whether a particular package has been install and what version
+pip install openpyxl ## required if we want python to extract information from an excel file
 pip install opencv-python ## required for resizing videos if using MoviePy v1.0 https://pypi.org/project/opencv-python/
 ```
 >[!NOTE]
