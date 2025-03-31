@@ -27,13 +27,13 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
         propsize = 0.25, ##resize the to-be-overlaid video
         dur = None,
         excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
-        children=None, start=None, end=None, corr=None) ##enter info as none because they are found in the excel
+        children=None, start=None, end=None, corr=None)
 
 ##EXAMPLE 2b: Using manually entered info
 overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
         attempts = 1, ##1: correction info will be disregarded, 2 or higher: correction info will be needed
         bgcam = "baby", ##name of the background video that python should search for
-        topcam = "screen", ##name of the to-be-overlaid video that python should search for
+        topcam = "screen", ##name of the top video that python should search for
         newname = "OMI", ##name of the output video
         propsize = 0.25, ##resize the to-be-overlaid video
         dur = None,
@@ -48,10 +48,10 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
 ##
 ##Required directory:
 from editvid import crop
-crop(folder = "C:/Users/user/Desktop/mc_vid",
-     cam = "front",
-     newname = "solo",
-     dur = 183,
+crop(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
+     cam = "front", ##name of the video that python should search for
+     newname = "solo", ##name of the output video
+     dur = 183, ##duration of the recording
      amplify = 5, ##do we want to mute/amplify the volume of the video?
      excel = "C:/Users/user/Desktop/mc_vid/mochibaby.xlsx",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
