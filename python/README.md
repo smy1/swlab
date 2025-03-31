@@ -38,7 +38,7 @@ In the merge function shown above, we need to enter three information:
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
 - __children__: What are the names of the first-level subfolders? These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
 - __camera__: What are the names of the second-level subfolders? These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
->[!NOTE]
+>[!TIP]
 >If a camera subfolder does not exist within one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
 
 Additional merging script not included in the function: 
@@ -69,12 +69,17 @@ In the overlay function shown above, we need to enter several information and ha
 - __excel__: What is the path and name of the excel file that contains all other relevant information? Leave this as "None" if we want to enter this information manually (see example B below).
 - the rest: Leave them as "None" since the information should be found in the excel file.
 
-In the excel file, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". While these names can be changed to something else that is more intuitive (or even translated into another language), the order of the columns _must_ be in this manner. For example, 
-- the first column (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, see [merge videos](#1-merge-videos) for more).
-- The second column (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), give the start time of only one of these cameras. It does not matter which camera we rely on but it must _consistently_ the same camera. The function will calculate the recording time difference between the two cameras and adjust the start time of the other camera.
-- The third column (named as "end"in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone.
+In the excel file, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". While these names can be changed to something else that is more intuitive (or even translated into another language), the order of the columns _must_ be in this manner. To illustrate: 
+- The first column (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, see [merge videos](#1-merge-videos) for more).
+- The second column (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), give the start time of only one of these cameras. The function will calculate the recording time difference between the two cameras and adjust the start time of the other camera.
+- The third column (named as "end" in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone.
 - The fourth column (named as "corr" in this example) contains information that corrects for out-of-sync videos.
 - The first row of these columns could have been entered as "subfolder_name", "begin_time", "end_time", and "video_difference" or anything else that makes more sense. The screenshot below shows an example of the excel file.
+
+<img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
+
+> [!IMPORTANT]  
+> The information entered in the first column of the excel file must be a character (in Python terms). If the names of the subfolders are numbers, such as these shown in the example, add an inverted comma before the number, otherwise, Python might not be able to match the information with the subfolder names.
 
 (B) The following code enters information into the function.
 ```
