@@ -27,7 +27,7 @@ pip install opencv-python ## required for resizing videos if using MoviePy v1.0 
 
 ## Examples
 ### 1. Merge videos
-To concatenate several videos into one long video, we use the following code.
+The following code concatenates several videos into one long video.
 ```
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
@@ -45,7 +45,7 @@ Additional merging script not included in the function:
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ### 2. Overlay videos
-The following code extracts information from an excel file.
+(A) The following code extracts information from an excel file.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -58,7 +58,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
-The following code enters information into the function.
+(B) The following code enters information into the function.
 ```
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
         attempts = 1, 
