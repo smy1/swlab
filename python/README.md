@@ -3,7 +3,7 @@ The previous scripts have now been compiled into a function script called [editv
 
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
-- [sync videos](#2-sync-videos)
+- [Example 2: Sync and overlay videos](#2-overlay-two-videos)
 - [Helpful resources](#helpful-resources)
 
 ## General requirements
@@ -42,9 +42,36 @@ In the merge function, we need to enter three information:
 Additional merging script not included in the function: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
-### 2. Sync videos
+### 2. Overlay two videos
+The following code extracts information from an excel file.
+```
+from editvid import overlay
+overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
+        attempts = 1, ##1: correction info will be disregarded, 2 or higher: correction info will be needed
+        bgcam = "baby", ##name of the background video that python should search for
+        topcam = "screen", ##name of the to-be-overlaid video that python should search for
+        newname = "OMI", ##name of the output video
+        propsize = 0.25, ##resize the to-be-overlaid video
+        dur = None,
+        excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
+        children=None, start=None, end=None, corr=None) ##enter info as none because they are found in the excel
+```
+The following code enters information into the function.
+```
+overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
+        attempts = 1, ##1: correction info will be disregarded, 2 or higher: correction info will be needed
+        bgcam = "baby", ##name of the background video that python should search for
+        topcam = "screen", ##name of the to-be-overlaid video that python should search for
+        newname = "OMI", ##name of the output video
+        propsize = 0.25, ##resize the to-be-overlaid video
+        dur = None,
+        excel = None, ##if not attaching an excel, enter info below
+        children = ["076", "078"], ##which child folder are we processing?
+        start = [20, 19], ##the seconds at which the experiment STARTED
+        end = [238, 609], ##the seconds at which the experiment ENDED
+        corr = [-1, 0.9]) ##manually correct out-of-sync videos
+```
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
-   - omi-sync-videos.py: This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](./sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
    - [crop-sync-2videos.py](./crop-sync-2videos.py) This script adds an additional chunk of code to the _sbr-sync-2videos_ script to crop one of the videos before syncing both of them. It also has an additional line to handle exceptions, which usually happen due to the actual video duration being shorter than the duration written in the script.
@@ -62,4 +89,4 @@ Previously used unnecessary modules:
 - pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
 - merge-videos.py: This script concatenates short videos of each video camera into a complete video.
 - rename-merge-videos.py: This script adds a chunk of "check-and-rename" code to the _merge-videos_ script so that we rename the video files before merging them. This is necessary because when syncing the videos, I rely on the name of the videos, which contains the minute and second at which the video recording was taken. In some cases, the recording starts at the 59th minute (e.g., 09:59am) and then continues to the next hour (e.g., 10:00am, 10:01am, etc), which will mess up the sequence of the merging (because 00 will be placed before 59). In the _merge-videos_ script, we have to check and rename the files manually. With the check-and-rename chunk, Python will change the "00" in the file name to "60" so that the "59" recording is placed before the originally-named-as-"00" recording. 
-
+- omi-sync-videos.py: This script downsizes the "screen" video to 25%, then overlays it on the "baby" video at the top left corner. This way, we can see the child's face clearly (to code where they are looking) as well as what is presented on the screen. (_Note_: _Omi_ stands for omission task)
