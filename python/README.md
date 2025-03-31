@@ -4,7 +4,8 @@ The previous scripts have now been compiled into a function script called [editv
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
 - [Example 2: Sync and overlay videos](#2-overlay-videos)
-- [Example 3: Sync and juxtapose videos](#3-juxtapose-videos)
+- [Example 3: Crop videos](#3-crop-videos)
+- [Example 4: Sync and juxtapose videos](#4-juxtapose-videos)
 - [Helpful resources](#helpful-resources)
 
 ## General requirements
@@ -73,7 +74,10 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
         corr = [-1, 0.9]) ##manually correct out-of-sync videos
 ```
 
-### 3. Juxtapose videos
+### 3. Crop videos
+Coming soon.
+
+### 4. Juxtapose videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](./sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
