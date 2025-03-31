@@ -35,9 +35,9 @@ merge(folder="C:/Users/user/Desktop/mc_vid",
       camera=["BABY", "front", "SBR1", "SCREEN", "影片二"])
 ```
 In the merge function, we need to enter three information:
-- **folder: Where is the main project folder that stores all the videos?** In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
-- **children: What are the names of the first-level subfolders?** These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
-- **camera: What are the names of the second-level subfolders?** These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
+- **folder**: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
+- **children**: What are the names of the first-level subfolders? These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
+- **camera**: What are the names of the second-level subfolders? These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
 >[!NOTE]
 >If a camera subfolder does not exist within one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
 
@@ -45,7 +45,7 @@ Additional merging script not included in the function:
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ### 2. Overlay videos
-(A) The following code extracts information from an excel file.
+(A) The following code extracts information from an excel file before overlaying a video onto another.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -58,6 +58,17 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
+In the overlay function, we need to enter several information and have an excel file ready.
+- **folder**: Where is the main project folder that stores all the videos? As with the merge function, in this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
+- **attempts**: Is this the first time? If yes, enter 1, and the function will ignore the information given under "corr".
+- **bgcam**: Stands for "background-camera". What is the name of the camera that will be used as the "base" of the video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video.
+- **topcam**: Stands for "top-camera". What is the name of the camera that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video.
+- **newname**: How should Python name the new output video? In this example, Python will name the new video as "OMI", which stands for "omission task".
+- **propsize**: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
+- **dur**: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter it here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
+- **excel**: What is the path and name of the excel file that contains all other relevant information? Leave this as "None" if we want to enter this information manually (see example B below).
+- the rest: Leave them as "none" since the information should be found in the excel file.
+
 (B) The following code enters information into the function.
 ```
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
