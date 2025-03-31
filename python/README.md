@@ -1,9 +1,10 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail below.
+The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail [below](#examples).
 
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
-- [Example 2: Sync and overlay videos](#2-overlay-two-videos)
+- [Example 2: Sync and overlay videos](#2-overlay-videos)
+- [Example 3: Sync and juxtapose videos](#3-juxtapose-videos)
 - [Helpful resources](#helpful-resources)
 
 ## General requirements
@@ -42,7 +43,7 @@ In the merge function, we need to enter three information:
 Additional merging script not included in the function: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
-### 2. Overlay two videos
+### 2. Overlay videos
 The following code extracts information from an excel file.
 ```
 from editvid import overlay
@@ -71,6 +72,8 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
         end = [238, 609], ##the seconds at which the experiment ENDED
         corr = [-1, 0.9]) ##manually correct out-of-sync videos
 ```
+
+### 3. Juxtapose videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](./sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
