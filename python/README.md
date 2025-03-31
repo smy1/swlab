@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail [below](#examples).
+The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. In general, this function batch processes several videos, allowing the video editing task to be automatised. Netheless to say, the videos and folders should be named in a consistent manner for the batch processing to be successful. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail [below](#examples).
 
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
@@ -27,17 +27,17 @@ pip install opencv-python ## required for resizing videos if using MoviePy v1.0 
 
 ## Examples
 ### 1. Merge videos
-The following code concatenates several videos into one long video.
+The following code concatenates several videos into one long video and does this repetitively for all the folders listed in the function.
 ```
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
       children=["a62_c62", "a63_c63", "a64_c64"], 
       camera=["BABY", "front", "SBR1", "SCREEN", "影片二"])
 ```
-In the merge function, we need to enter three information:
-- **folder**: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
-- **children**: What are the names of the first-level subfolders? These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
-- **camera**: What are the names of the second-level subfolders? These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
+In the merge function shown above, we need to enter three information:
+- __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
+- __children__: What are the names of the first-level subfolders? These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
+- __camera__: What are the names of the second-level subfolders? These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
 >[!NOTE]
 >If a camera subfolder does not exist within one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
 
@@ -45,7 +45,7 @@ Additional merging script not included in the function:
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ### 2. Overlay videos
-(A) The following code extracts information from an excel file before overlaying a video onto another.
+(A) The following code extracts information from an excel file before overlaying a video onto another and does this repetitively for all the folders listed in the excel file.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -58,16 +58,23 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
-In the overlay function, we need to enter several information and have an excel file ready.
-- **folder**: Where is the main project folder that stores all the videos? As with the merge function, in this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
-- **attempts**: Is this the first time? If yes, enter 1, and the function will ignore the information given under "corr".
-- **bgcam**: Stands for "background-camera". What is the name of the camera that will be used as the "base" of the video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video.
-- **topcam**: Stands for "top-camera". What is the name of the camera that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video.
-- **newname**: How should Python name the new output video? In this example, Python will name the new video as "OMI", which stands for "omission task".
-- **propsize**: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
-- **dur**: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter it here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
-- **excel**: What is the path and name of the excel file that contains all other relevant information? Leave this as "None" if we want to enter this information manually (see example B below).
-- the rest: Leave them as "none" since the information should be found in the excel file.
+In the overlay function shown above, we need to enter several information and have an excel file ready (an example of the excel file can be downloaded [here](./peekbaby.xlsx)).
+- __folder__: Where is the main project folder that stores all the videos? As with the merge function, in this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
+- __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the information given under "corr" (stands for "correction"). If the number entered here is 2 or higher, the function will extract the correction information and returns an error if none is found.
+- __bgcam__: Stands for "background-camera". What is the name of the recording that will be used as the "base" of the video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video.
+- __topcam__: Stands for "top-camera". What is the name of the recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video.
+- __newname__: How should Python name the new output video? In this example, Python will name the new video as "OMI", which stands for "omission task".
+- __propsize__: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
+- __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter it here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
+- __excel__: What is the path and name of the excel file that contains all other relevant information? Leave this as "None" if we want to enter this information manually (see example B below).
+- the rest: Leave them as "None" since the information should be found in the excel file.
+
+In the excel file, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". While these names can be changed to something else that is more intuitive (or even translated into another language), the order of the columns _must_ be in this manner. For example, 
+- the first column (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, see [merge videos](#1-merge-videos) for more).
+- The second column (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), give the start time of only one of these cameras. It does not matter which camera we rely on but it must _consistently_ the same camera. The function will calculate the recording time difference between the two cameras and adjust the start time of the other camera.
+- The third column (named as "end"in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone.
+- The fourth column (named as "corr" in this example) contains information that corrects for out-of-sync videos.
+- The first row of these columns could have been entered as "subfolder_name", "begin_time", "end_time", and "video_difference" or anything else that makes more sense. The screenshot below shows an example of the excel file.
 
 (B) The following code enters information into the function.
 ```
