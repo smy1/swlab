@@ -75,6 +75,16 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 
 ### 3. Crop videos
+```
+from editvid import crop
+crop(folder = "C:/Users/user/Desktop/mc_vid",
+     cam = "front",
+     newname = "solo",
+     dur = 183,
+     amplify = 5, 
+     excel = "C:/Users/user/Desktop/mc_vid/mochibaby.xlsx",
+     children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
+```
 Coming soon.
 
 ### 4. Juxtapose videos
