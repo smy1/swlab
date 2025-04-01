@@ -38,7 +38,7 @@ merge(folder="C:/Users/user/Desktop/mc_vid",
 ```
 As shown in the code above, the merge function has three parameters:
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
-- __children__: What are the names of the first-level subfolders? These subfolders should be stored directly within the main project folder. In this example, the three subfolders are "a62_c62", "a63_c63", and "a64_c64" (which, in our case, refer to the participants' ID). 
+- __children__: What are the names of the first-level subfolders? These subfolders should be stored directly within the main project folder. In this example, the three subfolders listed refer to our participants' ID. 
 - __camera__: What are the names of the second-level subfolders? These subfolders should be stored within the first-level  subfolders. In this example, these second-level subfolders are the names of the cameras/video recorders. Within these subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
 - In short, the storage path of the short videos should be something in the line of _< main project folder >/<first-level "child" subfolder>/<second-level "camera" subfolder>/< videos to be concatenated >_. By passing these subfolders into the function, all the videos in them will be processed automatically.
 
@@ -46,7 +46,7 @@ As shown in the code above, the merge function has three parameters:
 >If a camera subfolder does not exist in one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible second-level subfolders even if these subfolders exist only in some of the first-level subfolders but not in others. 
 
 > [!IMPORTANT]  
-> Even if there is only one first-level "children" subfolder, the argument must be given within a square bracket [ ] so that Python treats it like a list, otherwise, the function will return an error. This is true for all other parameters in which the function is supposed to loop through, like the second-level "camera" subfolder in this example or the start time information in Example 2 below.
+> Even if there is only one first-level subfolder that Python needs to deal with, the argument must be given within a square bracket (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. This is true for all other parameters in which the function expects a list, like the second-level "camera" subfolder in this example or the "start time" information in Example 2 below.
 
 An additional merging script that is not included in the module: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
@@ -54,7 +54,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. 
+__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -70,9 +70,9 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 As shown in the code above, the overlay function has many parameters, one of which requires us to have an Excel file ready.
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
 - __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the argument given to the parameter "corr" (stands for "correction", see below). If the number entered here is 2 or larger, we need to provide the correction argument, otherwise, the function will return an error.
-- __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the new composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders with each subfolder indicating an individual participant. The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually given to the parameter "children" (see Example 2B below).
-- __topcam__: Stands for "top-camera". What is the name of the video recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video to create a new composite video. As with the base videos, these top videos should be stored in their respective subfolders.
-- __newname__: How should Python name the new composite video? In this example, Python will name the new composite video as "OMI" (which stands for "omission task").
+- __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders (in our example, each subfolder corresponds to an individual participant). The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually given to the parameter "children" (see Example 2B below).
+- __topcam__: Stands for "top-camera". What is the name of the video recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video to create a composite video. These top videos should be stored together with the base videos.
+- __newname__: How should Python name the composite video? In this example, the composite video that is created will be called as "OMI" (which stands for "omission task").
 - __propsize__: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? Leave this as "None" if we want to enter this information manually (see Example 2B below).
