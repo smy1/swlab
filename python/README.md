@@ -78,7 +78,7 @@ In the overlay function shown above, we need to enter several information and ha
 
 In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see Image 1 below). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
 
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="250">
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="280">
 
 __Image 1__: _An example of an Excel file for the overlay function._  
 
@@ -128,7 +128,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
      excel = "C:/Users/user/Desktop/mc_vid/example_crop.xlsx",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
 ```
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="250">
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="280">
 
 __Image 2__: _An example of an Excel file for the crop function._
 
