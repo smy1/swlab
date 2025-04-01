@@ -71,11 +71,13 @@ In the overlay function shown above, we need to enter several information and ha
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? Leave this as "None" if we want to enter this information manually (see Example 2B below).
 - the rest: Leave them as "None" since the information should be found in the Excel file.
 
-In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see the image below). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
+In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see Image 1 below). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="250">
 
-In the image above: 
+__Image 1__: _An example of an Excel file for the overlay function._  
+
+In Image 1 above: 
 - The _first column_ (named as "children" in this example) must contain the name of the first-level subfolders in which the base video and top video are stored. The name of the subfolders is usually the participants' ID, hence, I sometimes call these subfolders "child subfolders". In this example, the subfolders are "076" and "078".
 - The _second column_ (named as "start" in this example) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos. The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy using the variable "corr" (see below).
 - The _third column_ (named as "end" in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone (see the variable "dur" above).
@@ -83,7 +85,7 @@ In the image above:
 - To reiterate: the first row of these columns could have been entered as "subfolder_name", "begin_time", "end_time", and "correct_timing_difference" or anything else that makes more sense. 
 
 > [!IMPORTANT]  
-> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in the image above (Notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
+> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Image 1 above (Notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
 
 __(2B)__ The following code calls for the __overlay function__ exactly as shown in Example 2A above. The difference is that here, we manually enter information regarding subfolder names and video timing. 
 ```
@@ -118,6 +120,8 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
 ```
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="250">
+
+__Image 2__: _An example of an Excel file for the crop function._
 
 ### 4. Juxtapose videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
