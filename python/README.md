@@ -38,10 +38,12 @@ merge(folder="C:/Users/user/Desktop/mc_vid",
 ```
 As shown in the code above, the merge function has three parameters:
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
-- __children__: What are the names of the first-level subfolders? These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
-- __camera__: What are the names of the second-level subfolders? These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
+- __children__: What are the names of the first-level subfolders? These subfolders should be stored directly within the main project folder. In this example, the three subfolders are "a62_c62", "a63_c63", and "a64_c64" (which, in our case, refer to the participants' ID). 
+- __camera__: What are the names of the second-level subfolders? These subfolders should be stored within the first-level  subfolders. In this example, these second-level subfolders are the names of the cameras/video recorders. Within these subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
+- In short, the storage path of the short videos should be something in the line of _< main project folder >/<first-level "child" subfolder>/<second-level "camera" subfolder>/< videos to be concatenated >_. By passing these subfolders into the function, all the videos in them will be processed automatically.
+
 >[!TIP]
->If a camera subfolder does not exist within one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
+>If a camera subfolder does not exist in one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible second-level subfolders even if these subfolders exist only in some of the first-level subfolders but not in others. 
 
 > [!IMPORTANT]  
 > Even if there is only one first-level "children" subfolder, the argument must be given within a square bracket [ ] so that Python treats it like a list, otherwise, the function will return an error. This is true for all other parameters in which the function is supposed to loop through, like the second-level "camera" subfolder in this example or the start time information in Example 2 below.
