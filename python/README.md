@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. In general, this function batch processes several videos, allowing the video editing task to be automatised. Needless to say, the videos and folders should be named in a consistent manner for the batch processing to be successful. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail [below](#examples).
+The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Needless to say, the videos and folders (in which the videos are stored) should be named in a consistent manner for the batch processing task to be run smoothly and successfully. The [examples.py](./examples.py) script shows how and when to call for various video-editing functions of the module. These examples are explained in detail [below](#examples).
 
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
@@ -9,7 +9,7 @@ The previous scripts have now been compiled into a function script called [editv
 - [Helpful resources](#helpful-resources)
 
 ## General requirements
-In order to run these python scripts, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
+In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
 ```
 python --version ## check python version
@@ -21,7 +21,7 @@ pip install DateTime ## required when syncing the timing of two videos
 pip install pathlib ## required for Python to locate a path of a file
 ```
 >[!NOTE]
->While writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier or the latest version.
+>When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier or the latest version.
 >```
 >pip install moviepy==1.0.3 ## this installs the older version
 >pip install moviepy ## this installs the latest version
@@ -29,14 +29,14 @@ pip install pathlib ## required for Python to locate a path of a file
 
 ## Examples
 ### 1. Merge videos
-The following code calls for the __merge function__ to concatenate several videos into one long video. This is done repetitively for all the subfolders listed in the function.
+The following code calls for the __merge function__ to concatenate several videos into one long video. 
 ```
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
       children=["a62_c62", "a63_c63", "a64_c64"], 
       camera=["BABY", "front", "SBR1", "SCREEN", "影片二"])
 ```
-In the merge function shown above, we need to provide three arguments:
+As shown in the code above, the merge function has three parameters:
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
 - __children__: What are the names of the first-level subfolders? These subfolders are stored within main project folder and are presumably named after the participants' ID (in this example, "a62_c62", "a63_c63", and "a64_c64"). By listing all the subfolders here, the merge function will loop through them one by one.
 - __camera__: What are the names of the second-level subfolders? These subfolders are stored within the first-level child subfolders. These second-level subfolders should be the name of the cameras/video recorders. Within these camera subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
@@ -46,13 +46,13 @@ In the merge function shown above, we need to provide three arguments:
 > [!IMPORTANT]  
 > Even if there is only one first-level "children" subfolder, the argument must be given within a square bracket [ ] so that Python treats it like a list, otherwise, the function will return an error. This is true for all other parameters in which the function is supposed to loop through, like the second-level "camera" subfolder in this example or the start time information in Example 2 below.
 
-An additional merging script that is not included in the function: 
+An additional merging script that is not included in the module: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ---
 
 ### 2. Overlay videos
-__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an Excel file (a sample file can be found [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Python will perform the overlay function on the videos in all the subfolders listed in the Excel file.
+__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -65,7 +65,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
-In the overlay function shown above, we need to provide the following arguments and have an Excel file ready.
+As shown in the code above, the overlay function has many parameters, one of which requires us to have an Excel file ready.
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
 - __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the argument given to the parameter "corr" (stands for "correction", see below). If the number entered here is 2 or larger, we need to provide the correction argument, otherwise, the function will return an error.
 - __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the new composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders with each subfolder indicating an individual participant. The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually given to the parameter "children" (see Example 2B below).
