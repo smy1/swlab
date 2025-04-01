@@ -142,6 +142,21 @@ In the __excel file__, we should have seven columns that correspond to the last 
 
 __Figure 2__: _An example of an Excel file for the crop function._
 
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
+
+__Figure 3__: _An example of how to get the cropping details._
+
+In Figure 3 above: 
+- This is a screenshot of a movie with a dimension of 640 x 480. (I have decided to illustrate using a movie instead of an actual experiment recording). Imagine that we want to crop the area indicated by the white border.
+- To get __x1 and x2__: Given that the horizontal length of the movie is 640, we can gauge the other points along the x-axis by dividing the screenshot by halves. This gives us a value of 120 for x1 and 480 for x2.
+- To get __y1 and y2__: Likewise, knowing that the vertical length of the movie is 480, we can gauge the other points along the y-axis. This gives us a value of 360 for y2. Since we do not want to cut the top, y1 will be 0.
+
+>[!TIP]
+>The dimension of a video can be obtained by checking its properties. We can also get this information using moviepy:
+>```
+>(w, h) = vid.size ##gives the width and heigth of a video that is named "vid"
+>```
+
 ---
 
 ### 4. Juxtapose videos
