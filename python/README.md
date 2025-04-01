@@ -43,6 +43,9 @@ In the merge function shown above, we need to enter three information:
 >[!TIP]
 >If a camera subfolder does not exist within one or more of the child subfolders, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible camera subfolders even if these subfolders exist only in some of the child subfolders but not in other child subfolders. 
 
+> [!IMPORTANT]  
+> Even if there is only one first-level "children" subfolder, the information must be entered within a square bracket [ ] so that Python treats it like a list, otherwise, the function will return an error. This is true for all other information in which the function is supposed to loop through, like the second-level "camera" subfolder in this example or start time information in Example 2 below.
+
 An additional merging script that is not included in the function: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
