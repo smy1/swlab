@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. In general, this function batch processes several videos, allowing the video editing task to be automatised. Netheless to say, the videos and folders should be named in a consistent manner for the batch processing to be successful. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail [below](#examples).
+The previous scripts have now been compiled into a function script called [editvid.py](./editvid.py). This function script should be downloaded and stored in the same folder as where we will be running our code. In general, this function batch processes several videos, allowing the video editing task to be automatised. Needless to say, the videos and folders should be named in a consistent manner for the batch processing to be successful. The [examples.py](./examples.py) script shows how and when to call for these functions. These examples are explained in detail [below](#examples).
 
 - [General requirements](#general-requirements)
 - [Example 1: Merge videos](#1-merge-videos)
@@ -9,14 +9,16 @@ The previous scripts have now been compiled into a function script called [editv
 - [Helpful resources](#helpful-resources)
 
 ## General requirements
-In order to run these python scripts, Python and the relevant modules need to be installed. I wrote these codes in Python 3.12.4.
-Installation can be done in the command prompt (for Windows users, type "command prompt" in the search box):
+In order to run these python scripts, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
+Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
 ```
 python --version ## check python version
-pip install --upgrade pip setuptools wheel ## check whether pip is installed, then use it to install the necessary modules
-pip show <package name> ## check whether a particular package has been install and what version
+pip install --upgrade pip setuptools wheel ## check whether pip is installed
+pip show <package name> ## check whether a particular package (and what version) has been install 
 pip install openpyxl ## required if we want python to extract information from an excel file
-pip install opencv-python ## required for resizing videos if using MoviePy v1.0 https://pypi.org/project/opencv-python/
+pip install opencv-python ## required for resizing videos if using MoviePy v1.0
+pip install DateTime ## required when syncing the timing of two videos
+pip install pathlib ## required for Python to locate a path of a file
 ```
 >[!NOTE]
 >While writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier or the latest version.
@@ -27,7 +29,7 @@ pip install opencv-python ## required for resizing videos if using MoviePy v1.0 
 
 ## Examples
 ### 1. Merge videos
-The following code concatenates several videos into one long video and does this repetitively for all the folders listed in the function.
+The following code calls for the __merge function__ to concatenate several videos into one long video. This is done repetitively for all the subfolders listed in the function.
 ```
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
@@ -45,7 +47,7 @@ Additional merging script not included in the function:
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ### 2. Overlay videos
-__(A)__ The following code extracts information from an excel file before overlaying a video onto another and does this repetitively for all the folders listed in the excel file.
+__(A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an excel file for the function to extract information regarding subfolder names and video timing. Python will perform the overlay function on the videos for each of the subfolder listed in the excel file.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -58,9 +60,9 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
-In the overlay function shown above, we need to enter several information and have an excel file ready (an example of the excel file can be downloaded [here](./peekbaby.xlsx)).
+In the overlay function shown above, we need to enter several information and have an excel file ready (an example of the excel file can be found [here](./peekbaby.xlsx)).
 - __folder__: Where is the main project folder that stores all the videos? As with the merge function, in this example, the main project folder is called "mc_vid", stored in the desktop by a user named "user".
-- __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the information given under "corr" (stands for "correction"). If the number entered here is 2 or higher, the function will extract the correction information and returns an error if none is found.
+- __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the information given under "corr" (stands for "correction"). If the number entered here is 2 or larger, the function will extract the correction information and returns an error if none is found.
 - __bgcam__: Stands for "background-camera". What is the name of the recording that will be used as the "base" of the video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video.
 - __topcam__: Stands for "top-camera". What is the name of the recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video.
 - __newname__: How should Python name the new output video? In this example, Python will name the new video as "OMI", which stands for "omission task".
@@ -69,22 +71,21 @@ In the overlay function shown above, we need to enter several information and ha
 - __excel__: What is the path and name of the excel file that contains all other relevant information? Leave this as "None" if we want to enter this information manually (see example B below).
 - the rest: Leave them as "None" since the information should be found in the excel file.
 
-In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". While these names can be changed to something else that is more intuitive (or even translated into another language), the order of the columns _must_ be in this manner. To illustrate: 
-- The _first column_ (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, see [merge videos](#1-merge-videos) for more).
-- The _second column_ (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), give the start time of only one of these cameras. The function will calculate the recording time difference between the two cameras and adjust the start time of the other camera.
+In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see the image below). While these names can be changed to something else that is more intuitive (or even translated into another language), the information _must_ be in entered in this order. To illustrate: 
+- The _first column_ (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, hence, I sometimes call them as "child subfolders". See [merge videos](#1-merge-videos) for more).
+- The _second column_ (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), use the start time of only one of these cameras. The function will calculate the time difference between the two cameras and adjust the start time of the other camera.
 - The _third column_ (named as "end" in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone.
-- The _fourth column_ (named as "corr" in this example) contains information that corrects for out-of-sync videos.
-- The first row of these columns could have been entered as "subfolder_name", "begin_time", "end_time", and "video_difference" or anything else that makes more sense. The screenshot below shows an example of the excel file.
+- The _fourth column_ (named as "corr" in this example, which stands for "correction") contains information that corrects for out-of-sync videos. This information will be disregarded if the number of attempt is entered as 1 earlier.
+- The first row of these columns could have been entered as "subfolder_name", "begin_time", "end_time", and "correct_timing_difference" or anything else that makes more sense. The image below shows an example of the excel file.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="250">
 
 > [!IMPORTANT]  
-> The information entered in the first column of the excel file must be a character (in Python terms). If the names of the subfolders are numbers, such as these shown in the example, add an inverted comma before the number, otherwise, Python might not be able to match the information with the subfolder names.
+> The information entered in the first column of the excel file (i.e., the names of the first-level subfolders) must be a string (in Python terms), as shown in the image above. To force excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the excel file with the subfolder names.
 
-
-
-__(B)__ The following code enters information into the function.
+__(B)__ The following code calls for the __overlay function__ exactly as shown above. Here, we provide an excel file for the function to extract information regarding subfolder names and video timing. but manually adds the folder and timing information to it.
 ```
+from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
         attempts = 1, 
         bgcam = "baby", 
@@ -98,6 +99,9 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         end = [238, 609], 
         corr = [-1, 0.9]) 
 ```
+As should be obvious, the only difference between this code and the previous one is from the excel input onwards. Here, excel is entered as "None" and the information saved in the excel file (shown earlier) is now listed manually when we call the function. 
+>[!TIP]
+>Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an excel file.
 
 ### 3. Crop videos
 ```
