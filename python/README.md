@@ -60,7 +60,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
-In the overlay function shown above, we need to enter several information and have an Excel file ready (an example of the Excel file can be found [here](./peekbaby.xlsx)).
+In the overlay function shown above, we need to enter several information and have an Excel file ready (an example of the Excel file can be found [here](./example_overlay.xlsx)).
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
 - __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the information given under "corr" (stands for "correction", see below). If the number entered here is 2 or larger, the function will extract the correction information and returns an error if none is found.
 - __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the new video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders with each subfolder indicating an individual participant. The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually entered under the variable "children" (see Example 2B below).
