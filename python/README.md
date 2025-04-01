@@ -46,6 +46,8 @@ In the merge function shown above, we need to enter three information:
 An additional merging script that is not included in the function: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
+---
+
 ### 2. Overlay videos
 __(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an Excel file (a sample file can be found [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Python will perform the overlay function on the videos in all the subfolders listed in the Excel file.
 ```
@@ -87,6 +89,8 @@ In Image 1 above:
 > [!IMPORTANT]  
 > The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Image 1 above (Notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
 
+---
+
 __(2B)__ The following code calls for the __overlay function__ exactly as shown in Example 2A above. The difference is that here, we manually enter information regarding subfolder names and video timing. 
 ```
 from editvid import overlay
@@ -107,6 +111,8 @@ As should be obvious, the code above enters "None" for the variable "excel". Ins
 >[!TIP]
 >Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
 
+---
+
 ### 3. Crop videos
 The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (a sample file can be found [here](./example_crop.xlsx)).
 ```
@@ -123,12 +129,16 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
 
 __Image 2__: _An example of an Excel file for the crop function._
 
+---
+
 ### 4. Juxtapose videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sync-2videos.py](./sbr-sync-2videos.py) This script is a 2-video version of the _sbr-sync-3videos_ script (because sometimes the third camera failed to record).
    - [crop-sync-2videos.py](./crop-sync-2videos.py) This script adds an additional chunk of code to the _sbr-sync-2videos_ script to crop one of the videos before syncing both of them. It also has an additional line to handle exceptions, which usually happen due to the actual video duration being shorter than the duration written in the script.
    - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
+
+---
 
 ## Helpful resources
 I relied heavily on the links below when writing these codes. Note: These links use MoviePy v1.0. 
