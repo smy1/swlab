@@ -57,7 +57,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         newname = "OMI", 
         propsize = 0.25, 
         dur = None,
-        excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
+        excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
 In the overlay function shown above, we need to enter several information and have an Excel file ready (an example of the Excel file can be found [here](./peekbaby.xlsx)).
@@ -101,12 +101,12 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         end = [238, 609], 
         corr = [-1, 0.9]) 
 ```
-As should be obvious, the code above enters "None" for the variable "excel". Instead, the information saved in the Excel file (shown earlier) is now listed in the variables "children", "start", "end", and "corr". 
+As should be obvious, the code above enters "None" for the variable "excel". Instead, the information saved in the Excel file (shown earlier) is now listed in the variables "children", "start", "end", and "corr", respectively. 
 >[!TIP]
 >Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information.
+The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file.
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
