@@ -45,7 +45,7 @@ Additional merging script not included in the function:
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders of the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ### 2. Overlay videos
-(A) The following code extracts information from an excel file before overlaying a video onto another and does this repetitively for all the folders listed in the excel file.
+__(A)__ The following code extracts information from an excel file before overlaying a video onto another and does this repetitively for all the folders listed in the excel file.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -69,19 +69,21 @@ In the overlay function shown above, we need to enter several information and ha
 - __excel__: What is the path and name of the excel file that contains all other relevant information? Leave this as "None" if we want to enter this information manually (see example B below).
 - the rest: Leave them as "None" since the information should be found in the excel file.
 
-In the excel file, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". While these names can be changed to something else that is more intuitive (or even translated into another language), the order of the columns _must_ be in this manner. To illustrate: 
-- The first column (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, see [merge videos](#1-merge-videos) for more).
-- The second column (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), give the start time of only one of these cameras. The function will calculate the recording time difference between the two cameras and adjust the start time of the other camera.
-- The third column (named as "end" in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone.
-- The fourth column (named as "corr" in this example) contains information that corrects for out-of-sync videos.
+In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". While these names can be changed to something else that is more intuitive (or even translated into another language), the order of the columns _must_ be in this manner. To illustrate: 
+- The _first column_ (named as "children" in this example) must contain the name of the first-level subfolders in which the background camera and top camera videos are stored (usually the participants' ID, see [merge videos](#1-merge-videos) for more).
+- The _second column_ (named as "start" in this example) contains the time at which the task started (in seconds) in the recording of each of the particpant. Since we have two video recordings (the background camera and the top camera), give the start time of only one of these cameras. The function will calculate the recording time difference between the two cameras and adjust the start time of the other camera.
+- The _third column_ (named as "end" in this example) contains the time at which the recording ended (again, in seconds). This can be left blank if the the duration of the task is always the same for everyone.
+- The _fourth column_ (named as "corr" in this example) contains information that corrects for out-of-sync videos.
 - The first row of these columns could have been entered as "subfolder_name", "begin_time", "end_time", and "video_difference" or anything else that makes more sense. The screenshot below shows an example of the excel file.
 
-<img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="250">
 
 > [!IMPORTANT]  
 > The information entered in the first column of the excel file must be a character (in Python terms). If the names of the subfolders are numbers, such as these shown in the example, add an inverted comma before the number, otherwise, Python might not be able to match the information with the subfolder names.
 
-(B) The following code enters information into the function.
+
+
+__(B)__ The following code enters information into the function.
 ```
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
         attempts = 1, 
