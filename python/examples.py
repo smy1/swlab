@@ -26,7 +26,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
         newname = "OMI", ##name of the output video
         propsize = 0.25, ##resize the to-be-overlaid video
         dur = None,
-        excel = "C:/Users/user/Desktop/mc_vid/peekbaby.xlsx",
+        excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
         children=None, start=None, end=None, corr=None)
 
 ##EXAMPLE 2b: Using manually entered info
