@@ -47,7 +47,7 @@ An additional merging script that is not included in the function:
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ### 2. Overlay videos
-__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an Excel file for the function to extract information regarding subfolder names and video timing. Python will perform the overlay function on the videos in all the subfolders listed in the Excel file.
+__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another. Here, we provide an Excel file (a sample file can be found [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Python will perform the overlay function on the videos in all the subfolders listed in the Excel file.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -60,7 +60,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
         children=None, start=None, end=None, corr=None) 
 ```
-In the overlay function shown above, we need to enter several information and have an Excel file ready (a sample file can be found [here](./example_overlay.xlsx)).
+In the overlay function shown above, we need to enter several information and have an Excel file ready.
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
 - __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the information given under "corr" (stands for "correction", see below). If the number entered here is 2 or larger, the function will extract the correction information and returns an error if none is found.
 - __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the new composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders with each subfolder indicating an individual participant. The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually entered under the variable "children" (see Example 2B below).
@@ -106,7 +106,7 @@ As should be obvious, the code above enters "None" for the variable "excel". Ins
 >Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file.
+The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (a sample file can be found [here](./example_crop.xlsx)).
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -114,10 +114,10 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
      newname = "solo",
      dur = 183,
      amplify = 5, 
-     excel = "C:/Users/user/Desktop/mc_vid/mochibaby.xlsx",
+     excel = "C:/Users/user/Desktop/mc_vid/example_crop.xlsx",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
 ```
-Coming soon.
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="250">
 
 ### 4. Juxtapose videos
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
