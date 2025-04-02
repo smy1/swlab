@@ -1,6 +1,6 @@
 Packages used in some of the video-editing scripts but are actually unnecessary:
 ```
-- pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
+pip install playsound==1.2.2 ## not necessary, only for notification when video rendering is done
 ```
 
 Previous scripts that are now developed into the function [editvid.py](https://github.com/smy1/swlab/blob/main/python/editvid.py).
