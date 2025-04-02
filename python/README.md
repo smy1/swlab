@@ -157,7 +157,8 @@ In Figure 3 above:
 ---
 
 ### 4. Juxtapose videos
-The following code calls for the __join2side function__ to juxtapose two videos (i.e., place two videos side-by-side). As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (see a sample [here](./example_join2.xlsx)).
+__(4A) Juxtapose two videos__ (i.e., place two videos side-by-side)
+The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (see a sample [here](./example_join2.xlsx)).
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -185,6 +186,10 @@ In Figure 4 above:
 
 ---
 
+__(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)
+The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. 
+
+---
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
