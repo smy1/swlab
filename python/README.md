@@ -6,7 +6,7 @@ The previous scripts have now been compiled into a module called [editvid.py](./
 - [Example 2: Sync and overlay videos](#2-overlay-videos)
 - [Example 3: Crop videos](#3-crop-videos)
 - [Example 4: Sync and juxtapose videos](#4-juxtapose-videos)
-- [Helpful resources](#helpful-resources)
+- [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without these helpful websites)
 
 ## General requirements
 In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
@@ -126,7 +126,7 @@ In Figure 2 above:
 - The _sixth column_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
 - The _seventh column_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
 
-And if I have not explained the cropping details clear enough, Figure 3 below should give a clear illustration of how to obtain these numbers.
+And if the explanation for the cropping details is unclear, Figure 3 below should be a helpful illustration.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
 
