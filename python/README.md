@@ -51,7 +51,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-__(2A)__ The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. 
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -67,13 +67,13 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 As shown in the code above, the overlay function has many parameters, one of which requires us to have an Excel file ready.
 - __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
 - __attempts__: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the argument given to the parameter "corr" (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
-- __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders (in our example, each subfolder corresponds to an individual participant). The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually given to the parameter "children" (see Example 2B below).
+- __bgcam__: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective first-level subfolders (in our example, each subfolder corresponds to an individual participant).
 - __topcam__: Stands for "top-camera". What is the name of the video recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video to create a composite video. These top videos should be stored together with the base videos.
 - __newname__: How should Python name the composite video? In this example, the composite video that is created will be called as "OMI" (which stands for "omission task").
 - __propsize__: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
-- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. Leave this as "None" if we want to enter this information manually (see Example 2B below).
-- the other parameters: Leave them as "None" since the information should be found in the Excel file.
+- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. Leave this as "None" if we want to enter this information manually.
+- other parameters: Leave them as "None" since the information should be found in the Excel file.
 
 In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see Figure 1 below). These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order. 
 
@@ -85,34 +85,15 @@ In Figure 1 above:
 - The _first column_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the base video and top video are stored. In this example, the subfolders are "076" and "078".
 - The _second column_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
 - The _third column_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- The _fourth column_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. Give a positive number if the base video is slower than the top video (if the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the paramter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- The _fourth column_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. Give a negative number if the top video is slower than the base video (assuming that the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the paramter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 
----
-
-__(2B)__ The following code calls for the __overlay function__ exactly as shown in Example 2A above. The difference is that here, we manually enter information regarding subfolder names and video timing. 
-```
-from editvid import overlay
-overlay(folder = "C:/Users/user/Desktop/mc_vid", 
-        attempts = 1, 
-        bgcam = "baby", 
-        topcam = "screen", 
-        newname = "OMI", 
-        propsize = 0.25, 
-        dur = None,
-        excel = None, 
-        children = ["076", "078"],
-        start = [20, 19], 
-        end = [238, 609], 
-        corr = [-1, 0.9]) 
-```
-As should be obvious, the code above enters "None" for the parameter "excel". Instead, the information saved in the Excel file (shown earlier) is now passed as arguments to the parameters "children", "start", "end", and "corr", respectively. 
 >[!TIP]
 >Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
 
 ---
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (see a sample [here](./example_crop.xlsx)).
+The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual entry of arguments is done).
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -124,7 +105,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
 ```
 In the crop function shown above, we need to give four arguments and have an Excel file ready.
-- __cam__: Stands for "camera". What is the name of the video recording that needs to be cropped? In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective first-level subfolders with each subfolder indicating an individual participant. The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually given to the parameter "children" (see Example 2B above for details).
+- __cam__: Stands for "camera". What is the name of the video recording that needs to be cropped? In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective first-level subfolders with each subfolder indicating an individual participant. The names of subfolders can either be provided in the first column of the Excel file (see below for details) or manually given to the parameter "children".
 - __newname__: How should Python name the new cropped video? In this example, Python will name the new cropped video as "solo" (the name of the recorded control task).
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
 - __amplify__: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
@@ -137,7 +118,15 @@ In the __excel file__, we should have seven columns that correspond to the last 
 __Figure 2__: _An example of an Excel file for the crop function._
 
 In Figure 2 above:
-- points coming soon
+- The _first column_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored. 
+- The _second column_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
+- The _third column_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- The _fourth column_ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. x1 refers to the start of the width of cropping area.
+- The _fifth column_ (or the parameter __"x2"__) refers to the end of the width of cropping area.
+- The _sixth column_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
+- The _seventh column_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
+
+And if I have not explained the cropping details clear enough, Figure 3 below should give a clear illustration of how to obtain these numbers.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
 
@@ -157,8 +146,8 @@ In Figure 3 above:
 ---
 
 ### 4. Juxtapose videos
-__(4A) Juxtapose two videos__ (i.e., place two videos side-by-side)
-The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (see a sample [here](./example_join2.xlsx)).
+__(4A) Juxtapose two videos__ (i.e., place two videos side-by-side)  
+The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual input of argument is done)
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -186,7 +175,7 @@ In Figure 4 above:
 
 ---
 
-__(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)
+__(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)  
 The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. 
 
 ---
