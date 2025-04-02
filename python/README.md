@@ -118,7 +118,7 @@ As should be obvious, the code above enters "None" for the parameter "excel". In
 ---
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (a sample file can be found [here](./example_crop.xlsx)).
+The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (see a sample [here](./example_crop.xlsx)).
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -142,14 +142,17 @@ In the __excel file__, we should have seven columns that correspond to the last 
 
 __Figure 2__: _An example of an Excel file for the crop function._
 
+In Figure 2 above:
+- points coming soon
+
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
 
 __Figure 3__: _An example of how to get the cropping details._
 
 In Figure 3 above: 
 - This is a screenshot of a movie with a dimension of 640 x 480. (I have decided to illustrate using a movie instead of an actual experiment recording). Imagine that we want to crop the area indicated by the white border.
-- To get __x1 and x2__: Given that the horizontal length of the movie is 640, we can gauge the other points along the x-axis by dividing the screenshot by halves. This gives us a value of 120 for x1 and 480 for x2.
-- To get __y1 and y2__: Likewise, knowing that the vertical length of the movie is 480, we can gauge the other points along the y-axis. This gives us a value of 360 for y2. Since we do not want to cut the top, y1 will be 0.
+- To get __x1 and x2__: Given that the width of the movie is 640, we can gauge the other points along the x-axis by dividing the screenshot by halves. This gives us a value of 120 for x1 and 480 for x2.
+- To get __y1 and y2__: Likewise, knowing that the height of the movie is 480, we can gauge the other points along the y-axis. This gives us a value of 360 for y2. Since we do not want to cut the top, y1 will be 0.
 
 >[!TIP]
 >The dimension of a video can be obtained by checking its properties. We can also get this information using moviepy:
