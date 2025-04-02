@@ -148,7 +148,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__ (i.e., place two videos side-by-side)  
-The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual input of argument is done)
+The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual input of argument is done). Also see [below](#before-syncing-videos) for an important note.
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -177,7 +177,7 @@ In Figure 4 above:
 ---
 
 __(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)  
-The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. 
+The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. See [below](#before-syncing-videos) for an important note.
 
 ---
 
