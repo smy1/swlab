@@ -3,10 +3,11 @@ The previous scripts have now been compiled into a module called [editvid.py](./
 
 - [General requirements](#general-requirements)
 - [Example 1: Join videos together](#1-merge-videos)
-- [Example 2: Sync and display one smaller video on top of another](#2-overlay-videos)
+- [Example 2: Sync and display one smaller video on top of a bigger one](#2-overlay-videos)
 - [Example 3: Crop videos](#3-crop-videos)
 - [Example 4: Sync and display videos beside each other](#4-juxtapose-videos)
-- [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without these helpful websites)
+- [Miscellaneous](#miscellaneous)
+- [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without them)
 
 ## General requirements
 In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
@@ -51,7 +52,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. 
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. See [below](#when-manually-providing-arguments) for an important note.
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -180,6 +181,7 @@ The following code calls for the __join3side function__ to juxtapose two videos.
 
 ---
 
+## Miscellaneous
 Another video-editing script that is not added to the function:
 - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
 
