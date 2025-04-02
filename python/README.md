@@ -189,13 +189,13 @@ Another video-editing script that is not added to the function:
 > [!IMPORTANT]  
 > For parameters that expects a list, even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
 
-#### Before syncing videos:
-> [!IMPORTANT]
-> In order for the function to sync the videos, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, e.g., 56M09S, which means that the first frame of the video occured at the 56th minute and 9th second of the hour. If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
-
 #### When using an Excel file:
 > [!IMPORTANT]  
 > The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 above (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
+
+#### Before syncing videos:
+> [!IMPORTANT]
+> In order for the function to sync the videos, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, e.g., 56M09S, which means that the first frame of the video occured at the 56th minute and 9th second of the hour. If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
 ---
 
