@@ -157,7 +157,34 @@ In Figure 3 above:
 ---
 
 ### 4. Juxtapose videos
-Coming soon.  
+The following code calls for the __join2side function__ to juxtapose two videos (i.e., place two videos side-by-side). As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I only show how the code works with an Excel file (see a sample [here](./example_join2.xlsx)).
+```
+from editvid import join2side
+join2side(folder = "C:/Users/user/Desktop/mc_vid",
+        attempts = 3,
+        cam1 = "front", ##name of the first video
+        cam2 = "side", ##name of the second video
+        newname = "sbr",
+        dur = 305, ##duration of the recorded task (if it is the same for everyone)
+        amplify_who = "side", ##which video should we amplify? "no" if neither
+        amplify = 10, ##how much to amplify? 0 will mute the video
+        mute_who = "front", ##which video should we mute? "no" if neither
+        crop_who = "front", ##which video should we crop? "no" if neither
+        excel = "C:/Users/user/Desktop/mc_vid/example_join2.xlsx",
+        children=None, main=None, start=None, end=None, corr=None, x1=None, x2=None, y1=None, y2=None)
+```
+In the crop function shown above, we need to give a few arguments and have an Excel file ready.
+- coming soon
+
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="280">
+
+__Figure 4__: _An example of an Excel file for the join2side function._
+
+In Figure 4 above: 
+- points coming soon.
+
+---
+
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
