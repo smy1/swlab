@@ -2,10 +2,10 @@
 The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Needless to say, the videos and folders (in which the videos are stored) should be named in a consistent manner for the batch processing task to be run smoothly and successfully. The [examples.py](./examples.py) script shows how and when to call for various video-editing functions of the module. These examples are explained in detail [below](#examples).
 
 - [General requirements](#general-requirements)
-- [Example 1: Merge videos](#1-merge-videos)
-- [Example 2: Sync and overlay videos](#2-overlay-videos)
+- [Example 1: Join videos together](#1-merge-videos)
+- [Example 2: Sync and display one smaller video on top of another](#2-overlay-videos)
 - [Example 3: Crop videos](#3-crop-videos)
-- [Example 4: Sync and juxtapose videos](#4-juxtapose-videos)
+- [Example 4: Sync and display videos beside each other](#4-juxtapose-videos)
 - [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without these helpful websites)
 
 ## General requirements
@@ -179,21 +179,19 @@ __(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)
 The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. 
 
 ---
-Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
-   - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
-   - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
 
----
+Another video-editing script that is not added to the function:
+- [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
 
-#### When providing arguments to the functions:
+#### When manually providing arguments:
 > [!IMPORTANT]  
 > For parameters that expects a list, even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
 
-#### When using functions to sync videos:
+#### Before syncing videos:
 > [!IMPORTANT]
 > In order for the function to sync the videos, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, e.g., 56M09S, which means that the first frame of the video occured at the 56th minute and 9th second of the hour. If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
-#### When using an excel file to supply arguments:
+#### When using an Excel file:
 > [!IMPORTANT]  
 > The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 above (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
 
