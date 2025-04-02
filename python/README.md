@@ -45,9 +45,6 @@ As shown in the code above, the merge function has three parameters:
 >[!TIP]
 >If a subfolder (at any level) or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible second-level subfolders even if these subfolders exist only in some of the first-level subfolders but not in others - it would not crash the function. 
 
-> [!IMPORTANT]  
-> Even if there is only one first-level subfolder that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. This is true for all other parameters in which the function expects a list, like the second-level "camera" subfolder in this example or the "start time" information in Example 2 below.
-
 An additional merging script that is not included in the module: 
    - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
@@ -89,12 +86,6 @@ In Figure 1 above:
 - The _second column_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
 - The _third column_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
 - The _fourth column_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. Give a positive number if the base video is slower than the top video (if the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the paramter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
-
-> [!IMPORTANT]  
-> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 above (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
-
-> [!IMPORTANT]
-> In order for the function to sync the videos, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, e.g., 56M09S, which means that the first frame of the video occured at the 56th minute and 9th second of the hour. If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
 ---
 
@@ -170,6 +161,20 @@ Coming soon.
 Once we have single, merged videos from each camera, we can sync and juxtapose these videos so that we see the recordings of participants from different angles. 
    - [sbr-sync-3videos.py](./sbr-sync-3videos.py) This script displays one video on the left and two (downsized) videos on the right (one on top and the other at the bottom) so that we capture parents' shared reading behaviour from three different angles. (_Note_: _SBR_ stands for shared book reading)
    - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
+
+---
+
+#### When providing arguments to the functions:
+> [!IMPORTANT]  
+> For parameters that expects a list, even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
+
+#### When using functions to sync videos:
+> [!IMPORTANT]
+> In order for the function to sync the videos, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, e.g., 56M09S, which means that the first frame of the video occured at the 56th minute and 9th second of the hour. If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
+
+#### When using an excel file to supply arguments:
+> [!IMPORTANT]  
+> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 above (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
 
 ---
 
