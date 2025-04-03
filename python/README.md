@@ -202,7 +202,7 @@ Another video-editing script that is not added to the function:
 ---
 
 ## Helpful resources
-I relied heavily on the links below when writing these codes. Note: These links use MoviePy v1.0. 
+I relied heavily on the links below when writing the video-editing scripts the first time. Note: These links use MoviePy v1.0. 
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
