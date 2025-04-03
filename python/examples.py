@@ -9,36 +9,37 @@
 ##Required directory: project folder -> "child" subfolder -> "camera" subfolder -> short videos
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", ##set path to the project folder
-      children=["a62_c62", "a63_c63", "a64_c64"], ##which 1st-level folder are we processing?
-      camera=["BABY", "front", "SBR1", "SCREEN", "影片二"]) ##which 2nd-level folder are we processing?
+      children=["a62_c62", "a63_c63", "a64_c64"], ##which 1st-level subfolder are we processing?
+      camera=["BABY", "front", "SBR1", "SCREEN", "影片二"]) ##which 2nd-level subfolder are we processing?
 
 ##------------------------##
 ##EXAMPLE 2: SYNC AND OVERLAY VIDEOS
-##Sync and overlay a downsized SCREEN video on a BABY video for gaze coding
+##Sync and overlay a downsized "top" video on a "base" video
 ##Required directory: project folder -> "child" subfolder -> videos
 from editvid import overlay
 
-##EXAMPLE 2a: Using info from an excel file
+##EXAMPLE 2a: Pass arguments by loading an excel file (see README.md for more)
+overlay(folder = "C:/Users/user/Desktop/mc_vid", 
+        attempts = 1, 
+        bgcam = "baby", 
+        topcam = "screen", 
+        newname = "OMI", 
+        propsize = 0.25, 
+        dur = None, 
+        excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
+        children=None, start=None, end=None, corr=None)
+
+##EXAMPLE 2b: Manually pass arguments to the parameters
 overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
-        attempts = 1, ##if 1: correction info will be disregarded; if 2 or higher: correction info will be needed
+        attempts = 1, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
         bgcam = "baby", ##name of the base video that python should search for
         topcam = "screen", ##name of the top video that python should search for
         newname = "OMI", ##name of the output video
         propsize = 0.25, ##resize the top video
-        dur = None, ##duration of the recorded task (if it is the same for everyone)
-        excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
-        children=None, start=None, end=None, corr=None)
-
-##EXAMPLE 2b: Using manually entered info
-overlay(folder = "C:/Users/user/Desktop/mc_vid",
-        attempts = 1,
-        bgcam = "baby",
-        topcam = "screen",
-        newname = "OMI",
-        propsize = 0.25,
-        dur = None,
-        excel = None, ##if not attaching an excel, enter info below
-        children = ["076", "078"], ##which 1st-level folder are we processing?
+        dur = None, ##standard duration of the recorded task, if "None", pass arguments to parameter "end" below
+        excel = None, ##if not attaching an excel, give arguments below
+        ##the following parameters must be entered as a list
+        children = ["076", "078"], ##which 1st-level subfolder are we processing?
         start = [20, 19], ##the seconds at which the task STARTED, based on topcam
         end = [238, 609], ##the seconds at which the task ENDED
         corr = [-1, 0.9]) ####if topcam lags behind, give a negative number
@@ -51,12 +52,13 @@ from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
      cam = "front", ##name of videos that python should crop
      newname = "solo", ##name of the output video
-     dur = 183, ##duration of the recorded task (if it is the same for everyone)
-     amplify = 5, ##do we want to amplify the volume of the video? 0=mute
+     dur = 183, ##standard duration of the recorded task, if "None", pass arguments to parameter "end" below
+     amplify = 5, ##1=original volume, a larger number means volume amplified, 0=mute
      excel = None,
-     children = [c63, c64],
+     ##the following parameters must be entered as a list
+     children = [c63, c64], ##which 1st-level subfolder are we processing?
      start = [51, 459],
-     end = [],
+     end = [], ##the seconds at which the task ENDED
      x1 = [644, 644], ##start of the width that we want to crop
      x2 = [2254, 2254], ##end of the width that we want to crop
      y1 = [175, 170], ##start of the height that we want to crop
@@ -68,20 +70,21 @@ crop(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
 ##Required directory: project folder -> "child" subfolder -> videos
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
-        attempts = 3,
-        cam1 = "front", ##name of the first video
-        cam2 = "side", ##name of the second video
-        newname = "sbr",
-        dur = 305, ##duration of the recorded task (if it is the same for everyone)
-        amplify_who = "side", ##which video should we amplify? "no" if neither
-        amplify = 10, ##how much to amplify? 0 will mute the video
-        mute_who = "front", ##which video should we mute? "no" if neither
-        crop_who = "front", ##which video should we crop? "no" if neither
+        attempts = 3, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
+        cam1 = "front", ##name of the first video that python should search for
+        cam2 = "side", ##name of the second video that python should search for
+        newname = "sbr", ##name of the output video
+        dur = 305, ##standard duration of the recorded task, if "None", pass arguments to parameter "end" below
+        amplify_who = "side", ##name of the video that should be amplified. "no" if neither
+        amplify = 10, ##1=original volume, a larger number means volume amplified, 0=mute
+        mute_who = "front", ##name of the video that should be muted. "no" if neither
+        crop_who = "front", ##name of the video that should be cropped. "no" if neither
         excel = None,
-        children = ["c62", "c63"],
-        main = ["front", "front"], ##main is the video with the best angle
+        ##the following parameters must be entered as a list
+        children = ["c62", "c63"], ##which 1st-level subfolder are we processing?
+        main = ["front", "front"], ##name of the video with the best angle
         start = [73, 334], ##the seconds at which the task STARTED, based on cam1
-        end = None,
+        end = [], ##the seconds at which the task ENDED
         corr = [-1.9, 0.8], ##if cam1 lags behind, give a negative number
         x1 = [644, 644], ##indicates the area of the video that we want to crop
         x2 = [2254, 2254], ##see example 3 for more
