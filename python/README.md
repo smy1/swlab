@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually give arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
+The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
 
 - [General requirements](#general-requirements)
 - [Example 1: Join videos together](#1-merge-videos)
@@ -31,7 +31,7 @@ pip install pathlib ## required for Python to locate a path of a file
 ### Important points to take note of
 When manually providing arguments:
 > [!IMPORTANT]  
-> For parameters that expects a list, even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
+> For parameters that expects a list (this usually means any arguments that can be passed into the function by loading an excel file), even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
 
 When using an Excel file:
 > [!IMPORTANT]  
@@ -65,7 +65,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see Figure 1 below) for the function to extract information regarding subfolder names and video timing. 
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see Figure 1 below) for the function to extract arguments regarding subfolder names and video timing. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -107,7 +107,7 @@ In Figure 1 above:
 ---
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. Here, I show how the code works with an Excel file.
+The following code calls for the __crop function__ to crop a video. Here, I show how the code works by loading an Excel file.
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -123,7 +123,7 @@ In the crop function shown above, we need to give four arguments and have an Exc
 - __newname__: How should Python name the new cropped video? In this example, Python will name the new cropped video as "solo" (the name of the recorded control task).
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
 - __amplify__: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
-- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names, video timing, and cropping details?
+- __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
 
 In the __excel file__, we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
