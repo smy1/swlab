@@ -167,19 +167,30 @@ The following code calls for the __join2side function__ to juxtapose two videos.
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 3,
-        cam1 = "front", ##name of the first video
-        cam2 = "side", ##name of the second video
+        cam1 = "front",
+        cam2 = "side",
         newname = "sbr",
-        dur = 305, ##duration of the recorded task (if it is the same for everyone)
-        amplify_who = "side", ##which video should we amplify? "no" if neither
-        amplify = 10, ##how much to amplify? 0 will mute the video
-        mute_who = "front", ##which video should we mute? "no" if neither
-        crop_who = "front", ##which video should we crop? "no" if neither
+        dur = 305,
+        amplify_who = "side",
+        amplify = 10,
+        mute_who = "front",
+        crop_who = "front",
         excel = "C:/Users/user/Desktop/mc_vid/example_join2.xlsx",
         children=None, main=None, start=None, end=None, corr=None, x1=None, x2=None, y1=None, y2=None)
 ```
 In the crop function shown above, we need to pass a few arguments and load an Excel file.
-- coming soon
+- __folder__:
+- __atempts__:
+- __cam1__: The name of the first video
+- __cam2__: The name of the second video
+- __newname__:
+- __dur__: The duration of the recorded task (if it is the same for everyone)
+- __amplify_who__: Which video should we amplify? "no" if neither
+- __amplify__: How much to amplify? 0 will mute the video
+- __mute_who__: Which video should we mute? "no" if neither
+- __crop_who__: Which video should we crop? "no" if neither
+- __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
+- __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="280">
 
