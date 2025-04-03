@@ -65,7 +65,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see Figure 1 below) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. 
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see Figure 1 below) for the function to extract information regarding subfolder names and video timing. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -86,8 +86,8 @@ As shown in the code above, the overlay function has many parameters, one of whi
 - __newname__: How should Python name the composite video? In this example, the composite video that is created will be called as "OMI" (which stands for "omission task").
 - __propsize__: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
-- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. Leave this as "None" if we want to enter this information manually.
-- other parameters: Leave them as "None" since the information should be found in the Excel file.
+- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. 
+- other parameters: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
 
 In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see Figure 1 below). These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order. 
 
@@ -107,7 +107,7 @@ In Figure 1 above:
 ---
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual entry of arguments is done).
+The following code calls for the __crop function__ to crop a video. Here, I show how the code works with an Excel file.
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -123,7 +123,8 @@ In the crop function shown above, we need to give four arguments and have an Exc
 - __newname__: How should Python name the new cropped video? In this example, Python will name the new cropped video as "solo" (the name of the recorded control task).
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
 - __amplify__: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
-- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names, video timing, and cropping details? Leave this as "None" if we want to enter this information manually.
+- __excel__: What is the path and name of the Excel file that contains information regarding subfolder names, video timing, and cropping details?
+- other parameters: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
 
 In the __excel file__, we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
 
