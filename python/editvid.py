@@ -1,9 +1,9 @@
-#### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Date: 31.03.2025
-#### Author: MY Sia (with lots of help from the web, see README.md for more)
-#### Functions: (1) concatenate, (2) sync and overlay, (3) crop, (4) juxtapose
+## Affiliation: SW-Lab, Dept of CFS, NTNU
+## Date: 31.03.2025
+## Author: MY Sia (with lots of help from the web, see README.md for more)
 
-#### Import necessary modules
+
+## Import necessary modules
 import glob
 from pathlib import Path
 import os ##to rename files, where necessary
@@ -13,17 +13,20 @@ from datetime import datetime ##to calculate time difference between videos
 import cv2 ##so that videos can be resized properly
 from openpyxl import load_workbook ##if we pass arguments from an excel file
 
-#### FUNCTION 1: CONCATENATE short videos into a long one
-##Date: first written on 23.06.2024, further editing on 12.02.2025
-##Input: Multiple videos stored in a folder (one folder for each camera)
-##Output: A single video per camera per child
-##Required directory: project folder -> "child" subfolder -> "camera" subfolder -> short videos
+
 def merge(folder, children, camera):
+    """
+    FUNCTION 1: CONCATENATE short videos into a long one
+    Date: first written on 23.06.2024, further editing on 12.02.2025
+    Input: Multiple videos stored in a folder (one folder for each camera)
+    Output: A single video per camera per child
+    Required directory: project folder -> 'child' subfolder -> 'camera' subfolder -> short videos
+    """
     ##loop through child subfolders
     for child in children:
         ##loop through camera subfolders
         for cam in camera:
-            video_list = [] ##empty holder to store videos
+            video_list = []
             files_path = Path(f"{folder}/{child}/{cam}")
             file_list = glob.glob(f"{files_path}/*.mp4")
             ##check for problematic cases
@@ -57,20 +60,21 @@ def merge(folder, children, camera):
                 joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
 
 
-#### END OF FUNCTION 1 ####
 
-#### FUNCTION 2: SYNC AND OVERLAY a downsized "top" video on a "bg" video
-##Date: first written on 23.06.2024
-##Input: A video showing the child's face (BABY video) and a video showing the screen that the child is watching (SCREEN video)
-##Output: A single video per child with the BABY video as the main video and the SCREEN video overlaid on the top left corner
-##Required directory: project folder -> "child" subfolder -> videos (e.g., <desktop>/Peekaboo/P01/<videos>)
 def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             excel, children, start, end, corr):
+    """
+    FUNCTION 2: SYNC AND OVERLAY a downsized 'top' video on a 'bg' video
+    Date: first written on 23.06.2024
+    Input: Two videos, one showing the participant and another showing the screen
+    Output: A composite video one video as the base and another overlaid on the top left corner
+    Required directory: project folder -> "child" subfolder -> videos
+    """
     ##extract information if we load an excel file
     if excel != None:
         wb = load_workbook(excel)
         sheet = wb["Sheet1"]
-        ##extract information from excel
+
         children=[] ##which child subfolder are we processing
         list_children = sheet["a"]
         for i in list_children[1:]:
@@ -138,7 +142,6 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
                 n += 1 ##now, do the next one
 
 
-#### END OF FUNCTION 2 ####
 
 #### FUNCTION 3: CROP a video
 ##Date: first written on 18.02.2025
@@ -147,10 +150,11 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
 ##Required directory: project folder -> "child" subfolder -> videos
 def crop(folder, cam, newname, dur, amplify,
          excel, children, start, end, x1, x2, y1, y2):
+    ##extract information if we load an excel file
     if excel != None:
         wb = load_workbook(excel)
         sheet = wb["Sheet1"]
-        ##extract information from excel
+
         children=[] ##which child subfolder are we processing
         list_children = sheet["a"]
         for i in list_children[1:]:
@@ -206,27 +210,28 @@ def crop(folder, cam, newname, dur, amplify,
                 thevid = thevid.subclip(start[n], end[n])
             else:
                 thevid = thevid.subclip(start[n], thevid.duration)
-            ##crop it
+            ##crop then render the output
             cropped = thevid.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
             cropped = cropped.volumex(amplify)
-            ##render the new video
             cropped.write_videofile(f"{folder}/{child}/{child}_{newname}.mp4")
             n += 1 ##now, do the next one
 
 
-#### END OF FUNCTION 3 ####
 
-#### FUNCTION 4A: JUXTAPOSE two videos
-##Date: first written on 08.07.2024, further editing on 18.02.2025
-##Input: Two video recordings (from different angles) that record the participant performing a task
-##Output: A single video per participant with one of the recordings (the one with the best angle) as the main video and the other as the minor
-##Required directory: project folder -> "child" subfolder -> videos
 def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, mute_who, crop_who,
               excel, children, main, start, end, corr, x1, x2, y1, y2):
+    """
+    FUNCTION 4A: JUXTAPOSE two videos
+    Date: first written on 08.07.2024, further editing on 18.02.2025
+    Input: Two video recordings (from different angles) that record the participant performing a task
+    Output: A single video per participant with one of the videos being larger than the other
+    Required directory: project folder -> "child" subfolder -> videos
+    """
+    ##extract information if we load an excel file
     if excel != None:
         wb = load_workbook(excel)
         sheet = wb["Sheet1"]
-        ##extract information from excel
+
         children=[] ##which child subfolder are we processing
         list_children = sheet["a"]
         for i in list_children[1:]:
@@ -348,11 +353,10 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                     major, minor = vid1, vid2
                 else:
                     major, minor = vid2, vid1
-                ##resize videos
+                ##resize then render output
                 major_vid = major.resize(0.7)
                 minor_vid =  minor.resize(0.4)
                 final_vid = clips_array([[major_vid, minor_vid], ])
-                ##save the output
                 final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
 
