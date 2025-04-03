@@ -42,7 +42,6 @@ def merge(folder, children, camera):
                     elif xx == "\\1":
                         new_fname = f"{p1}\\7{p2}"
                         os.rename(f_name, new_fname)
-                ##add the subfolder back to be processed
                 camera.append(cam)
             ##load & merge videos
             else:
@@ -50,7 +49,7 @@ def merge(folder, children, camera):
                     clip = VideoFileClip(i)
                     video_list.append(clip)
                 joined = concatenate_videoclips(video_list)
-                joined = joined.set_fps(fps=30) ##standardise frame per second
+                joined = joined.set_fps(fps=30)
                 ##render output
                 first_frame = file_list[0][-21:-15]
                 cam = cam.lower()
@@ -102,7 +101,7 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
         vid_path = Path(f"{folder}/{child}/")
         ##check for the base video
         baby_list = glob.glob(f"{vid_path}/*{bgcam}*.mp4")
-        if len(baby_list) < 1: ##check for problem
+        if len(baby_list) < 1:
             print(f"Can't find {child}'s {bgcam}. Please check the path and folder names.")
         else:
             baby_vid = VideoFileClip(baby_list[0])
@@ -111,11 +110,11 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             t_baby = datetime.strptime(t_baby, "%M:%S")
             ##check for the top video
             screen_list = glob.glob(f"{vid_path}/*{topcam}*.mp4")
-            if len(screen_list) < 1: ##check for problem
+            if len(screen_list) < 1:
                 print(f"Can't find {child}'s {topcam}. Please check the path and folder names.")
             else:
                 screen_vid = VideoFileClip(screen_list[0])
-                screen_vid = screen_vid.resize(propsize).margin(5) ##downsize video and add a 5px border
+                screen_vid = screen_vid.resize(propsize).margin(5) ##add a 5px border
                 t_screen = screen_list[0][-10:-5]
                 t_screen = t_screen.replace("M", ":")
                 t_screen = datetime.strptime(t_screen, "%M:%S")
@@ -282,7 +281,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
         vid_path = Path(f"{folder}/{child}/")
         ##check for the first camera
         vid1_list = glob.glob(f"{vid_path}/*{cam1}*.mp4")
-        if len(vid1_list) < 1: ##check for problem
+        if len(vid1_list) < 1:
             print(f"Can't find {child}'s {cam1}. Please check the path and folder names.")
         else:
             vid1 = VideoFileClip(vid1_list[0])
@@ -290,7 +289,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 vid1 = vid1.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
             ##check for the second camera
             vid2_list = glob.glob(f"{vid_path}/*{cam2}*.mp4")
-            if len(vid2_list) < 1: ##check for problem
+            if len(vid2_list) < 1:
                 print(f"Can't find {child}'s {cam2}. Please check the path and folder names.")
             else:
                 vid2 = VideoFileClip(vid2_list[0])
