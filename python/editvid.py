@@ -11,7 +11,7 @@ from moviepy.editor import * ##MoviePy v1.0.3
 ##for syncing videos
 from datetime import datetime ##to calculate time difference between videos
 import cv2 ##so that videos can be resized properly
-from openpyxl import load_workbook ##if we extract info from an excel file
+from openpyxl import load_workbook ##if we pass arguments from an excel file
 
 #### FUNCTION 1: CONCATENATE short videos into a long one
 ##Date: first written on 23.06.2024, further editing on 12.02.2025
@@ -19,40 +19,39 @@ from openpyxl import load_workbook ##if we extract info from an excel file
 ##Output: A single video per camera per child
 ##Required directory: project folder -> "child" subfolder -> "camera" subfolder -> short videos
 def merge(folder, children, camera):
-    #### Loop through child folders
+    ##loop through child subfolders
     for child in children:
-        ## Loop through camera folders
+        ##loop through camera subfolders
         for cam in camera:
             video_list = [] ##empty holder to store videos
             files_path = Path(f"{folder}/{child}/{cam}")
             file_list = glob.glob(f"{files_path}/*.mp4")
-            ## (a)Check for problematic cases:
+            ##check for problematic cases
             if len(file_list) < 2:
                 print(f"Nothing to join in {child}'s {cam} folder.")
-            ## if the recording passed the hour (e.g., 10:59 to 11:00)
+            ##if the recording passed the hour (e.g., 10:59 to 11:00)
             elif  file_list[0][-22:-20] == "\\0" and file_list[-1][-22:-20] == "\\5":
                 for f_name in file_list:
                     p1 = f_name[0:-22]
                     xx = f_name[-22:-20]
                     p2 = f_name[-20:]
-                    ## rename 0 to 6 and 1 to 7
+                    ##rename 0 to 6 and 1 to 7
                     if xx == "\\0":
                         new_fname = f"{p1}\\6{p2}"
                         os.rename(f_name, new_fname)
                     elif xx == "\\1":
                         new_fname = f"{p1}\\7{p2}"
                         os.rename(f_name, new_fname)
-                ## add the folder back to be processed
+                ##add the subfolder back to be processed
                 camera.append(cam)
             else:
-                ## (b)Load mp4 files as videos:
+                ##load mp4 files as videos
                 for i in file_list:
-                    print(i) ##which video is being processed?
                     clip = VideoFileClip(i)
                     video_list.append(clip)
-                ## (c)Merge & save the output:
+                ##merge & save the output
                 joined = concatenate_videoclips(video_list)
-                joined = joined.set_fps(fps=30) ##standardise frame per second for all videos
+                joined = joined.set_fps(fps=30) ##standardise frame per second
                 first_frame = file_list[0][-21:-15]
                 cam = cam.lower()
                 joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
@@ -67,42 +66,43 @@ def merge(folder, children, camera):
 ##Required directory: project folder -> "child" subfolder -> videos (e.g., <desktop>/Peekaboo/P01/<videos>)
 def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             excel, children, start, end, corr):
-    ### Extract information if we load an excel file
+    ##extract information if we load an excel file
     if excel != None:
         wb = load_workbook(excel)
         sheet = wb["Sheet1"]
-        ##Extract information from excel
-        children=[] ##which child folder are we processing?
+        ##extract information from excel
+        children=[] ##which child subfolder are we processing
         list_children = sheet["a"]
         for i in list_children[1:]:
             children.append(i.value)
-        #
-        start=[] ##the seconds at which the experiment STARTED in the SCREEN video
+
+        start=[] ##the seconds at which the task STARTED
         list_start =  sheet["b"]
         for i in list_start[1:]:
             start.append(i.value)
-        #
-        end=[] ##the seconds at which the experiment ENDED in the SCREEN video
+
+        end=[] ##the seconds at which the task ENDED
         list_end =  sheet["c"]
         for i in list_end[1:]:
             end.append(i.value)
-        #
-        corr=[] ## Manually correct out-of-sync baby videos:
+
+        corr=[] ##manually correct out-of-sync videos
         list_corr =  sheet["d"]
         for i in list_corr[1:]:
             corr.append(i.value)
-        #
-    ##If all videos are of the same length, use it to calculate the end time
+
+    ##if the task duration is the same for all participants, use it to calculate the end time
     if dur != None:
         end = []
         for i in start:
             end.append(i + dur)
-    ### Start overlaying videos
+
+    ##start overlaying videos
     n = 0
     for child in children:
-        ## (a)Prepare videos:
+        ##prepare videos
         vid_path = Path(f"{folder}/{child}/")
-        ## Baby video
+        ##base video
         baby_list = glob.glob(f"{vid_path}/*{bgcam}*.mp4")
         if len(baby_list) < 1: ##check for problem
             print(f"Can't find {child}'s {bgcam}. Please check the path and folder names.")
@@ -111,7 +111,7 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             t_baby = baby_list[0][-10:-5]
             t_baby = t_baby.replace("M", ":")
             t_baby = datetime.strptime(t_baby, "%M:%S")
-            ## Screen video
+            ##top video
             screen_list = glob.glob(f"{vid_path}/*{topcam}*.mp4")
             if len(screen_list) < 1: ##check for problem
                 print(f"Can't find {child}'s {topcam}. Please check the path and folder names.")
@@ -121,10 +121,10 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
                 t_screen = screen_list[0][-10:-5]
                 t_screen = t_screen.replace("M", ":")
                 t_screen = datetime.strptime(t_screen, "%M:%S")
-                ## Get time difference between videos
+                ##get time difference between videos
                 diff = t_screen - t_baby
                 diff = diff.total_seconds()
-                ## (b)Overlay screen video on baby video at the top left corner:
+                ##overlay top video on base video at the top left corner
                 if attempts == 1: ##first round
                     x = 0 ##no manual correction
                     all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
@@ -133,7 +133,7 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
                     x = corr[n]
                     all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
                                                 screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-                ## (c)Save composite video:
+                ##save composite video
                 all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_merged{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
 
@@ -150,52 +150,52 @@ def crop(folder, cam, newname, dur, amplify,
     if excel != None:
         wb = load_workbook(excel)
         sheet = wb["Sheet1"]
-        ##Extract information from excel
-        children=[] ##which child folder are we processing?
+        ##extract information from excel
+        children=[] ##which child subfolder are we processing
         list_children = sheet["a"]
         for i in list_children[1:]:
             children.append(i.value)
-        #
-        start=[] ##the seconds at which the experiment STARTED
+
+        start=[] ##the seconds at which the task STARTED
         list_start =  sheet["b"]
         for i in list_start[1:]:
             start.append(i.value)
-        #
-        end=[] ##the seconds at which the experiment ENDED
+
+        end=[] ##the seconds at which the task ENDED
         list_end =  sheet["c"]
         for i in list_end[1:]:
             end.append(i.value)
-        #
+
         x1=[]
         list_x1 =  sheet["d"]
         for i in list_x1[1:]:
             x1.append(i.value)
-        #
+
         x2=[]
         list_x2 =  sheet["e"]
         for i in list_x2[1:]:
             x2.append(i.value)
-        #
+
         y1=[]
         list_y1 =  sheet["f"]
         for i in list_y1[1:]:
             y1.append(i.value)
-        #
+
         y2=[]
         list_y2 =  sheet["g"]
         for i in list_y2[1:]:
             y2.append(i.value)
-        #
-    ##If all videos are of the same length, use it to calculate the end time
+
+    ##if the task duration is the same for all participants, use it to calculate the end time
     if dur != None:
         end = []
         for i in start:
             end.append(i + dur)
-        #
-    ##Start overlaying videos
+
+    ##start cropping videos
     n = 0
     for child in children:
-        ## Prepare video:
+        ##prepare video
         vid_path = Path(f"{folder}/{child}/")
         vid_list = glob.glob(f"{vid_path}/*{cam}*.mp4")
         if len(vid_list) < 1: ##check for problem
@@ -206,17 +206,17 @@ def crop(folder, cam, newname, dur, amplify,
                 thevid = thevid.subclip(start[n], end[n])
             else:
                 thevid = thevid.subclip(start[n], thevid.duration)
-            ## Crop it:
+            ##crop it
             cropped = thevid.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
             cropped = cropped.volumex(amplify)
-            ## Extract and render:
+            ##render the new video
             cropped.write_videofile(f"{folder}/{child}/{child}_{newname}.mp4")
             n += 1 ##now, do the next one
 
 
 #### END OF FUNCTION 3 ####
 
-#### FUNCTION 4: JUXTAPOSE videos
+#### FUNCTION 4A: JUXTAPOSE two videos
 ##Date: first written on 08.07.2024, further editing on 18.02.2025
 ##Input: Two video recordings (from different angles) that record the participant performing a task
 ##Output: A single video per participant with one of the recordings (the one with the best angle) as the main video and the other as the minor
@@ -226,64 +226,64 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
     if excel != None:
         wb = load_workbook(excel)
         sheet = wb["Sheet1"]
-        ##Extract information from excel
-        children=[] ##which child folder are we processing?
+        ##extract information from excel
+        children=[] ##which child subfolder are we processing
         list_children = sheet["a"]
         for i in list_children[1:]:
             children.append(i.value)
-        #
+
         main=[] ##the video with the best angle
         list_main = sheet["b"]
         for i in list_main[1:]:
             main.append(i.value)
-        #
-        start=[] ##the seconds at which the experiment STARTED
+
+        start=[] ##the seconds at which the task STARTED
         list_start = sheet["c"]
         for i in list_start[1:]:
             start.append(i.value)
-        #
-        end=[] ##the seconds at which the experiment ENDED
+
+        end=[] ##the seconds at which the task ENDED
         list_end = sheet["d"]
         for i in list_end[1:]:
             end.append(i.value)
-        #
-        corr=[] ##the seconds at which the experiment ENDED
+
+        corr=[] ##manually correct out-of-sync videos
         list_corr = sheet["e"]
         for i in list_corr[1:]:
             corr.append(i.value)
-        #
+
         x1=[]
         list_x1 = sheet["f"]
         for i in list_x1[1:]:
             x1.append(i.value)
-        #
+
         x2=[]
         list_x2 = sheet["g"]
         for i in list_x2[1:]:
             x2.append(i.value)
-        #
+
         y1=[]
         list_y1 = sheet["h"]
         for i in list_y1[1:]:
             y1.append(i.value)
-        #
+
         y2=[]
         list_y2 = sheet["i"]
         for i in list_y2[1:]:
             y2.append(i.value)
-        #
-    ##If all videos are of the same length, use it to calculate the end time
+
+    ##if the task duration is the same for all participants, use it to calculate the end time
     if dur != None:
         end = []
         for i in start:
             end.append(i + dur)
-        #
-    ##Start juxtaposing videos
+
+    ##start juxtaposing videos
     n = 0
     for child in children:
-        ### (a)Prepare videos (crop if necessary):
+        ##prepare videos (crop if necessary)
         vid_path = Path(f"{folder}/{child}/")
-        ## The first camera
+        ##the first camera
         vid1_list = glob.glob(f"{vid_path}/*{cam1}*.mp4")
         if len(vid1_list) < 1: ##check for problem
             print(f"Can't find {child}'s {cam1}. Please check the path and folder names.")
@@ -291,7 +291,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
             vid1 = VideoFileClip(vid1_list[0])
             if crop_who == cam1:
                 vid1 = vid1.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
-            ## The second camera
+            ##the second camera
             vid2_list = glob.glob(f"{vid_path}/*{cam2}*.mp4")
             if len(vid2_list) < 1: ##check for problem
                 print(f"Can't find {child}'s {cam2}. Please check the path and folder names.")
@@ -299,7 +299,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 vid2 = VideoFileClip(vid2_list[0])
                 if crop_who == cam2:
                     vid2 = vid2.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
-                ### (b)Sync the videos:
+                ##sync the videos
                 t_vid1 = vid1_list[0][-10:-5]
                 t_vid1 = t_vid1.replace("M", ":")
                 t_vid1 = datetime.strptime(t_vid1, "%M:%S")
@@ -308,19 +308,19 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 t_vid2 = datetime.strptime(t_vid2, "%M:%S")
                 diff = t_vid1 - t_vid2
                 diff = diff.total_seconds()
-                ## cam1
+                ##the first camera
                 if vid1.duration > end[n]:
                     vid1 = vid1.subclip(start[n], end[n])
                 else:
                     vid1 = vid1.subclip(start[n], vid1.duration)
-                ## cam2
+                ##the second camera
                 if attempts == 1: ##first round
                     x = 0 ##no manual correction
                     if vid2.duration > end[n]+diff:
                         vid2 = vid2.subclip(start[n], end[n]+diff)
                     else:
                         vid2 = vid2.subclip(start[n], vid2.duration)
-                    ##save audio files to aid correction of out-of-sync videos:
+                    ##save audio files to aid correction of out-of-sync videos
                     audio_vid1 = vid1.audio
                     audio_vid1.write_audiofile(f"{folder}/{child}/{child}_{cam1}_audio.mp3")
                     audio_vid2 = vid2.audio
@@ -331,7 +331,6 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                         vid2 = vid2.subclip(start[n]+corr[n], end[n]+diff+corr[n])
                     else:
                         vid2 = vid2.subclip(start[n]+corr[n], vid2.duration)
-                ### (c) Deal with the volume/audio extraction:
                 ##amplify if necessary and add a blue border
                 if amplify_who == cam1:
                     vid1 = vid1.volumex(amplify).margin(10, color=(0, 0, 225))
@@ -344,7 +343,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                     vid1 = vid1.volumex(0)
                 elif mute_who == cam2:
                     vid2 = vid2.volumex(0)
-                ### (d) Position videos and save them:
+                ##position videos
                 if main[n] == cam1:
                     major, minor = vid1, vid2
                 else:
@@ -356,3 +355,12 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 ##save the output
                 final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
+
+
+#### END OF FUNCTION 4A ####
+
+#### FUNCTION 4B: JUXTAPOSE three videos
+##Date: first written on 08.07.2024
+##Input: Three video recordings (from different angles) that record the participant performing a task
+##Output: A single video per participant with one of the recordings (the one with the best angle) as the main video and the other two as minors
+##Required directory: project folder -> "child" subfolder -> videos

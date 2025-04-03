@@ -20,7 +20,7 @@ from editvid import overlay
 
 ##EXAMPLE 2a: Using info from an excel file
 overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
-        attempts = 1, ##1: correction info will be disregarded, 2 or higher: correction info will be needed
+        attempts = 1, ##if 1: correction info will be disregarded; if 2 or higher: correction info will be needed
         bgcam = "baby", ##name of the base video that python should search for
         topcam = "screen", ##name of the top video that python should search for
         newname = "OMI", ##name of the output video
