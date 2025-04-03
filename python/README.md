@@ -87,7 +87,7 @@ As shown in the code above, the overlay function has many parameters, one of whi
 - __propsize__: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. 
-- other parameters: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
+- __other parameters__: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
 
 In the __excel file__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr" (see Figure 1 below). These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order. 
 
@@ -124,7 +124,7 @@ In the crop function shown above, we need to give four arguments and have an Exc
 - __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
 - __amplify__: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names, video timing, and cropping details?
-- other parameters: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
+- __other parameters__: Leave them as "None" here since the information should be found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to them.
 
 In the __excel file__, we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
 
@@ -141,7 +141,7 @@ In Figure 2 above:
 - The _sixth column_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
 - The _seventh column_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
 
-And if the explanation for the cropping details is unclear, Figure 3 below should be a helpful illustration.
+And if the explanation for the cropping details is unclear, Figure 3 below should be helpful.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
 
@@ -161,8 +161,8 @@ In Figure 3 above:
 ---
 
 ### 4. Juxtapose videos
-__(4A) Juxtapose two videos__ (i.e., place two videos side-by-side)  
-The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual input of argument is done). 
+__(4A) Juxtapose two videos__ (i.e., place two videos side-by-side for comparison)  
+The following code calls for the __join2side function__ to juxtapose two videos. See __Example 4B below__ to join three videos. 
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -190,8 +190,8 @@ In Figure 4 above:
 
 ---
 
-__(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)  
-The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. 
+__(4B) Juxtapose three videos__ (i.e., place three videos adjacent to each other for comparison)  
+The following code calls for the __join3side function__ to juxtapose three videos. See __Example 4A above__ to join two videos. 
 
 ---
 
