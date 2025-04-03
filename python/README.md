@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Needless to say, the videos and folders (in which the videos are stored) should be named in a consistent manner for the batch processing task to be run smoothly and successfully. The [examples.py](./examples.py) script shows how and when to call for various video-editing functions of the module. These examples are explained in detail [below](#examples).
+The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually give arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
 
 - [General requirements](#general-requirements)
 - [Example 1: Join videos together](#1-merge-videos)
@@ -65,7 +65,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. 
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see Figure 1 below) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
