@@ -2,37 +2,34 @@
 ## Date: 31.03.2025
 ## Author: MY Sia (with lots of help from the web, see README.md for more)
 
-
 ## Import necessary modules
 import glob
 from pathlib import Path
 import os ##to rename files, where necessary
 from moviepy.editor import * ##MoviePy v1.0.3
+
 ##for syncing videos
 from datetime import datetime ##to calculate time difference between videos
 import cv2 ##so that videos can be resized properly
 from openpyxl import load_workbook ##if we pass arguments from an excel file
 
-
 def merge(folder, children, camera):
     """
     FUNCTION 1: CONCATENATE short videos into a long one
-    Date: first written on 23.06.2024, further editing on 12.02.2025
-    Input: Multiple videos stored in a folder (one folder for each camera)
-    Output: A single video per camera per child
+    Date: First written on 23.06.2024, further editing on 12.02.2025
+    Input: Multiple videos stored in a folder (one folder for each camera).
+    Output: A single video per camera per child.
     Required directory: project folder -> 'child' subfolder -> 'camera' subfolder -> short videos
     """
-    ##loop through child subfolders
     for child in children:
-        ##loop through camera subfolders
         for cam in camera:
             video_list = []
             files_path = Path(f"{folder}/{child}/{cam}")
             file_list = glob.glob(f"{files_path}/*.mp4")
-            ##check for problematic cases
+            ##check for nonexistent files
             if len(file_list) < 2:
                 print(f"Nothing to join in {child}'s {cam} folder.")
-            ##if the recording passed the hour (e.g., 10:59 to 11:00)
+            ##check for recordings that passed the hour (e.g., 10:59 to 11:00)
             elif  file_list[0][-22:-20] == "\\0" and file_list[-1][-22:-20] == "\\5":
                 for f_name in file_list:
                     p1 = f_name[0:-22]
@@ -47,28 +44,26 @@ def merge(folder, children, camera):
                         os.rename(f_name, new_fname)
                 ##add the subfolder back to be processed
                 camera.append(cam)
+            ##load & merge videos
             else:
-                ##load mp4 files as videos
                 for i in file_list:
                     clip = VideoFileClip(i)
                     video_list.append(clip)
-                ##merge & save the output
                 joined = concatenate_videoclips(video_list)
                 joined = joined.set_fps(fps=30) ##standardise frame per second
+                ##render output
                 first_frame = file_list[0][-21:-15]
                 cam = cam.lower()
                 joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
 
-
-
 def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             excel, children, start, end, corr):
     """
-    FUNCTION 2: SYNC AND OVERLAY a downsized 'top' video on a 'bg' video
-    Date: first written on 23.06.2024
-    Input: Two videos, one showing the participant and another showing the screen
-    Output: A composite video one video as the base and another overlaid on the top left corner
-    Required directory: project folder -> "child" subfolder -> videos
+    FUNCTION 2: SYNC AND OVERLAY a downsized 'top' video on a 'base' video
+    Date: First written on 23.06.2024
+    Input: Two videos, one showing the participant and another showing what the participant saw.
+    Output: A composite video with one video as the base and another overlaid on the top left corner.
+    Required directory: project folder -> 'child' subfolder -> videos
     """
     ##extract information if we load an excel file
     if excel != None:
@@ -101,12 +96,11 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
         for i in start:
             end.append(i + dur)
 
-    ##start overlaying videos
+    ##prepare to overlay videos
     n = 0
     for child in children:
-        ##prepare videos
         vid_path = Path(f"{folder}/{child}/")
-        ##base video
+        ##check for the base video
         baby_list = glob.glob(f"{vid_path}/*{bgcam}*.mp4")
         if len(baby_list) < 1: ##check for problem
             print(f"Can't find {child}'s {bgcam}. Please check the path and folder names.")
@@ -115,7 +109,7 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             t_baby = baby_list[0][-10:-5]
             t_baby = t_baby.replace("M", ":")
             t_baby = datetime.strptime(t_baby, "%M:%S")
-            ##top video
+            ##check for the top video
             screen_list = glob.glob(f"{vid_path}/*{topcam}*.mp4")
             if len(screen_list) < 1: ##check for problem
                 print(f"Can't find {child}'s {topcam}. Please check the path and folder names.")
@@ -125,10 +119,10 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
                 t_screen = screen_list[0][-10:-5]
                 t_screen = t_screen.replace("M", ":")
                 t_screen = datetime.strptime(t_screen, "%M:%S")
-                ##get time difference between videos
+                ##calculate the time difference between videos
                 diff = t_screen - t_baby
                 diff = diff.total_seconds()
-                ##overlay top video on base video at the top left corner
+                ##sync & overlay videos
                 if attempts == 1: ##first round
                     x = 0 ##no manual correction
                     all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
@@ -137,19 +131,19 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
                     x = corr[n]
                     all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
                                                 screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-                ##save composite video
+                ##render output
                 all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_merged{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
 
-
-
-#### FUNCTION 3: CROP a video
-##Date: first written on 18.02.2025
-##Input:
-##Output:
-##Required directory: project folder -> "child" subfolder -> videos
 def crop(folder, cam, newname, dur, amplify,
          excel, children, start, end, x1, x2, y1, y2):
+    """
+    FUNCTION 3: CROP a video
+    Date: First written on 18.02.2025
+    Input: A video.
+    Output: A cropped (and possibly clipped and amplified) video.
+    Required directory: project folder -> 'child' subfolder -> videos
+    """
     ##extract information if we load an excel file
     if excel != None:
         wb = load_workbook(excel)
@@ -170,7 +164,7 @@ def crop(folder, cam, newname, dur, amplify,
         for i in list_end[1:]:
             end.append(i.value)
 
-        x1=[]
+        x1=[] ##the dimension of the cropped area
         list_x1 =  sheet["d"]
         for i in list_x1[1:]:
             x1.append(i.value)
@@ -196,36 +190,35 @@ def crop(folder, cam, newname, dur, amplify,
         for i in start:
             end.append(i + dur)
 
-    ##start cropping videos
+    ##prepare to crop videos
     n = 0
     for child in children:
-        ##prepare video
         vid_path = Path(f"{folder}/{child}/")
         vid_list = glob.glob(f"{vid_path}/*{cam}*.mp4")
-        if len(vid_list) < 1: ##check for problem
+        ##check for nonexistent files
+        if len(vid_list) < 1: 
             print(f"Can't find {child}'s {cam}. Please check the path and folder names.")
+        ##load, clip, crop, & amplify videos
         else:
             thevid = VideoFileClip(vid_list[0])
             if thevid.duration > end[n]:
                 thevid = thevid.subclip(start[n], end[n])
             else:
                 thevid = thevid.subclip(start[n], thevid.duration)
-            ##crop then render the output
             cropped = thevid.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
             cropped = cropped.volumex(amplify)
+            ##render output
             cropped.write_videofile(f"{folder}/{child}/{child}_{newname}.mp4")
             n += 1 ##now, do the next one
-
-
 
 def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, mute_who, crop_who,
               excel, children, main, start, end, corr, x1, x2, y1, y2):
     """
     FUNCTION 4A: JUXTAPOSE two videos
-    Date: first written on 08.07.2024, further editing on 18.02.2025
-    Input: Two video recordings (from different angles) that record the participant performing a task
-    Output: A single video per participant with one of the videos being larger than the other
-    Required directory: project folder -> "child" subfolder -> videos
+    Date: First written on 08.07.2024, further editing on 18.02.2025
+    Input: Two video recordings of a participant performing a task (from different angles).
+    Output: A single video with the two recordings beside each other (one recording is set larger than the other).
+    Required directory: project folder -> 'child' subfolder -> videos
     """
     ##extract information if we load an excel file
     if excel != None:
@@ -257,7 +250,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
         for i in list_corr[1:]:
             corr.append(i.value)
 
-        x1=[]
+        x1=[] ##the dimension of the cropped area
         list_x1 = sheet["f"]
         for i in list_x1[1:]:
             x1.append(i.value)
@@ -286,9 +279,8 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
     ##start juxtaposing videos
     n = 0
     for child in children:
-        ##prepare videos (crop if necessary)
         vid_path = Path(f"{folder}/{child}/")
-        ##the first camera
+        ##check for the first camera
         vid1_list = glob.glob(f"{vid_path}/*{cam1}*.mp4")
         if len(vid1_list) < 1: ##check for problem
             print(f"Can't find {child}'s {cam1}. Please check the path and folder names.")
@@ -296,7 +288,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
             vid1 = VideoFileClip(vid1_list[0])
             if crop_who == cam1:
                 vid1 = vid1.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
-            ##the second camera
+            ##check for the second camera
             vid2_list = glob.glob(f"{vid_path}/*{cam2}*.mp4")
             if len(vid2_list) < 1: ##check for problem
                 print(f"Can't find {child}'s {cam2}. Please check the path and folder names.")
@@ -304,7 +296,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 vid2 = VideoFileClip(vid2_list[0])
                 if crop_who == cam2:
                     vid2 = vid2.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
-                ##sync the videos
+                ##calculate the time difference between videos
                 t_vid1 = vid1_list[0][-10:-5]
                 t_vid1 = t_vid1.replace("M", ":")
                 t_vid1 = datetime.strptime(t_vid1, "%M:%S")
@@ -313,19 +305,18 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 t_vid2 = datetime.strptime(t_vid2, "%M:%S")
                 diff = t_vid1 - t_vid2
                 diff = diff.total_seconds()
-                ##the first camera
+                ##sync & clip videos
                 if vid1.duration > end[n]:
                     vid1 = vid1.subclip(start[n], end[n])
                 else:
                     vid1 = vid1.subclip(start[n], vid1.duration)
-                ##the second camera
                 if attempts == 1: ##first round
                     x = 0 ##no manual correction
                     if vid2.duration > end[n]+diff:
                         vid2 = vid2.subclip(start[n], end[n]+diff)
                     else:
                         vid2 = vid2.subclip(start[n], vid2.duration)
-                    ##save audio files to aid correction of out-of-sync videos
+                    ##render audio files to aid correction of out-of-sync videos
                     audio_vid1 = vid1.audio
                     audio_vid1.write_audiofile(f"{folder}/{child}/{child}_{cam1}_audio.mp3")
                     audio_vid2 = vid2.audio
@@ -336,32 +327,28 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                         vid2 = vid2.subclip(start[n]+corr[n], end[n]+diff+corr[n])
                     else:
                         vid2 = vid2.subclip(start[n]+corr[n], vid2.duration)
-                ##amplify if necessary and add a blue border
+                ##amplify (or mute) & add a blue border
                 if amplify_who == cam1:
                     vid1 = vid1.volumex(amplify).margin(10, color=(0, 0, 225))
                     vid2 = vid2.margin(10)
                 elif amplify_who == cam2:
                     vid2 = vid2.volumex(amplify).margin(10, color=(0, 0, 225))
                     vid1 = vid1.margin(10)
-                ##mute if necessary
                 if mute_who == cam1:
                     vid1 = vid1.volumex(0)
                 elif mute_who == cam2:
                     vid2 = vid2.volumex(0)
-                ##position videos
+                ##resize videos
                 if main[n] == cam1:
                     major, minor = vid1, vid2
                 else:
                     major, minor = vid2, vid1
-                ##resize then render output
                 major_vid = major.resize(0.7)
                 minor_vid =  minor.resize(0.4)
                 final_vid = clips_array([[major_vid, minor_vid], ])
+                ##render output
                 final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
-
-
-#### END OF FUNCTION 4A ####
 
 #### FUNCTION 4B: JUXTAPOSE three videos
 ##Date: first written on 08.07.2024
