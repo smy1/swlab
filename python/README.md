@@ -3,7 +3,7 @@ The previous scripts have now been compiled into a module called [editvid.py](./
 
 - [General requirements](#general-requirements)
 - [Example 1: Join videos together](#1-merge-videos)
-- [Example 2: Sync and display one smaller video on top of a bigger one](#2-overlay-videos)
+- [Example 2: Sync and display a smaller video on top of a bigger one](#2-overlay-videos)
 - [Example 3: Crop videos](#3-crop-videos)
 - [Example 4: Sync and display videos beside each other](#4-juxtapose-videos)
 - [Miscellaneous](#miscellaneous)
@@ -27,6 +27,19 @@ pip install pathlib ## required for Python to locate a path of a file
 >pip install moviepy==1.0.3 ## this installs the older version
 >pip install moviepy ## this installs the latest version
 >```
+
+### Important points to take note of
+When manually providing arguments:
+> [!IMPORTANT]  
+> For parameters that expects a list, even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
+
+When using an Excel file:
+> [!IMPORTANT]  
+> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 of Example 2 below (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
+
+Before syncing videos:
+> [!IMPORTANT]
+> In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (which means that the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
 ## Examples
 ### 1. Merge videos
@@ -52,7 +65,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. See [below](#when-manually-providing-arguments) for an important note.
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file (see a sample [here](./example_overlay.xlsx)) for the function to extract information regarding subfolder names and video timing. Another way to pass these arguments to the function is by entering them manually. The [examples.py](./examples.py) script shows how this is done. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -86,7 +99,7 @@ In Figure 1 above:
 - The _first column_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the base video and top video are stored. In this example, the subfolders are "076" and "078".
 - The _second column_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
 - The _third column_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- The _fourth column_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. Give a negative number if the top video is slower than the base video (assuming that the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the paramter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- The _fourth column_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. Give a negative number if the top video is slower than the base video (assuming that the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 
 >[!TIP]
 >Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
@@ -148,7 +161,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__ (i.e., place two videos side-by-side)  
-The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual input of argument is done). Also see [below](#before-syncing-videos) for an important note.
+The following code calls for the __join2side function__ to juxtapose two videos. See Example 4B below to join three videos. As with Example 2 on overlaying videos, this can be done either with an Excel file or by manually entering the information. Here, I show how the code works with an Excel file (see the [examples.py](./examples.py) script for how manual input of argument is done). 
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -177,25 +190,13 @@ In Figure 4 above:
 ---
 
 __(4B) Juxtapose three videos__ (i.e., place three videos side-by-side)  
-The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. See [below](#before-syncing-videos) for an important note.
+The following code calls for the __join3side function__ to juxtapose two videos. See Example 4A above to join two videos. 
 
 ---
 
 ## Miscellaneous
 Another video-editing script that is not added to the function:
 - [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
-
-#### When manually providing arguments:
-> [!IMPORTANT]  
-> For parameters that expects a list, even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. Examples of such parameters are the "camera" subfolder (in Example 1) and the "start time" information (in Example 2).
-
-#### When using an Excel file:
-> [!IMPORTANT]  
-> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 above (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
-
-#### Before syncing videos:
-> [!IMPORTANT]
-> In order for the function to sync the videos, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, e.g., 56M09S, which means that the first frame of the video occured at the 56th minute and 9th second of the hour. If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
 ---
 
