@@ -313,9 +313,9 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 if attempts == 1: ##first round
                     x = 0 ##no manual correction
                     if vid2.duration > end[n]+diff:
-                        vid2 = vid2.subclip(start[n], end[n]+diff)
+                        vid2 = vid2.subclip(start[n]+diff, end[n]+diff)
                     else:
-                        vid2 = vid2.subclip(start[n], vid2.duration)
+                        vid2 = vid2.subclip(start[n]+diff, vid2.duration)
                     ##render audio files to aid correction of out-of-sync videos
                     audio_vid1 = vid1.audio
                     audio_vid1.write_audiofile(f"{folder}/{child}/{child}_{cam1}_audio.mp3")
@@ -324,9 +324,9 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 elif attempts > 1: ##corrective round
                     x = corr[n]
                     if vid2.duration > end[n]+diff+corr[n]:
-                        vid2 = vid2.subclip(start[n]+corr[n], end[n]+diff+corr[n])
+                        vid2 = vid2.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n])
                     else:
-                        vid2 = vid2.subclip(start[n]+corr[n], vid2.duration)
+                        vid2 = vid2.subclip(start[n]+diff+corr[n], vid2.duration)
                 ##amplify (or mute) & add a blue border
                 if amplify_who == cam1:
                     vid1 = vid1.volumex(amplify).margin(10, color=(0, 0, 225))
@@ -344,7 +344,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 else:
                     major, minor = vid2, vid1
                 major_vid = major.resize(0.7)
-                minor_vid =  minor.resize(0.4)
+                minor_vid = minor.resize(0.4)
                 final_vid = clips_array([[major_vid, minor_vid], ])
                 ##render output
                 final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
