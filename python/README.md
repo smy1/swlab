@@ -92,17 +92,17 @@ As shown in the code above, the overlay function has many parameters, one of whi
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. 
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In _Column _excel file__ (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
+In the excel file (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="280">
 
 __Figure 1__: _An example of an Excel file for the overlay function._  
 
 In Figure 1 above: 
-- _Column A_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the base video and top video are stored. In this example, the subfolders are "076" and "078".
-- _Column B_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
-- _Column C_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- _Column D_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. If the base video is slower (i.e., lags behind the top video), give a positive number (assuming that the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- __Column A__ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the base video and top video are stored. In this example, the subfolders "076" and "078" refer to our participants' ID.
+- __Column B__ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
+- __Column C__ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- __Column D__ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. _If the base video is slower (i.e., lags behind the top video), give a positive number (assuming that the start time is based on the top video, as suggested earlier)_. This information can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 
 ---
 
@@ -126,20 +126,20 @@ In the crop function shown above, we need to give four arguments and load an Exc
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In _Column _excel file__ (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
+In the excel file (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="280">
 
 __Figure 2__: _An example of an Excel file for the crop function._
 
 In Figure 2 above:
-- _Column A_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored. 
-- _Column B_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
-- _Column C_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- _Column D_ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. "x1" refers to the start of the width of cropping area.
-- _Column E_ (or the parameter __"x2"__) refers to the end of the width of cropping area.
-- _Column F_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
-- _Column G_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
+- __Column A__ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored. In this example, the names of subfolders correspond to our participants' ID.
+- __Column B__ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
+- __Column C__ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- __Column D__ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. "x1" refers to the start of the width of cropping area.
+- __Column E__ (or the parameter __"x2"__) refers to the end of the width of cropping area.
+- __Column F__ (or the parameter __"y1"__) refers to the start of the height of cropping area.
+- __Column G__ (or the parameter __"y2"__) refers to the end of the height of cropping area.
 
 And if the explanation for the cropping details is unclear, Figure 3 below should be helpful.
 
@@ -197,15 +197,15 @@ In the crop function shown above, we need to pass a few arguments and load an Ex
 __Figure 4__: _An example of an Excel file for the join2side function._
 
 In Figure 4 above: 
-- _Column A_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored.
-- _Column B_ (or the parameter __"main"__) must contain the name of the video camera that has the best angle of recording. This will be displayed larger than the other video camera.
-- _Column C_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
-- _Column D_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- _Column E_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. If the cam2 is slower (i.e., lags behind cam1), give a positive number (assuming that the start time is based on cam1, as suggested earlier). This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
-- _Column F_ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "crop_who" is "no". "x1" refers to the start of the width of cropping area.
-- _Column G_ (or the parameter __"x2"__) refers to the end of the width of cropping area.
-- _Column H_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
-- _Column I_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
+- __Column A__ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored. In this example, the names of subfolders correspond to our participants' ID.
+- __Column B__ (or the parameter __"main"__) must contain the name of the video camera that has the best angle of recording. This will be displayed larger than the other video camera. In this example, the camera "side" has the best recording angle of participants c47 and c59 while the camera "front" has the best angle for participant "c61".
+- __Column C__ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (cam1 and cam), use the start time of one of these videos (preferably cam1). 
+- __Column D__ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- __Column E__ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. _If the cam2 is slower (i.e., lags behind cam1), give a positive number (assuming that the start time is based on cam1, as suggested earlier)_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- __Column F__ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "crop_who" is "no". "x1" refers to the start of the width of cropping area.
+- __Column G__ (or the parameter __"x2"__) refers to the end of the width of cropping area.
+- __Column H__ (or the parameter __"y1"__) refers to the start of the height of cropping area.
+- __Column I__ (or the parameter __"y2"__) refers to the end of the height of cropping area.
 
 See Figure 3 above for a helpful illustration.
 
@@ -223,7 +223,7 @@ Another video-editing script that is not added to the function:
 ---
 
 ## Helpful resources
-I relied heavily on the links below when writing the video-editing scripts the first time. Note: These links use MoviePy v1.0. 
+I relied heavily on the links below when writing the video-editing scripts the first time. Note: These links use [MoviePy v1.0](https://zulko.github.io/moviepy/v1.0.3/). 
 - how to [loop multiple videos in a folder](https://stackoverflow.com/a/75788036)
 - how to [concatenate multiple videos](https://www.geeksforgeeks.org/moviepy-concatenating-multiple-video-files/)
 - how to [calculate time difference](https://www.geeksforgeeks.org/calculate-time-difference-in-python/)
