@@ -16,20 +16,21 @@ merge(folder="C:/Users/user/Desktop/mc_vid", ##set path to the project folder
 ##EXAMPLE 2: SYNC AND OVERLAY VIDEOS
 ##Sync and overlay a downsized "top" video on a "base" video
 ##Required directory: project folder -> "child" subfolder -> videos
-from editvid import overlay
 
 ##EXAMPLE 2a: Pass arguments by loading an excel file (see README.md for more)
-overlay(folder = "C:/Users/user/Desktop/mc_vid", 
+from editvid import overlay
+overlay(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 1, 
         bgcam = "baby", 
         topcam = "screen", 
         newname = "OMI", 
-        propsize = 0.25, 
+        propsize = 0.25,
         dur = None, 
         excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
         children=None, start=None, end=None, corr=None)
 
 ##EXAMPLE 2b: Manually pass arguments to the parameters
+from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
         attempts = 1, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
         bgcam = "baby", ##name of the base video that python should search for

@@ -2,13 +2,11 @@
 ## Date: 31.03.2025
 ## Author: MY Sia (with lots of help from the web, see README.md for more)
 
-## Import necessary modules
+##import necessary packages
 import glob
 from pathlib import Path
 import os ##to rename files, where necessary
 from moviepy.editor import * ##MoviePy v1.0.3
-
-##for syncing videos
 from datetime import datetime ##to calculate time difference between videos
 import cv2 ##so that videos can be resized properly
 from openpyxl import load_workbook ##if we pass arguments from an excel file
@@ -17,7 +15,7 @@ def merge(folder, children, camera):
     """
     FUNCTION 1: CONCATENATE short videos into a long one
     Date: First written on 23.06.2024, further editing on 12.02.2025
-    Input: Multiple videos stored in a folder (one folder for each camera).
+    Input: Multiple short videos stored in subfolders.
     Output: A single video per camera per child.
     Required directory: project folder -> 'child' subfolder -> 'camera' subfolder -> short videos
     """
@@ -54,6 +52,7 @@ def merge(folder, children, camera):
                 first_frame = file_list[0][-21:-15]
                 cam = cam.lower()
                 joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
+
 
 def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             excel, children, start, end, corr):
@@ -131,8 +130,9 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
                     all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
                                                 screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
                 ##render output
-                all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_merged{attempts}_corr={x}.mp4")
+                all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
+
 
 def crop(folder, cam, newname, dur, amplify,
          excel, children, start, end, x1, x2, y1, y2):
@@ -209,6 +209,7 @@ def crop(folder, cam, newname, dur, amplify,
             ##render output
             cropped.write_videofile(f"{folder}/{child}/{child}_{newname}.mp4")
             n += 1 ##now, do the next one
+
 
 def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, mute_who, crop_who,
               excel, children, main, start, end, corr, x1, x2, y1, y2):
@@ -349,8 +350,14 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
                 n += 1 ##now, do the next one
 
-#### FUNCTION 4B: JUXTAPOSE three videos
-##Date: first written on 08.07.2024
-##Input: Three video recordings (from different angles) that record the participant performing a task
-##Output: A single video per participant with one of the recordings (the one with the best angle) as the main video and the other two as minors
-##Required directory: project folder -> "child" subfolder -> videos
+
+def join3side():
+    """
+    FUNCTION 4B: JUXTAPOSE three videos
+    Date: first written on 08.07.2024
+    Input: Three video recordings of a participant performing a task (from different angles).
+    Output: A single video with the three recordings beside each other (one recording is set larger than the other two).
+    Required directory: project folder -> 'child' subfolder -> videos
+    """
+    print("coming soon")
+
