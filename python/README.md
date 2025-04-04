@@ -46,7 +46,7 @@ Before syncing videos:
 
 ## Examples
 ### 1. Merge videos
-The following code calls for the __merge function__ to concatenate several videos into one long video. 
+The following code calls for _Column _merge function__ to concatenate several videos into one long video. 
 ```
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
@@ -68,7 +68,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file for the function to extract arguments regarding subfolder names and video timing. 
+The following code calls for _Column _overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file for the function to extract arguments regarding subfolder names and video timing. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -92,22 +92,22 @@ As shown in the code above, the overlay function has many parameters, one of whi
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. 
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the __excel file__ (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order. 
+In _Column _excel file__ (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="280">
 
 __Figure 1__: _An example of an Excel file for the overlay function._  
 
 In Figure 1 above: 
-- The _first column_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the base video and top video are stored. In this example, the subfolders are "076" and "078".
-- The _second column_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
-- The _third column_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- The _fourth column_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. Give a negative number if the top video is slower than the base video (assuming that the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- _Column A_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the base video and top video are stored. In this example, the subfolders are "076" and "078".
+- _Column B_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. Since we have two video recordings (the base video and the top video), use the start time of one of these videos (preferably the top video). The function will calculate the time difference between the two recordings and adjust the start time of the other video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
+- _Column C_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- _Column D_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. If the base video is slower (i.e., lags behind the top video), give a positive number (assuming that the start time is based on the top video, as suggested earlier). This information can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 
 ---
 
 ### 3. Crop videos
-The following code calls for the __crop function__ to crop a video. Here, I show how the code works by loading an Excel file.
+The following code calls for _Column _crop function__ to crop a video. Here, I show how the code works by loading an Excel file.
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -126,20 +126,20 @@ In the crop function shown above, we need to give four arguments and load an Exc
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the __excel file__ (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order. 
+In _Column _excel file__ (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="280">
 
 __Figure 2__: _An example of an Excel file for the crop function._
 
 In Figure 2 above:
-- The _first column_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored. 
-- The _second column_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
-- The _third column_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
-- The _fourth column_ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. x1 refers to the start of the width of cropping area.
-- The _fifth column_ (or the parameter __"x2"__) refers to the end of the width of cropping area.
-- The _sixth column_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
-- The _seventh column_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
+- _Column A_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored. 
+- _Column B_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
+- _Column C_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- _Column D_ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. "x1" refers to the start of the width of cropping area.
+- _Column E_ (or the parameter __"x2"__) refers to the end of the width of cropping area.
+- _Column F_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
+- _Column G_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
 
 And if the explanation for the cropping details is unclear, Figure 3 below should be helpful.
 
@@ -162,7 +162,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__ (i.e., place two videos side-by-side for comparison)  
-The following code calls for the __join2side function__ to juxtapose two videos. See __Example 4B below__ to join three videos. 
+The following code calls for _Column _join2side function__ to juxtapose two videos. See __Example 4B below__ to join three videos. 
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -179,16 +179,16 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
         children=None, main=None, start=None, end=None, corr=None, x1=None, x2=None, y1=None, y2=None)
 ```
 In the crop function shown above, we need to pass a few arguments and load an Excel file.
-- __folder__:
-- __atempts__:
-- __cam1__: The name of the first video
-- __cam2__: The name of the second video
-- __newname__:
+- __folder__: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
+- __attempts__: Is this the first attempt to sync and juxtapose videos? If yes, enter 1, and the function will ignore the argument given to the parameter "corr" (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
+- __cam1__: Stands for "camera-1". What is the name of the first video recording? In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective first-level subfolders (in our example, each subfolder corresponds to an individual participant).
+- __cam2__: Stands for "camera-2". What is the name of the second video recording? In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with cam1 videos.
+- __newname__: How should Python name the new video? In this example, the video that is created will be called as "sbr" (which stands for "shared book reading").
 - __dur__: The duration of the recorded task (if it is the same for everyone)
-- __amplify_who__: Which video should we amplify? "no" if neither
-- __amplify__: How much to amplify? 0 will mute the video
-- __mute_who__: Which video should we mute? "no" if neither
-- __crop_who__: Which video should we crop? "no" if neither
+- __amplify_who__: Which video should Python amplify? "no" if neither, and the parameter "amplify" below will be ignored.
+- __amplify__: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
+- __mute_who__: Which video should Python mute? "no" if neither.
+- __crop_who__: Which video should Python crop? "no" if neither, and the parameters x1, x2, y1, and y2 below will be ignored.
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
@@ -197,12 +197,22 @@ In the crop function shown above, we need to pass a few arguments and load an Ex
 __Figure 4__: _An example of an Excel file for the join2side function._
 
 In Figure 4 above: 
-- points coming soon.
+- _Column A_ (or the parameter __"children"__) must contain the name of the first-level subfolders in which the videos are stored.
+- _Column B_ (or the parameter __"main"__) must contain the name of the video camera that has the best angle of recording. This will be displayed larger than the other video camera.
+- _Column C_ (or the parameter __"start"__) contains the time at which the task started (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
+- _Column D_ (or the parameter __"end"__) contains the time at which the recording ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
+- _Column E_ (or the parameter __"corr"__, which stands for "correction") contains information that corrects for out-of-sync videos. If the cam2 is slower (i.e., lags behind cam1), give a positive number (assuming that the start time is based on cam1, as suggested earlier). This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- _Column F_ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "crop_who" is "no". "x1" refers to the start of the width of cropping area.
+- _Column G_ (or the parameter __"x2"__) refers to the end of the width of cropping area.
+- _Column H_ (or the parameter __"y1"__) refers to the start of the height of cropping area.
+- _Column I_ (or the parameter __"y2"__) refers to the end of the height of cropping area.
+
+See Figure 3 above for a helpful illustration.
 
 ---
 
 __(4B) Juxtapose three videos__ (i.e., place three videos adjacent to each other for comparison)  
-The following code calls for the __join3side function__ to juxtapose three videos. See __Example 4A above__ to join two videos. 
+The following code calls for _Column _join3side function__ to juxtapose three videos. See __Example 4A above__ to join two videos. 
 
 ---
 
