@@ -46,7 +46,7 @@ Before syncing videos:
 
 ## Examples
 ### 1. Merge videos
-The following code calls for _Column _merge function__ to concatenate several videos into one long video. 
+The following code calls for the __merge function__ to concatenate several videos into one long video. 
 ```
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
@@ -68,7 +68,7 @@ An additional merging script that is not included in the module:
 ---
 
 ### 2. Overlay videos
-The following code calls for _Column _overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file for the function to extract arguments regarding subfolder names and video timing. 
+The following code calls for the __overlay function__ to overlay one video on top of another and create a composite video. Here, we provide an Excel file for the function to extract arguments regarding subfolder names and video timing. 
 ```
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -92,7 +92,7 @@ As shown in the code above, the overlay function has many parameters, one of whi
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. 
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the excel file (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
+In the Excel file (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="280">
 
@@ -107,7 +107,7 @@ In Figure 1 above:
 ---
 
 ### 3. Crop videos
-The following code calls for _Column _crop function__ to crop a video. Here, I show how the code works by loading an Excel file.
+The following code calls for the __crop function__ to crop a video. Here, I show how the code works by loading an Excel file.
 ```
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -126,7 +126,7 @@ In the crop function shown above, we need to give four arguments and load an Exc
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the excel file (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
+In the Excel file (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="280">
 
@@ -162,7 +162,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__ (i.e., place two videos side-by-side for comparison)  
-The following code calls for _Column _join2side function__ to juxtapose two videos. See __Example 4B below__ to join three videos. 
+The following code calls for the _join2side function__ to juxtapose two videos. See __Example 4B below__ to join three videos. 
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -184,13 +184,15 @@ In the crop function shown above, we need to pass a few arguments and load an Ex
 - __cam1__: Stands for "camera-1". What is the name of the first video recording? In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective first-level subfolders (in our example, each subfolder corresponds to an individual participant).
 - __cam2__: Stands for "camera-2". What is the name of the second video recording? In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with cam1 videos.
 - __newname__: How should Python name the new video? In this example, the video that is created will be called as "sbr" (which stands for "shared book reading").
-- __dur__: The duration of the recorded task (if it is the same for everyone).
-- __amplify_who__: Which video should Python amplify? The argument given here should be the same as that given for either cam1 or cam2. "no" should be given if neither video should be amplified, and the parameter "amplify" below will be ignored. In this example, Python will amplify the volume of videos that are named "side" (i.e., cam2). 
+- __dur__: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as "None". 
+- __amplify_who__: Which video should Python amplify? The argument given here should be the same as that given for either cam1 or cam2. Leave it as "no" if neither video should be amplified, and the parameter "amplify" below will be ignored. In this example, Python will amplify the volume of videos that are named "side" (i.e., cam2). 
 - __amplify__: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
-- __mute_who__: Which video should Python mute? The argument given here should be the same as that given for either cam1 or cam2. "no" should be given if neither video should be muted. In this example, Python will mute videos that are named "front" (i.e., cam1). 
-- __crop_who__: Which video should Python crop? The argument given here should be the same as that given for either cam1 or cam2. "no" should be given if neither video should be cropped, and the parameters x1, x2, y1, and y2 below will be ignored. In this example, Python will crop videos that are named "front" (i.e., cam1). 
+- __mute_who__: Which video should Python mute? The argument given here should be the same as that given for either cam1 or cam2. Leave it as "no" if neither video should be muted. In this example, Python will mute videos that are named "front" (i.e., cam1). 
+- __crop_who__: Which video should Python crop? The argument given here should be the same as that given for either cam1 or cam2. Leave it as "no" if neither video should be cropped, and the parameters x1, x2, y1, and y2 below will be ignored. In this example, Python will crop videos that are named "front" (i.e., cam1). 
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
+
+In the Excel file (see Figure 4 below), we should have nine columns that correspond to the last few parameters of this function (i.e., "children", "main", "start", "end", "corr", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="280">
 
@@ -212,7 +214,7 @@ See Figure 3 above for a more helpful illustration on the cropping details.
 ---
 
 __(4B) Juxtapose three videos__ (i.e., place three videos adjacent to each other for comparison)  
-The following code calls for _Column _join3side function__ to juxtapose three videos. See __Example 4A above__ to join two videos. 
+The following code calls for the __join3side function__ to juxtapose three videos. See __Example 4A above__ to join two videos. 
 
 ---
 
