@@ -92,7 +92,7 @@ As shown in the code above, the overlay function has many parameters, one of whi
 - __excel__: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the excel file is stored in the main project folder. 
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the Excel file (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
+In the __Excel file__ (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="280">
 
@@ -126,7 +126,7 @@ In the crop function shown above, we need to give four arguments and load an Exc
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the Excel file (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
+In the __Excel file__ (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., "children", "start", "end", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="280">
 
@@ -192,7 +192,7 @@ In the crop function shown above, we need to pass a few arguments and load an Ex
 - __excel__: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as "None" here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
-In the Excel file (see Figure 4 below), we should have nine columns that correspond to the last few parameters of this function (i.e., "children", "main", "start", "end", "corr", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
+In the __Excel file__ (see Figure 4 below), we should have nine columns that correspond to the last few parameters of this function (i.e., "children", "main", "start", "end", "corr", "x1", "x2", "y1", and "y2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="280">
 
