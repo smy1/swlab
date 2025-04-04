@@ -207,7 +207,7 @@ In Figure 4 above:
 - __Column H__ (or the parameter __"y1"__) refers to the start of the height of cropping area.
 - __Column I__ (or the parameter __"y2"__) refers to the end of the height of cropping area.
 
-See Figure 3 above for a helpful illustration.
+See Figure 3 above for a more helpful illustration on the cropping details.
 
 ---
 
