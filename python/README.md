@@ -161,8 +161,8 @@ In Figure 3 above:
 ---
 
 ### 4. Juxtapose videos
-__(4A) Juxtapose two videos__ (i.e., place two videos side-by-side for comparison)  
-The following code calls for the _join2side function__ to juxtapose two videos. See __Example 4B below__ to join three videos. 
+__(4A) Juxtapose two videos__ 
+The following code calls for the _join2side function__ to place two videos side-by-side for comparison. See [Example 4B below](#4b-juxtapose-three-videos) to join three videos. 
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -213,8 +213,8 @@ See Figure 3 above for a more helpful illustration on the cropping details.
 
 ---
 
-__(4B) Juxtapose three videos__ (i.e., place three videos adjacent to each other for comparison)  
-The following code calls for the __join3side function__ to juxtapose three videos. See __Example 4A above__ to join two videos. 
+#### (4B) Juxtapose three videos
+The following code calls for the __join3side function__ to place three videos beside each other for comparison. See __Example 4A above__ to join two videos. 
 ```
 from editvid import join3side
 join3side(folder = "C:/Users/user/Desktop/mc_vid",
