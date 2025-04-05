@@ -73,7 +73,7 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
         for i in list_children[1:]:
             children.append(i.value)
 
-        start=[] ##the seconds at which the task STARTED
+        start=[] ##the seconds at which the task STARTED (in topcam)
         list_start =  sheet["b"]
         for i in list_start[1:]:
             start.append(i.value)
@@ -98,40 +98,40 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
     n = 0
     for child in children:
         vid_path = Path(f"{folder}/{child}/")
-        ##check for the base video
+        ##check for the existence of videos
         baby_list = glob.glob(f"{vid_path}/*{bgcam}*.mp4")
+        screen_list = glob.glob(f"{vid_path}/*{topcam}*.mp4")
         if len(baby_list) < 1:
             print(f"Can't find {child}'s {bgcam}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
+        elif len(screen_list) < 1:
+            print(f"Can't find {child}'s {topcam}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
         else:
             baby_vid = VideoFileClip(baby_list[0])
+            screen_vid = VideoFileClip(screen_list[0])
+            screen_vid = screen_vid.resize(propsize).margin(5) ##add a 5px border
+            ##calculate the time difference between videos
             t_baby = baby_list[0][-10:-5]
             t_baby = t_baby.replace("M", ":")
             t_baby = datetime.strptime(t_baby, "%M:%S")
-            ##check for the top video
-            screen_list = glob.glob(f"{vid_path}/*{topcam}*.mp4")
-            if len(screen_list) < 1:
-                print(f"Can't find {child}'s {topcam}. Please check the path and folder names.")
-            else:
-                screen_vid = VideoFileClip(screen_list[0])
-                screen_vid = screen_vid.resize(propsize).margin(5) ##add a 5px border
-                t_screen = screen_list[0][-10:-5]
-                t_screen = t_screen.replace("M", ":")
-                t_screen = datetime.strptime(t_screen, "%M:%S")
-                ##calculate the time difference between videos
-                diff = t_screen - t_baby
-                diff = diff.total_seconds()
-                ##sync & overlay videos
-                if attempts == 1: ##first round
-                    x = 0 ##no manual correction
-                    all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
-                                                screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-                elif attempts > 1: ##corrective round
-                    x = corr[n]
-                    all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
-                                                screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
-                ##render output
-                all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
-                n += 1 ##now, do the next one
+            t_screen = screen_list[0][-10:-5]
+            t_screen = t_screen.replace("M", ":")
+            t_screen = datetime.strptime(t_screen, "%M:%S")
+            diff = t_screen - t_baby
+            diff = diff.total_seconds()
+            ##sync & overlay videos
+            if attempts == 1: ##first round
+                x = 0 ##no manual correction
+                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff, end[n]+diff),
+                                            screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
+            elif attempts > 1: ##corrective round
+                x = corr[n]
+                all_vid = CompositeVideoClip([baby_vid.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n]),
+                                            screen_vid.subclip(start[n], end[n]).set_position((0, 50))])
+            ##render output
+            all_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
+            n += 1 ##now, do the next one
 
 
 def crop(folder, cam, newname, dur, amplify,
@@ -193,10 +193,11 @@ def crop(folder, cam, newname, dur, amplify,
     n = 0
     for child in children:
         vid_path = Path(f"{folder}/{child}/")
-        vid_list = glob.glob(f"{vid_path}/*{cam}*.mp4")
         ##check for nonexistent files
+        vid_list = glob.glob(f"{vid_path}/*{cam}*.mp4")
         if len(vid_list) < 1: 
             print(f"Can't find {child}'s {cam}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
         ##load, clip, crop, & amplify videos
         else:
             thevid = VideoFileClip(vid_list[0])
@@ -235,7 +236,7 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
         for i in list_main[1:]:
             main.append(i.value)
 
-        start=[] ##the seconds at which the task STARTED
+        start=[] ##the seconds at which the task STARTED (in cam1)
         list_start = sheet["c"]
         for i in list_start[1:]:
             start.append(i.value)
@@ -280,75 +281,75 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
     n = 0
     for child in children:
         vid_path = Path(f"{folder}/{child}/")
-        ##check for the first camera
+        ##check for the existence of cameras
         vid1_list = glob.glob(f"{vid_path}/*{cam1}*.mp4")
+        vid2_list = glob.glob(f"{vid_path}/*{cam2}*.mp4")
         if len(vid1_list) < 1:
             print(f"Can't find {child}'s {cam1}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
+        elif len(vid2_list) < 1:
+            print(f"Can't find {child}'s {cam2}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
         else:
             vid1 = VideoFileClip(vid1_list[0])
+            vid2 = VideoFileClip(vid2_list[0])
             if crop_who == cam1:
                 vid1 = vid1.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
-            ##check for the second camera
-            vid2_list = glob.glob(f"{vid_path}/*{cam2}*.mp4")
-            if len(vid2_list) < 1:
-                print(f"Can't find {child}'s {cam2}. Please check the path and folder names.")
+            if crop_who == cam2:
+                vid2 = vid2.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
+            ##calculate the time difference between videos
+            t_vid1 = vid1_list[0][-10:-5]
+            t_vid1 = t_vid1.replace("M", ":")
+            t_vid1 = datetime.strptime(t_vid1, "%M:%S")
+            t_vid2 = vid2_list[0][-10:-5]
+            t_vid2 = t_vid2.replace("M", ":")
+            t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+            diff = t_vid1 - t_vid2
+            diff = diff.total_seconds()
+            ##sync & clip videos
+            if vid1.duration > end[n]:
+                vid1 = vid1.subclip(start[n], end[n])
             else:
-                vid2 = VideoFileClip(vid2_list[0])
-                if crop_who == cam2:
-                    vid2 = vid2.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
-                ##calculate the time difference between videos
-                t_vid1 = vid1_list[0][-10:-5]
-                t_vid1 = t_vid1.replace("M", ":")
-                t_vid1 = datetime.strptime(t_vid1, "%M:%S")
-                t_vid2 = vid2_list[0][-10:-5]
-                t_vid2 = t_vid2.replace("M", ":")
-                t_vid2 = datetime.strptime(t_vid2, "%M:%S")
-                diff = t_vid1 - t_vid2
-                diff = diff.total_seconds()
-                ##sync & clip videos
-                if vid1.duration > end[n]:
-                    vid1 = vid1.subclip(start[n], end[n])
+                vid1 = vid1.subclip(start[n], vid1.duration)
+            if attempts == 1: ##first round
+                x = 0 ##no manual correction
+                if vid2.duration > end[n]+diff:
+                    vid2 = vid2.subclip(start[n]+diff, end[n]+diff)
                 else:
-                    vid1 = vid1.subclip(start[n], vid1.duration)
-                if attempts == 1: ##first round
-                    x = 0 ##no manual correction
-                    if vid2.duration > end[n]+diff:
-                        vid2 = vid2.subclip(start[n]+diff, end[n]+diff)
-                    else:
-                        vid2 = vid2.subclip(start[n]+diff, vid2.duration)
-                    ##render audio files to aid correction of out-of-sync videos
-                    audio_vid1 = vid1.audio
-                    audio_vid1.write_audiofile(f"{folder}/{child}/{child}_{cam1}_audio.mp3")
-                    audio_vid2 = vid2.audio
-                    audio_vid2.write_audiofile(f"{folder}/{child}/{child}_{cam2}_audio.mp3")
-                elif attempts > 1: ##corrective round
-                    x = corr[n]
-                    if vid2.duration > end[n]+diff+corr[n]:
-                        vid2 = vid2.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n])
-                    else:
-                        vid2 = vid2.subclip(start[n]+diff+corr[n], vid2.duration)
-                ##amplify (or mute) & add a blue border
-                if amplify_who == cam1:
-                    vid1 = vid1.volumex(amplify).margin(10, color=(0, 0, 225))
-                    vid2 = vid2.margin(10)
-                elif amplify_who == cam2:
-                    vid2 = vid2.volumex(amplify).margin(10, color=(0, 0, 225))
-                    vid1 = vid1.margin(10)
-                if mute_who == cam1:
-                    vid1 = vid1.volumex(0)
-                elif mute_who == cam2:
-                    vid2 = vid2.volumex(0)
-                ##resize videos
-                if main[n] == cam1:
-                    major, minor = vid1, vid2
+                    vid2 = vid2.subclip(start[n]+diff, vid2.duration)
+                ##render audio files to aid correction of out-of-sync videos
+                audio_vid1 = vid1.audio
+                audio_vid1.write_audiofile(f"{folder}/{child}/{child}_{cam1}_audio.mp3")
+                audio_vid2 = vid2.audio
+                audio_vid2.write_audiofile(f"{folder}/{child}/{child}_{cam2}_audio.mp3")
+            elif attempts > 1: ##corrective round
+                x = corr[n]
+                if vid2.duration > end[n]+diff+corr[n]:
+                    vid2 = vid2.subclip(start[n]+diff+corr[n], end[n]+diff+corr[n])
                 else:
-                    major, minor = vid2, vid1
-                major_vid = major.resize(0.7)
-                minor_vid = minor.resize(0.4)
-                final_vid = clips_array([[major_vid, minor_vid], ])
-                ##render output
-                final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
-                n += 1 ##now, do the next one
+                    vid2 = vid2.subclip(start[n]+diff+corr[n], vid2.duration)
+            ##amplify (or mute) & add a blue border
+            if amplify_who == cam1:
+                vid1 = vid1.volumex(amplify).margin(10, color=(0, 0, 225))
+                vid2 = vid2.margin(10)
+            elif amplify_who == cam2:
+                vid2 = vid2.volumex(amplify).margin(10, color=(0, 0, 225))
+                vid1 = vid1.margin(10)
+            if mute_who == cam1:
+                vid1 = vid1.volumex(0)
+            elif mute_who == cam2:
+                vid2 = vid2.volumex(0)
+            ##resize videos
+            if main[n] == cam1:
+                major, minor = vid1, vid2
+            else:
+                major, minor = vid2, vid1
+            major_vid = major.resize(0.7)
+            minor_vid = minor.resize(0.4)
+            final_vid = clips_array([[major_vid, minor_vid], ])
+            ##render output
+            final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")
+            n += 1 ##now, do the next one
 
 
 def join3side():
