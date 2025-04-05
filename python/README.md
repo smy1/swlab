@@ -162,7 +162,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__ 
-The following code calls for the _join2side function__ to place two videos side-by-side for comparison. See [Example 4B below](#4b-juxtapose-three-videos) to join three videos. 
+The following code calls for the __join2side function__ to place two videos side-by-side for comparison. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
 ```
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
