@@ -43,7 +43,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
         children = ["076", "078"], ##which 1st-level subfolder are we processing?
         start = [20, 19], ##the seconds at which the task STARTED, based on topcam
         end = [238, 609], ##the seconds at which the task ENDED
-        corr = [-1, 0.9]) ####if topcam lags behind, give a negative number
+        corr = [-1, 0.9]) ####if bgcam is slower (lags behind), give a positive number
 
 ##------------------------##
 ##EXAMPLE 3: CROP VIDEOS
@@ -66,7 +66,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
      y2 = [1092, 1092]) ##end of the height that we want to crop
 
 ##------------------------##
-##EXAMPLE 4: SYNC AND JUXTAPOSE VIDEOS
+##EXAMPLE 4a: SYNC AND JUXTAPOSE 2 VIDEOS
 ##Sync the time of two videos and place them side-by-side with one video larger than the other
 ##Required directory: project folder -> "child" subfolder -> videos
 from editvid import join2side
@@ -86,8 +86,33 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
         main = ["front", "front"], ##name of the video with the best angle
         start = [73, 334], ##the seconds at which the task STARTED, based on cam1
         end = [], ##the seconds at which the task ENDED
-        corr = [-1.9, 0.8], ##if cam1 lags behind, give a negative number
+        corr = [-1.9, 0.8], ##if cam2 is slower (lags behind), give a positive number
         x1 = [644, 644], ##indicates the area of the video that we want to crop
         x2 = [2254, 2254], ##see example 3 for more
         y1 = [160, 155],
         y2 = [1092, 1092])
+
+##------------------------##
+##EXAMPLE 4b: SYNC AND JUXTAPOSE 3 VIDEOS
+##Sync the time of two videos and place them side-by-side with one video larger than the other two
+##Required directory: project folder -> "child" subfolder -> videos
+from editvid import join3side
+join2side(folder = "C:/Users/user/Desktop/mc_vid",
+        attempts = 3, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
+        cam1 = "front", ##name of the first video that python should search for
+        cam2 = "side", ##name of the second video that python should search for
+        cam3 = "side", ##name of the thirdd video that python should search for
+        newname = "sbr", ##name of the output video
+        dur = 305, ##standard duration of the recorded task, if "None", pass arguments to parameter "end" below
+        amplify_who = "side", ##name of the video that should be amplified. "no" if neither
+        amplify = 10, ##1=original volume, a larger number means volume amplified, 0=mute
+        excel = None,
+        ##the following parameters must be entered as a list
+        children = ["c62", "c63"], ##which 1st-level subfolder are we processing?
+        main = ["front", "front"], ##name of the video with the best angle
+        start = [73, 334], ##the seconds at which the task STARTED, based on cam1
+        end = [], ##the seconds at which the task ENDED
+        corr1 = [-1.9, 0.8], ##if cam2 is slower (lags behind), give a positive number
+        corr2 = [-1.9, 0.8]) ##if cam3 is slower (lags behind), give a positive number
+
+##------------------------##
