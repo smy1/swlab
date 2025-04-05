@@ -97,22 +97,22 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
 ##Sync the time of two videos and place them side-by-side with one video larger than the other two
 ##Required directory: project folder -> "child" subfolder -> videos
 from editvid import join3side
-join2side(folder = "C:/Users/user/Desktop/mc_vid",
-        attempts = 3, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
-        cam1 = "front", ##name of the first video that python should search for
-        cam2 = "side", ##name of the second video that python should search for
-        cam3 = "side", ##name of the thirdd video that python should search for
-        newname = "sbr", ##name of the output video
-        dur = 305, ##standard duration of the recorded task, if "None", pass arguments to parameter "end" below
-        amplify_who = "side", ##name of the video that should be amplified. "no" if neither
+join3side(folder = "C:/Users/user/Desktop/mc_vid",
+        attempts = 1, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
+        cam1 = "sbr1", ##name of the first video that python should search for
+        cam2 = "sbr2", ##name of the second video that python should search for
+        cam3 = "sbr3", ##name of the third video that python should search for
+        newname = "sbr_merged", ##name of the output video
+        dur = 20, ##standard duration of the recorded task, if "None", pass arguments to parameter "end" below
+        amplify_who = "sbr2", ##name of the video that should be amplified. "no" if neither
         amplify = 10, ##1=original volume, a larger number means volume amplified, 0=mute
         excel = None,
         ##the following parameters must be entered as a list
-        children = ["c62", "c63"], ##which 1st-level subfolder are we processing?
-        main = ["front", "front"], ##name of the video with the best angle
-        start = [73, 334], ##the seconds at which the task STARTED, based on cam1
+        children = ["129", "130"], ##which 1st-level subfolder are we processing?
+        main = ["sbr3", "sbr2"], ##name of the video with the best angle
+        start = [39, 54], ##the seconds at which the task STARTED, based on cam1
         end = [], ##the seconds at which the task ENDED
-        corr1 = [-1.9, 0.8], ##if cam2 is slower (lags behind), give a positive number
-        corr2 = [-1.9, 0.8]) ##if cam3 is slower (lags behind), give a positive number
+        corr1 = [], ##if cam2 is slower (lags behind cam1), give a positive number
+        corr2 = []) ##if cam3 is slower (lags behind cam1), give a positive number
 
 ##------------------------##

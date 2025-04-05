@@ -1,5 +1,5 @@
 ## Affiliation: SW-Lab, Dept of CFS, NTNU
-## Date: 31.03.2025
+## Date: 05.04.2025
 ## Author: MY Sia (with lots of help from the web, see README.md for more)
 
 ##import necessary packages
@@ -352,7 +352,8 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
             n += 1 ##now, do the next one
 
 
-def join3side():
+def join3side(folder, attempts, cam1, cam2, cam3, newname, dur, amplify_who, amplify,
+              excel, children, main, start, end, corr1, corr2):
     """
     FUNCTION 4B: JUXTAPOSE three videos
     Date: first written on 08.07.2024
@@ -360,5 +361,133 @@ def join3side():
     Output: A single video with the three recordings beside each other (one recording is set larger than the other two).
     Required directory: project folder -> 'child' subfolder -> videos
     """
-    print("coming soon")
+    ##extract information if we load an excel file
+    if excel != None:
+        wb = load_workbook(excel)
+        sheet = wb["Sheet1"]
+
+        children=[] ##which child subfolder are we processing
+        list_children = sheet["a"]
+        for i in list_children[1:]:
+            children.append(i.value)
+
+        main=[] ##the video with the best angle
+        list_main = sheet["b"]
+        for i in list_main[1:]:
+            main.append(i.value)
+
+        start=[] ##the seconds at which the task STARTED (in cam1)
+        list_start = sheet["c"]
+        for i in list_start[1:]:
+            start.append(i.value)
+
+        end=[] ##the seconds at which the task ENDED
+        list_end = sheet["d"]
+        for i in list_end[1:]:
+            end.append(i.value)
+
+        corr1=[] ##manually correct out-of-sync videos
+        list_corr1 = sheet["e"]
+        for i in list_corr1[1:]:
+            corr1.append(i.value)
+
+        corr2=[] ##manually correct out-of-sync videos
+        list_corr2 = sheet["e"]
+        for i in list_corr2[1:]:
+            corr2.append(i.value)
+
+    ##if the task duration is the same for all participants, use it to calculate the end time
+    if dur != None:
+        end = []
+        for i in start:
+            end.append(i + dur)
+    ##prepare to justapose videos
+    n = 0
+    for child in children:
+        vid_path = Path(f"{folder}/{child}/")
+        ##check for existence of cameras
+        vid1_list = glob.glob(f"{vid_path}/*{cam1}*.mp4")
+        vid2_list = glob.glob(f"{vid_path}/*{cam2}*.mp4")
+        vid3_list = glob.glob(f"{vid_path}/*{cam3}*.mp4")
+        if len(vid1_list) < 1:
+            print(f"Can't find {child}'s {cam1}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
+        elif len(vid2_list) < 1:
+            print(f"Can't find {child}'s {cam2}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
+        elif len(vid3_list) < 1:
+            print(f"Can't find {child}'s {cam3}. Please check the path and folder names.")
+            n += 1 ##skip to the next one
+        else:
+            ##prepare cam1
+            vid1 = VideoFileClip(vid1_list[0])
+            t_vid1 = vid1_list[0][-10:-5]
+            t_vid1 = t_vid1.replace("M", ":")
+            t_vid1 = datetime.strptime(t_vid1, "%M:%S")
+            ##prepare cam2
+            vid2 = VideoFileClip(vid2_list[0])
+            t_vid2 = vid2_list[0][-10:-5]
+            t_vid2 = t_vid2.replace("M", ":")
+            t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+            diff1 = t_vid1 - t_vid2
+            diff1 = diff1.total_seconds()
+            ##prepare cam3
+            vid3 = VideoFileClip(vid3_list[0])
+            t_vid3 = vid3_list[0][-10:-5]
+            t_vid3 = t_vid3.replace("M", ":")
+            t_vid3 = datetime.strptime(t_vid3, "%M:%S")
+            diff2 = t_vid1 - t_vid3
+            diff2 = diff2.total_seconds()
+            ##sync & clip videos
+            if vid1.duration > end[n]:
+                vid1 = vid1.subclip(start[n], end[n])
+            else:
+                vid1 = vid1.subclip(start[n], vid1.duration)
+            if attempts == 1: ##first round
+                x = "corr=0" ##no manual correction
+                if vid2.duration > end[n]+diff1:
+                    vid2 = vid2.subclip(start[n]+diff1, end[n]+diff1)
+                else:
+                    vid2 = vid2.subclip(start[n]+diff1, vid2.duration)
+                if vid3.duration > end[n]+diff2:
+                    vid3 = vid3.subclip(start[n]+diff2, end[n]+diff2)
+                else:
+                    vid3 = vid3.subclip(start[n]+diff2, vid3.duration)
+            elif attempts > 1: ##corrective round
+                x = f"corr1={corr1[n]}_corr2={corr2[n]}"
+                if vid2.duration > end[n]+diff1+corr1[n]:
+                    vid2 = vid2.subclip(start[n]+diff1+corr1[n], end[n]+diff1+corr1[n])
+                else:
+                    vid2 = vid2.subclip(start[n]+diff1+corr1[n], vid2.duration)
+                if vid3.duration > end[n]+diff2+corr2[n]:
+                    vid3 = vid3.subclip(start[n]+diff2+corr2[n], end[n]+diff2+corr2[n])
+                else:
+                    vid3 = vid3.subclip(start[n]+diff2+corr2[n], vid3.duration)
+            ##amplify & add a blue border
+            if amplify_who == cam1:
+                vid1 = vid1.volumex(amplify).margin(10, color=(0, 0, 225))
+                vid2 = vid2.volumex(0).margin(10)
+                vid3 = vid3.volumex(0).margin(10)
+            elif amplify_who == cam2:
+                vid2 = vid2.volumex(amplify).margin(10, color=(0, 0, 225))
+                vid1 = vid1.volumex(0).margin(10)
+                vid3 = vid3.volumex(0).margin(10)
+            elif amplify_who == cam3:
+                vid3 = vid3.volumex(amplify).margin(10, color=(0, 0, 225))
+                vid1 = vid1.volumex(0).margin(10)
+                vid2 = vid2.volumex(0).margin(10)
+            ##resize videos
+            if main[n] == cam1:
+                major, min1, min2 = vid1, vid2, vid3
+            elif main[n] == cam2:
+                major, min1, min2 = vid2, vid1, vid3
+            elif main[n] == cam3:
+                major, min1, min2 = vid3, vid1, vid2
+            final_min = clips_array([[min1.resize(width=480)],
+                                     [min2.resize(width=480)]])
+            final_all = clips_array([[major.resize(height=720),
+                                      final_min.resize(height=720)], ])
+            ##render output
+            final_all.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_{x}.mp4")
+            n += 1 ##now, do the next one
 
