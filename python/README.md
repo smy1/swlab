@@ -1,11 +1,11 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts (see [here](./obsolete/)) have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
+Most of my previous scripts (see them [here](./obsolete/)) have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
 
 - [General requirements](#general-requirements)
-- [Example 1: Join videos together](#1-merge-videos)
-- [Example 2: Sync and display a smaller video on top of a bigger one](#2-overlay-videos)
-- [Example 3: Crop videos](#3-crop-videos)
-- [Example 4: Sync and display videos beside each other](#4-juxtapose-videos)
+- [__Example 1__](#1-merge-videos): Join videos together
+- [__Example 2__](#2-overlay-videos): Sync and display a smaller video on top of a bigger one
+- [__Example 3__](#3-crop-videos): Crop videos
+- [__Example 4__](#4-juxtapose-videos): Sync and display videos beside each other
 - [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without them)
 
 ---
@@ -30,6 +30,8 @@ pip install pathlib ## required for Python to locate a path of a file
 >```
 
 ### Important points
+I run all my code in the terminal of [Kate](https://kate-editor.org/) (Windows PowerShell) instead of IDLE because somehow, my code doesn't run in the latter. I have never used other source code editors before, but there is no reason why my code won't run in other editors (such as [VS Code](https://code.visualstudio.com/)).  
+
 __1. When manually providing arguments:__
 > [!IMPORTANT]  
 > For parameters that expects a list (this usually means any arguments that can be passed into the function by loading an excel file), even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. 
