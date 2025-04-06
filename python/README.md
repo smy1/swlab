@@ -9,6 +9,8 @@ The previous scripts have now been compiled into a module called [editvid.py](./
 - [Miscellaneous](#miscellaneous)
 - [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without them)
 
+---
+
 ## General requirements
 In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
@@ -28,21 +30,23 @@ pip install pathlib ## required for Python to locate a path of a file
 >pip install moviepy ## this installs the latest version
 >```
 
-### Important points to take note of
-When manually providing arguments:
+### Important points
+__1. When manually providing arguments:__
 > [!IMPORTANT]  
 > For parameters that expects a list (this usually means any arguments that can be passed into the function by loading an excel file), even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., ["a62_c62"]) so that Python treats it like a list, otherwise, the function will return an error. 
 
 >[!TIP]
 >Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
 
-When passing arguments by loading an Excel file:
+__2. When passing arguments by loading an Excel file:__
 > [!IMPORTANT]  
-> The information entered in __the first column of the Excel file (i.e., the names of the first-level subfolders) must be a string__ (in Python terms), as shown in Figure 1 of Example 2 below (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
+> The information entered in __the first column of the Excel file (i.e., the names of subfolders; see examples below) must be a string__ (in Python terms), as shown in Figure 1 of Example 2 below (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
 
-Before syncing videos:
+__3. Before syncing videos:__
 > [!IMPORTANT]
 > In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (which means that the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
+
+---
 
 ## Examples
 ### 1. Merge videos
@@ -200,8 +204,8 @@ __Figure 4__: _An example of an Excel file for the join2side function._
 
 In Figure 4 above: 
 - __Column A__ (or the parameter __"children"__): Contains the name of the subfolders in which the three cam1 and cam2 videos are stored. In this example, the names of subfolders correspond to our participants' ID.
-- __Column B__ (or the parameter __"main"__): Contains the name of the video camera that has the best angle of recording. These names should be the same as that entered for the parameters "cam1" and "cam2". The video identified as the main camera will be displayed larger than the other video. In this example, the camera "side" has the best recording angle of participants c47 and c59 while the camera "front" has the best angle for participant "c61".
-- __Column C__ (or the parameter __"start"__): Contains the time at which the task started (in seconds) in the video recording of each of the particpant. _Since we have two video recordings (cam1 and cam2), use the start time of cam1)._
+- __Column B__ (or the parameter __"main"__): Contains the name of the video camera that has the best angle of recording. These names should be the same as that entered for the parameters "cam1" and "cam2". The video identified as the main camera will be displayed larger than the other video. In this example, the camera "side" has the best recording angle for participants "c47" and "c59" while the camera "front" has the best angle for participant "c61".
+- __Column C__ (or the parameter __"start"__): Contains the time at which the task started (in seconds) in the video recording of each of the particpant. _Since we have two video recordings (cam1 and cam2), use the start time of cam1._
 - __Column D__ (or the parameter __"end"__): Contains the time at which the task ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
 - __Column E__ (or the parameter __"corr"__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. _If the cam2 is slower (i.e., lags behind cam1), give a positive number_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 - __Column F__ (or the parameter __"x1"__) onwards requires a number to determine the area of the video that we want to crop. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "crop_who" is "no". "x1" refers to the start of the width of cropping area.
