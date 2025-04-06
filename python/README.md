@@ -1,12 +1,11 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-The previous scripts have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
+The previous scripts (see [here](./obsolete/)) have now been compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The [examples.py](./examples.py) script explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
 
 - [General requirements](#general-requirements)
 - [Example 1: Join videos together](#1-merge-videos)
 - [Example 2: Sync and display a smaller video on top of a bigger one](#2-overlay-videos)
 - [Example 3: Crop videos](#3-crop-videos)
 - [Example 4: Sync and display videos beside each other](#4-juxtapose-videos)
-- [Miscellaneous](#miscellaneous)
 - [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without them)
 
 ---
@@ -65,9 +64,6 @@ In the code above:
 
 >[!TIP]
 >If a subfolder or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible subfolders even if the combination of first and second level subfolders exist only for some but not other videos - it would not crash the function. 
-
-An additional merging script that is not included in the module: 
-   - [merge-clips.py](./merge-clips.py): This script concatenates short videos which are stored in third-level subfolders, that is, within the second-level camera subfolders. The third-level subfolders indicate the minute of the recording, e.g., a folder named "09" contains several three-second-long clips recorded at the 9th minute of the hour of experiment.
 
 ---
 
@@ -260,12 +256,6 @@ In Figure 5 above:
 - __Column D__ (or the parameter __"end"__): Contains the time at which the task ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter "dur" above).
 - __Column E__ (or the parameter __"corr1"__, which stands for "correction-cam2"): Contains numbers (in seconds) to correct for out-of-sync cam2. _If the cam2 is slower (i.e., lags behind cam1), give a positive number_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter "attempts" gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 - __Column F__ (or the parameter __"corr2"__, which stands for "correction-cam3"): Contains numbers (in seconds) to correct for out-of-sync cam3. _If the cam3 is slower (i.e., lags behind cam1), give a positive number_. 
-
----
-
-## Miscellaneous
-Another video-editing script that is not added to the function:
-- [sbr-sound.py](./sbr-sound.py) This script just replaces the audio of the juxtaposed video with another audio file (that hopefully has better quality). To sync the timing of the two audio files, I use Audacity. See [here](https://github.com/smy1/swlab/blob/main/script/audacity-sync-audio.pdf) for the instructions.
 
 ---
 
