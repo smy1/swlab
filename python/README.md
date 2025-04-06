@@ -246,8 +246,7 @@ In the code above:
 
 In the __Excel file__ (see Figure 5 below), we should have six columns that correspond to the last few parameters of this function (i.e., "children", "main", "start", "end", "corr1", "corr2"). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
-_Will add Figure 5 here._
-<!--img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join3.png" width=auto height="280"-->
+<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join3.png" width=auto height="280">
 
 __Figure 5__: _An example of an Excel file for the join3side function._
 
