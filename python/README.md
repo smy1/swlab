@@ -30,7 +30,7 @@ pip install pathlib ## required for Python to locate a path of a file
 >```
 
 ### Important points
-I run all my code in the terminal of [Kate](https://kate-editor.org/) (Windows PowerShell) instead of IDLE because somehow, my code doesn't run in the latter. I have never used other source code editors before, but there is no reason why my code won't run in other editors (such as [VS Code](https://code.visualstudio.com/)).  
+I run all my code in the terminal of [Kate](https://kate-editor.org/) (Windows PowerShell) instead of IDLE because somehow, my code doesn't run in the latter. I have never used other source code editors before, but there is no reason why my code won't run in the terminal of other editors (such as [VS Code](https://code.visualstudio.com/)).  
 
 __1. When manually providing arguments:__
 > [!IMPORTANT]  
