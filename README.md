@@ -5,5 +5,5 @@ _Last update: 07.04.2025_
 
 ## List of scripts
 1. Python: [Edit videos](https://github.com/smy1/swlab/blob/main/python/)
-2. Jupyter: [Automatise coding of parental utterances](https://github.com/smy1/swlab/blob/main/DR-AI/)
+2. Jupyter: [Automatise coding of parental utterances](https://github.com/smy1/swlab/blob/main/script/)
 3. MATLAB: [Prepare data before preprocessing](https://github.com/smy1/swlab/blob/main/matlab/)
