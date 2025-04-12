@@ -85,10 +85,10 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - `folder`: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
-- `attempts`: Is this the first attempt to sync and overlay videos? If yes, enter 1, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
+- `attempts`: Is this the first attempt to sync and overlay videos? If yes, enter `1`, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
 - `bgcam`: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 1 below).
 - `topcam`: Stands for "top-camera". What is the name of the video recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video to create a composite video. These top videos should be stored together with the base videos.
-- `newname`: How should Python name the composite video? In this example, the video that is created will be named "OMI" (which stands for "omission task").
+- `newname`: How should Python name the composite video_ In this example, the video that is created will be named "OMI" (which stands for "omission task").
 - `propsize`: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - `excel`: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the Excel file is stored in the main project folder. 
