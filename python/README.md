@@ -1,7 +1,7 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
 Most of my previous scripts (see them [here](./obsolete/)) have now been compiled into a module called `editvid.py` (see [here](./editvid.py)). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The `examples.py` script (see [here](./examples.py)) explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
 
-- [General requirements](#general-requirements)
+- [Installation and requirements](#installation-and-requirements)
 - [__Example 1__](#1-merge-videos): Join videos together
 - [__Example 2__](#2-overlay-videos): Sync and display a smaller video on top of a bigger one
 - [__Example 3__](#3-crop-videos): Crop videos
@@ -10,7 +10,7 @@ Most of my previous scripts (see them [here](./obsolete/)) have now been compile
 
 ---
 
-## General requirements
+## Installation and requirements
 In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
 Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
 ```
@@ -88,8 +88,8 @@ In the code above:
 - `attempts`: Is this the first attempt to sync and overlay videos? If yes, enter `1`, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
 - `bgcam`: Stands for "background-camera". What is the name of the video recording that will be used as the "base" of the composite video? In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 1 below).
 - `topcam`: Stands for "top-camera". What is the name of the video recording that will be overlaid on top of the base video? In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video to create a composite video. These top videos should be stored together with the base videos.
-- `newname`: How should Python name the composite video_ In this example, the video that is created will be named "OMI" (which stands for "omission task").
-- `propsize`: Stands for "proportion-size". How small should be top video be? In this example, 0.25 means 25% of its original size.
+- `newname`: How should Python name the composite video? In this example, the video that is created will be named "OMI" (which stands for "omission task").
+- `propsize`: Stands for "proportion-size". How small should be top video be? In this example, `0.25` means 25% of its original size.
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - `excel`: What is the path and name of the Excel file that contains information regarding subfolder names and video timing? In this example, the Excel file is stored in the main project folder. 
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
@@ -182,15 +182,15 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - `folder`: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
-- `attempts`: Is this the first attempt to sync and juxtapose videos? If yes, enter 1, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
-- `cam1`: Stands for "camera-1". What is the name of the first video recording? In this example, Python will search for a video file that has the word "front" in the name. These cam1 videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 4 below).
-- `cam2`: Stands for "camera-2". What is the name of the second video recording? In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with cam1 videos.
+- `attempts`: Is this the first attempt to sync and juxtapose videos? If yes, enter `1`, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
+- `cam1`: Stands for "camera-1". What is the name of the first video recording? In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 4 below).
+- `cam2`: Stands for "camera-2". What is the name of the second video recording? In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
 - `newname`: How should Python name the new video? In this example, the video that is created will be named "sbr" (which stands for "shared book reading").
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
-- `amplify_who`: Which video should Python amplify? The argument given here should be the same as that given for either cam1 or cam2. Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "side" (i.e., cam2). 
+- `amplify_who`: Which video should Python amplify? The argument given here should be the same as that given for either `cam1` or `cam2`. Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "side" (i.e., camera-2). 
 - `amplify`: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
-- `mute_who`: Which video should Python mute? The argument given here should be the same as that given for either cam1 or cam2. Leave it as `no` if neither video should be muted. In this example, Python will mute videos that are named "front" (i.e., cam1). 
-- `crop_who`: Which video should Python crop? The argument given here should be the same as that given for either cam1 or cam2. Leave it as `no` if neither video should be cropped, and the parameters x1, x2, y1, and y2 below will be ignored. In this example, Python will crop videos that are named "front" (i.e., cam1). 
+- `mute_who`: Which video should Python mute? The argument given here should be the same as that given for either `cam1` or `cam2`. Leave it as `no` if neither video should be muted. In this example, Python will mute videos that are named "front" (i.e., camera-1). 
+- `crop_who`: Which video should Python crop? The argument given here should be the same as that given for either `cam1` or `cam2`. Leave it as `no` if neither video should be cropped, and the parameters `x1`, `x2`, `y1`, and `y2` below will be ignored. In this example, Python will crop videos that are named "front" (i.e., camera-1). 
 - `excel`: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
@@ -201,11 +201,11 @@ In the __Excel file__ (see Figure 4 below), we should have nine columns that cor
 __Figure 4__: _An example of an Excel file for the join2side function._
 
 In Figure 4 above: 
-- __Column A__ (or the parameter `children`): Contains the name of the subfolders in which the three cam1 and cam2 videos are stored. In this example, the names of subfolders correspond to our participants' ID.
-- __Column B__ (or the parameter `main`): Contains the name of the video camera that has the best angle of recording. These names should be the same as that entered for the parameters `cam1` and `cam2`. The video identified as the main camera will be displayed larger than the other video. In this example, the camera "side" has the best recording angle for participants "c47" and "c59" while the camera "front" has the best angle for participant "c61".
-- __Column C__ (or the parameter `start`): Contains the time at which the task started (in seconds) in the video recording of each of the particpant. _Since we have two video recordings (cam1 and cam2), use the start time of cam1._
+- __Column A__ (or the parameter `children`): Contains the name of the subfolders in which the two camera-1 and camera-2 videos are stored. In this example, the names of subfolders correspond to our participants' ID.
+- __Column B__ (or the parameter `main`): Contains the name of the video camera that has the best angle of recording. These names should be the same as that entered for the parameters `cam1` and `cam2`. The video identified as the main camera will be displayed larger than the other video. In this example, the camera "side" (i.e., camera-2) has the best recording angle for participants "c47" and "c59" while the camera "front" (i.e., camera-1) has the best angle for participant "c61".
+- __Column C__ (or the parameter `start`): Contains the time at which the task started (in seconds) in the video recording of each of the particpant. _Since we have two video recordings (camera-1 and camera-2), use the start time of cam1._
 - __Column D__ (or the parameter `end`): Contains the time at which the task ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
-- __Column E__ (or the parameter `corr`, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. _If the cam2 is slower (i.e., lags behind cam1), give a positive number_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter `attempts` gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- __Column E__ (or the parameter `corr`, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. _If the camera-2 is slower (i.e., lags behind camera-1), give a positive number_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter `attempts` gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
 - __Column F__ (or the parameter `x1`) onwards requires a number to determine the area of the video that we want to crop. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter `crop_who` is `no`. `x1` refers to the start of the width of cropping area.
 - __Column G__ (or the parameter `x2`) refers to the end of the width of cropping area.
 - __Column H__ (or the parameter `y1`) refers to the start of the height of cropping area.
@@ -233,13 +233,13 @@ join3side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - `folder`: Where is the main project folder that stores all the videos? In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
-- `attempts`: Is this the first attempt to sync and juxtapose videos? If yes, enter 1, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
-- `cam1`: Stands for "camera-1". What is the name of the first video recording? In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders.  The names of these subfolders must be provided in the first column of the Excel file (see Figure 5 below).
+- `attempts`: Is this the first attempt to sync and juxtapose videos? If yes, enter `1`, and the function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
+- `cam1`: Stands for "camera-1". What is the name of the first video recording? In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 5 below).
 - `cam2`: Stands for "camera-2". What is the name of the second video recording? In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
 - `cam3`: Stands for "camera-3". What is the name of the second video recording? In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
 - `newname`: How should Python name the new video? In this example, the video that is created will be named "sbr_merged".
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
-- `amplify_who`: Which video should Python amplify? The argument given here should be the same as that given for either cam1, cam2, or cam3. Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "sbr2" (i.e., cam2). In this function, the other two videos will be muted automatically.
+- `amplify_who`: Which video should Python amplify? The argument given here should be the same as that given for either `cam1`, `cam2`, or `cam3`. Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "sbr2" (i.e., camera-2). In this function, the other two videos will be muted automatically.
 - `amplify`: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
 - `excel`: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing and details?
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
@@ -251,12 +251,12 @@ In the __Excel file__ (see Figure 5 below), we should have six columns that corr
 __Figure 5__: _An example of an Excel file for the join3side function._
 
 In Figure 5 above: 
-- __Column A__ (or the parameter `children`): Contains the name of the subfolders in which the three cam1, cam2, and cam3 videos are stored. In this example, the names of subfolders correspond to our participants' ID.
+- __Column A__ (or the parameter `children`): Contains the name of the subfolders in which the three camera-1, camera-2, and camera-3 videos are stored. In this example, the names of subfolders correspond to our participants' ID.
 - __Column B__ (or the parameter `main`): Contains the name of the video camera that has the best angle of recording. These names should be the same as that entered for the parameters `cam1`, `cam2`, and `cam3`. The video identified as the main camera will be displayed larger than the other video. In this example, the camera "sbr3" has the best recording angle for participant "129" while the camera "sbr2" has the best angle for participant "130".
-- __Column C__ (or the parameter `start`): Contains the time at which the task started (in seconds) in the video recording of each of the particpant. _Since we have three video recordings (cam1, cam2, & cam3), use the start time of cam1._
+- __Column C__ (or the parameter `start`): Contains the time at which the task started (in seconds) in the video recording of each of the particpant. _Since we have three video recordings (camera-1, camera-2, & camera-3), use the start time of cam1._
 - __Column D__ (or the parameter `end`): Contains the time at which the task ended (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
-- __Column E__ (or the parameter `corr1`, which stands for "correction-cam2"): Contains numbers (in seconds) to correct for out-of-sync cam2. _If the cam2 is slower (i.e., lags behind cam1), give a positive number_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter `attempts` gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
-- __Column F__ (or the parameter `corr2`, which stands for "correction-cam3"): Contains numbers (in seconds) to correct for out-of-sync cam3. _If the cam3 is slower (i.e., lags behind cam1), give a positive number_. 
+- __Column E__ (or the parameter `corr1`, which stands for "correction-cam2"): Contains numbers (in seconds) to correct for out-of-sync camera-2. _If the camera-2 is slower (i.e., lags behind camera-1), give a positive number_. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter `attempts` gets an argument of 1 (because logically, in the first attempt, we do not know how well Python syncs the two videos). 
+- __Column F__ (or the parameter `corr2`, which stands for "correction-cam3"): Contains numbers (in seconds) to correct for out-of-sync camera-3. _If the camera-3 is slower (i.e., lags behind camera-1), give a positive number_. 
 
 ---
 
