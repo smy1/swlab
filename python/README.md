@@ -88,7 +88,7 @@ In the code above:
 - `attempts`: If this is the first attempt to sync and overlay videos, enter `1`. The function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
 - `bgcam`: Stands for "background-camera". Enter the name of the video that will be used as the "base" of the composite video. In this example, Python will search for a video file that has the word "baby" in the name and use it as the base video. These base videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 1 below).
 - `topcam`: Stands for "top-camera". Enter the name of the video that will be overlaid on top of the base video. In this example, Python will search for a video file that has the word "screen" in the name and overlay it on top of the base video to create a composite video. These top videos should be stored together with the base videos.
-- `newname`: Enter the name of the composite video. In this example, the video that is created will be named "OMI" (which stands for "omission task").
+- `newname`: Give the composite video a new name. In this example, the video that is created will be named "OMI" (which stands for "omission task").
 - `propsize`: Stands for "proportion-size". How small should be top video be? In this example, `0.25` means 25% of its original size.
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - `excel`: Enter the path and name of the relevant Excel file. In this example, the Excel file is "example_overlay.xlsx" and is stored in the main project folder. 
@@ -122,7 +122,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - `cam`: Stands for "camera". Enter the name of the video that needs to be cropped. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 2 below).
-- `newname`: Enter the name of the cropped video. In this example, the video that is created will be named "solo" (the name of the recorded control task).
+- `newname`: Give the cropped video a new name. In this example, the video that is created will be named "solo" (the name of the recorded control task).
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - `amplify`: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - `excel`: Enter the path and name of the relevant Excel file. In this example, the Excel file is "example_crop.xlsx" and is stored in the main project folder.
@@ -187,7 +187,7 @@ In the code above:
 - `attempts`: If this is the first attempt to sync and juxtapose videos, enter `1`. The function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
 - `cam1`: Stands for "camera-1". Enter the name of the first video. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 4 below).
 - `cam2`: Stands for "camera-2". Enter the name of the second video. In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
-- `newname`: Enter the name of the new video. In this example, the video that is created will be named "sbr" (which stands for "shared book reading").
+- `newname`: Give the new video a name. In this example, the video that is created will be named "sbr" (which stands for "shared book reading").
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - `amplify_who`: Enter the name of the video that should be amplified (the name should be the same as that given for either `cam1` or `cam2`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "side". 
 - `amplify`: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
@@ -241,7 +241,7 @@ In the code above:
 - `cam1`: Stands for "camera-1". Enter the name of the first video. In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 5 below).
 - `cam2`: Stands for "camera-2". Enter the name of the second video. In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
 - `cam3`: Stands for "camera-3". Enter the name of the second video. In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
-- `newname`: Enter the name of the new video. In this example, the video that is created will be named "sbr_merged".
+- `newname`: Give the new video a name. In this example, the video that is created will be named "sbr_merged".
 - `dur`: Stands for "duration". If the recorded task has a standard length (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - `amplify_who`: Enter the name of the video that should be amplified (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "sbr2". In this function, the other two videos will be muted automatically.
 - `amplify`: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
