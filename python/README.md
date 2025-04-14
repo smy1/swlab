@@ -193,8 +193,8 @@ In the code above:
 - `amplify`: How much do we want to amplify the volume of the video? The higher the number we enter here, the louder the video would be. Needless to say, an argument of 0 means that the video will be muted.
 - `mute_who`: Which video should Python mute? The argument given here should be the same as that given for either `cam1` or `cam2`. Leave it as `no` if neither video should be muted. In this example, Python will mute videos that are named "front". 
 - `crop_who`: Which video should Python crop? The argument given here should be the same as that given for either `cam1` or `cam2`. Leave it as `no` if neither video should be cropped, and the parameters `x1`, `x2`, `y1`, and `y2` below will be ignored. In this example, Python will crop videos that are named "front".
-- `match_time`: `yes` if we need to calculate the difference in start time between the two videos, `no` if not.
-- `resize_yes`: `yes` if we want to resize the videos. The main video will be downsized to 0.7 while the other video will be downsized to 0.4. `no` will mean that both videos will be of equal sizes. 
+- `match_time`: If the start time of the two videos is different, enter `yes`. The name of the videos must then end with their respective start time (e.g., 01M03S), so that Python can calculate the time difference between the videos. If this is not necessary (i.e., the time of both videos is already synced), leave it as `no`.
+- `resize_yes`: If we want to resize the videos, enter `yes`. The main video will then be downsized to 0.7 while the other video will be downsized to 0.4. If we enter `no`, the videos will be of equal sizes. 
 - `excel`: What is the path and name of the Excel file that contains arguments regarding subfolder names, video timing, and cropping details?
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
