@@ -184,7 +184,7 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - `folder`: Enter the path of the main project folder. In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
-- `attempts`: If this is the first attempt to sync and overlay videos, enter `1`. The function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
+- `attempts`: If this is the first attempt to sync and juxtapose videos, enter `1`. The function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
 - `cam1`: Stands for "camera-1". Enter the name of the first video. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 4 below).
 - `cam2`: Stands for "camera-2". Enter the name of the second video. In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
 - `newname`: Enter the name of the new video. In this example, the video that is created will be named "sbr" (which stands for "shared book reading").
@@ -237,7 +237,7 @@ join3side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - `folder`: Enter the path of the main project folder. In this example, the main project folder is called "mc_vid", which is stored in the desktop by a user named "user".
-- `attempts`: If this is the first attempt to sync and overlay videos, enter `1`. The function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
+- `attempts`: If this is the first attempt to sync and juxtapose videos, enter `1`. The function will ignore the argument given to the parameter `corr` (see below). If the number entered here is 2 or larger, we need to provide this argument, otherwise, the function will return an error.
 - `cam1`: Stands for "camera-1". Enter the name of the first video. In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 5 below).
 - `cam2`: Stands for "camera-2". Enter the name of the second video. In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
 - `cam3`: Stands for "camera-3". Enter the name of the second video. In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
