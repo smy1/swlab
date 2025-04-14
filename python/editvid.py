@@ -1,5 +1,5 @@
 ## Affiliation: SW-Lab, Dept of CFS, NTNU
-## Date: 05.04.2025
+## Date: 14.04.2025
 ## Author: MY Sia (with lots of help from the web, see README.md for more)
 
 ##import necessary packages
@@ -212,7 +212,7 @@ def crop(folder, cam, newname, dur, amplify,
             n += 1 ##now, do the next one
 
 
-def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, mute_who, crop_who,
+def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, mute_who, crop_who, match_time, resize_yes,
               excel, children, main, start, end, corr, x1, x2, y1, y2):
     """
     FUNCTION 4A: JUXTAPOSE two videos
@@ -298,14 +298,17 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
             if crop_who == cam2:
                 vid2 = vid2.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
             ##calculate the time difference between videos
-            t_vid1 = vid1_list[0][-10:-5]
-            t_vid1 = t_vid1.replace("M", ":")
-            t_vid1 = datetime.strptime(t_vid1, "%M:%S")
-            t_vid2 = vid2_list[0][-10:-5]
-            t_vid2 = t_vid2.replace("M", ":")
-            t_vid2 = datetime.strptime(t_vid2, "%M:%S")
-            diff = t_vid1 - t_vid2
-            diff = diff.total_seconds()
+            if match_time == "yes":
+                t_vid1 = vid1_list[0][-10:-5]
+                t_vid1 = t_vid1.replace("M", ":")
+                t_vid1 = datetime.strptime(t_vid1, "%M:%S")
+                t_vid2 = vid2_list[0][-10:-5]
+                t_vid2 = t_vid2.replace("M", ":")
+                t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+                diff = t_vid1 - t_vid2
+                diff = diff.total_seconds()
+            else:
+                diff = 0
             ##sync & clip videos
             if vid1.duration > end[n]:
                 vid1 = vid1.subclip(start[n], end[n])
@@ -317,11 +320,6 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                     vid2 = vid2.subclip(start[n]+diff, end[n]+diff)
                 else:
                     vid2 = vid2.subclip(start[n]+diff, vid2.duration)
-                ##render audio files to aid correction of out-of-sync videos
-                audio_vid1 = vid1.audio
-                audio_vid1.write_audiofile(f"{folder}/{child}/{child}_{cam1}_audio.mp3")
-                audio_vid2 = vid2.audio
-                audio_vid2.write_audiofile(f"{folder}/{child}/{child}_{cam2}_audio.mp3")
             elif attempts > 1: ##corrective round
                 x = corr[n]
                 if vid2.duration > end[n]+diff+corr[n]:
@@ -335,6 +333,9 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
             elif amplify_who == cam2:
                 vid2 = vid2.volumex(amplify).margin(10, color=(0, 0, 225))
                 vid1 = vid1.margin(10)
+            else:
+                vid1 = vid1.margin(10)
+                vid2 = vid2.margin(10)
             if mute_who == cam1:
                 vid1 = vid1.volumex(0)
             elif mute_who == cam2:
@@ -344,8 +345,12 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 major, minor = vid1, vid2
             else:
                 major, minor = vid2, vid1
-            major_vid = major.resize(0.7)
-            minor_vid = minor.resize(0.4)
+            if resize_yes == "yes":
+                major_vid = major.resize(0.7)
+                minor_vid = minor.resize(0.4)
+            else:
+                major_vid = major
+                minor_vid = minor
             final_vid = clips_array([[major_vid, minor_vid], ])
             ##render output
             final_vid.write_videofile(f"{folder}/{child}/{child}_{newname}_{attempts}_corr={x}.mp4")

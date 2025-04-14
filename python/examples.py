@@ -1,5 +1,5 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Date: 02.04.2025
+#### Date: 14.04.2025
 #### Author: MY Sia (with lots of help from the web, see README.md for more)
 #### Example scripts to use the "editvid" function. Requires MoviePy v1.0.3
 
@@ -80,6 +80,8 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
         amplify = 10, ##1=original volume, a larger number means volume amplified, 0=mute
         mute_who = "front", ##name of the video that should be muted. "no" if neither
         crop_who = "front", ##name of the video that should be cropped. "no" if neither
+        match_time = "yes", ##"yes" if we need to compare the start time of the two videos. "no" if not
+        resize_yes = "yes", ##"yes" if we want to resize the videos. "no" if not
         excel = None,
         ##the following parameters must be entered as a list
         children = ["c62", "c63"], ##which 1st-level subfolder are we processing?
