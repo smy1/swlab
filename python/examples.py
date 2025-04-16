@@ -42,6 +42,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folde
         ##the following parameters must be entered as a list
         children = ["076", "078"], ##which 1st-level subfolder are we processing?
         start = [20, 19], ##the seconds at which the task STARTED, based on topcam
+        #start = [0] * 65 ##THIS REPEATS THE SAME START TIME FOR 65 times
         end = [238, 609], ##the seconds at which the task ENDED
         corr = [-1, 0.9]) ####if bgcam is slower (lags behind), give a positive number
 
