@@ -34,10 +34,13 @@ I run all my code in the terminal of [Kate](https://kate-editor.org/) (Windows P
 
 __1. When manually providing arguments:__
 > [!IMPORTANT]  
-> For parameters that expects a list (this usually means any arguments that can be passed into the function by loading an excel file), even if there is only one item that Python needs to deal with, the argument must be given within square brackets (e.g., `["a62_c62"]`) so that Python treats it like a list, otherwise, the function will return an error. 
+> For parameters that expects a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list, otherwise, the function will return an error.
 
->[!TIP]
->Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
+> [!TIP]
+> If all the arguments for a list-type parameter are the same (e.g., all 65 videos have the same start time of 0 second), a shortcut is to use `start = [0] * 65` instead of typing `0` 65 times.
+
+> [!TIP]
+> Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
 
 __2. When passing arguments by loading an Excel file:__
 > [!IMPORTANT]  
