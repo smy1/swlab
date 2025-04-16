@@ -39,14 +39,7 @@ __1. When manually providing arguments:__
 > [!TIP]
 > If all the arguments for a list-type parameter are the same (e.g., all 65 videos have the same start time of 0 second), a shortcut is to use `start = [0] * 65` instead of typing `0` 65 times.
 
-> [!TIP]
-> Manual input of information is alright when we have less than five child subfolders. When the number of subfolders is huge, it becomes difficult to keep track of which timing information refers to which subfolder because these variables are not visually aligned (I'm telling from experience). In such a case, I highly recommend using an Excel file.
-
-__2. When passing arguments by loading an Excel file:__
-> [!IMPORTANT]  
-> The information entered in __the first column of the Excel file (i.e., the names of subfolders; see examples below) must be a string__ (in Python terms), as shown in Figure 1 of Example 2 below (notice the tiny green triangle in the top left corner of each cell). To force Excel to accept numbers as strings, add an inverted comma before the number. This is very important, otherwise, Python might not be able to match the information in the Excel file with the subfolder names.
-
-__3. Before syncing videos:__
+__2. Before syncing videos:__
 > [!IMPORTANT]
 > In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (which means that the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
