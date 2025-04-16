@@ -1,5 +1,5 @@
 # Python scripts for SW-Lab <img src="https://github.com/smy1/swlab/blob/main/script/swlogo.jpg" width=auto height="27"> <img src="https://github.com/smy1/swlab/blob/main/script/logo_python.png" width=auto height="27">
-Most of my previous scripts (see them [here](./obsolete/)) have now been compiled into a module called `editvid.py` (see [here](./editvid.py)). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The `examples.py` script (see [here](./examples.py)) explains how to manually pass arguments to these functions while the [examples below](#examples) explains how these arguments can be given through an excel file.
+Most of my previous scripts (see them [here](./obsolete/)) have now been compiled into a module called `editvid.py` (see [here](./editvid.py)). This module should be downloaded and stored in the same folder as where we will be running our code. Briefly, the functions in this module edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file or manually entering the arguments. The `examples.py` script (see [here](./examples.py)) explains how to manually pass arguments to these functions while the [examples below](#examples) explain how these arguments can be given through an excel file.
 
 - [Installation and requirements](#installation-and-requirements)
 - [__Example 1__](#1-merge-videos): Join videos together
@@ -139,7 +139,7 @@ In Figure 2 above:
 - __Column F__ (or the parameter `y1`) refers to the start of the height of cropping area.
 - __Column G__ (or the parameter `y2`) refers to the end of the height of cropping area.
 
-And if the explanation for the cropping details is unclear, Figure 3 below should be helpful.
+And if the __explanation for the cropping details__ is unclear, Figure 3 below should be helpful.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
 
