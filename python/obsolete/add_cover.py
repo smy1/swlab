@@ -60,7 +60,7 @@ c_clip = TextClip("小孩", color="black", font="DengXian", fontsize=20)
 n = 0
 for child in children:
     ## the brain activation video
-    vid_path = Path(f"{folder}/brain/{child}/")
+    vid_path = Path(f"{folder}/{child}/")
     vid_list = glob.glob(f"{vid_path}/*{targ}*.mp4")
     if len(vid_list) == 1:
         ##Create a front page based on the dimension of the main video
