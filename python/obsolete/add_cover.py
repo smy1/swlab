@@ -19,8 +19,8 @@ from moviepy.editor import * ##MoviePy v1.0.3
 from openpyxl import load_workbook ##if we pass arguments from an excel file
 
 folder = "C:/Users/user/Desktop/mc_vid"
-outsub = "to_send" ##subfolder within the main folder to store the outputs
-targ = "brain_activation"
+outsub = "to_send" ##the name of the subfolder within the main folder to store the outputs
+targ = "brain_activation" ##the name of video that Python should search for
 newname = "大腦動畫"
 
 #### Read arguments from excel
@@ -32,7 +32,7 @@ list_children = sheet["c"]
 for i in list_children[1:]:
     children.append(i.value)
 
-name=[] ##name of the child (to personalise the videos)
+name=[] ##the name of the child (to personalise the videos)
 list_name =  sheet["b"]
 for i in list_name[1:]:
     name.append(i.value)
