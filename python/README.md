@@ -48,7 +48,7 @@ __2. Before syncing videos:__
 ## Examples
 ### 1. Merge videos
 The following code calls for the `merge` function to concatenate several videos into one long video. 
-```
+```ruby
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
       children=["a62_c62", "a63_c63", "a64_c64"], 
@@ -67,7 +67,7 @@ In the code above:
 
 ### 2. Overlay videos
 The following code calls for the `overlay` function to overlay one video on top of another and create a composite video. 
-```
+```ruby
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
         attempts = 1, 
@@ -106,7 +106,7 @@ In Figure 1 above:
 
 ### 3. Crop videos
 The following code calls for the `crop` function to crop a video. 
-```
+```ruby
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
      cam = "front",
@@ -161,7 +161,7 @@ In Figure 3 above:
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__  
 The following code calls for the `join2side` function to place two videos side-by-side for comparison. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
-```
+```ruby
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 3,
@@ -192,7 +192,7 @@ In the code above:
 - `match_time`: If the start time of the two videos is different and we __need Python to calculate the time difference between the videos__, enter `yes`. The name of the videos must then end with their respective start time (e.g., 01M03S). If this is not necessary (i.e., the time of both videos is already synced), leave it as `no`.
 - `resize_yes`: If we __want to resize the videos__, enter `yes`. The main video will then be downsized to 0.7 while the other video will be downsized to 0.4. If we enter `no`, the videos will be of equal sizes. 
 - `excel`: Enter __the path and name of the relevant Excel file__. In this example, the Excel file is "example_join2.xlsx" and is stored in the main project folder.
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
+- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.  
 
 In the __Excel file__ (see Figure 4 below), we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
@@ -217,7 +217,7 @@ See Figure 3 above for a more helpful illustration on the cropping details.
 
 #### (4B) Juxtapose three videos
 The following code calls for the `join3side` function to place three videos beside each other for comparison. See __Example 4A above__ to join two videos. 
-```
+```ruby
 from editvid import join3side
 join3side(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 1,
