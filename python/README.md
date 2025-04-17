@@ -48,7 +48,7 @@ __2. Before syncing videos:__
 ## Examples
 ### 1. Merge videos
 The following code calls for the `merge` function to concatenate several videos into one long video. 
-```ruby
+```python
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
       children=["a62_c62", "a63_c63", "a64_c64"], 
@@ -67,7 +67,7 @@ In the code above:
 
 ### 2. Overlay videos
 The following code calls for the `overlay` function to overlay one video on top of another and create a composite video. 
-```ruby
+```python
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
         attempts = 1, 
@@ -106,7 +106,7 @@ In Figure 1 above:
 
 ### 3. Crop videos
 The following code calls for the `crop` function to crop a video. 
-```ruby
+```python
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
      cam = "front",
@@ -152,7 +152,7 @@ In Figure 3 above:
 
 >[!TIP]
 >The dimension of a video can be obtained by checking its properties. We can also get this information using moviepy:
->```
+>```python
 >(w, h) = vid.size ##gives the width and heigth of a video that is named "vid"
 >```
 
@@ -161,7 +161,7 @@ In Figure 3 above:
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__  
 The following code calls for the `join2side` function to place two videos side-by-side for comparison. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
-```ruby
+```python
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 3,
@@ -217,7 +217,7 @@ See Figure 3 above for a more helpful illustration on the cropping details.
 
 #### (4B) Juxtapose three videos
 The following code calls for the `join3side` function to place three videos beside each other for comparison. See __Example 4A above__ to join two videos. 
-```ruby
+```python
 from editvid import join3side
 join3side(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 1,
