@@ -90,6 +90,8 @@ In the code above:
 - `excel`: Enter __the path and name of the relevant Excel file__. In this example, the Excel file is "example_overlay.xlsx" and is stored in the main project folder. 
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
+&nbsp;
+
 In the __Excel file__ (see Figure 1 below), we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the Excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="280">
@@ -124,6 +126,8 @@ In the code above:
 - `excel`: Enter __the path and name of the relevant Excel file__. In this example, the Excel file is "example_crop.xlsx" and is stored in the main project folder.
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
 
+&nbsp;
+
 In the __Excel file__ (see Figure 2 below), we should have seven columns that correspond to the last few parameters of this function (i.e., `children`, `start`, `end`, `x1`, `x2`, `y1`, and `y2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="280">
@@ -138,6 +142,8 @@ In Figure 2 above:
 - __Column E__ (or the parameter `x2`) refers to __the end of the width__ of cropping area.
 - __Column F__ (or the parameter `y1`) refers to __the start of the height__ of cropping area.
 - __Column G__ (or the parameter `y2`) refers to __the end of the height__ of cropping area.
+
+&nbsp;
 
 And if the __explanation for the cropping details__ is unclear, Figure 3 below should be helpful.
 
@@ -194,6 +200,8 @@ In the code above:
 - `excel`: Enter __the path and name of the relevant Excel file__. In this example, the Excel file is "example_join2.xlsx" and is stored in the main project folder.
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.  
 
+&nbsp;
+
 In the __Excel file__ (see Figure 4 below), we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="280">
@@ -243,6 +251,8 @@ In the code above:
 - `amplify`: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - `excel`: Enter __the path and name of the relevant Excel file__. In this example, the Excel file is "example_join3.xlsx" and is stored in the main project folder.
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
+
+&nbsp;
 
 In the __Excel file__ (see Figure 5 below), we should have six columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr1`, `corr2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
