@@ -1,7 +1,11 @@
 #### Affiliation: SW-Lab, Dept of CFS, NTNU
 #### Date: 14.04.2025
-#### Author: MY Sia (with lots of help from the web, see README.md for more)
-#### Example scripts to use the "editvid" function. Requires MoviePy v1.0.3
+#### Author: MY Sia
+'''
+Example scripts to use the "editvid" function by manually passing arguments to the parameters. 
+Requires MoviePy v1.0.3. 
+See https://github.com/smy1/swlab/tree/main/python#readme on passing arguments by loading an excel file.
+'''
 
 ##------------------------##
 ##EXAMPLE 1: MERGE VIDEOS
@@ -17,7 +21,7 @@ merge(folder="C:/Users/user/Desktop/mc_vid", ##set path to the project folder
 ##Sync and overlay a downsized "top" video on a "base" video
 ##Required directory: project folder -> "child" subfolder -> videos
 
-##EXAMPLE 2a: Pass arguments by loading an excel file (see README.md for more)
+##EXAMPLE 2a: Pass arguments by loading an excel file (see GitHub for more)
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid",
         attempts = 1, 
