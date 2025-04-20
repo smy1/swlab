@@ -81,8 +81,8 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: If this is the first __attempt to sync and overlay videos__, enter `1`. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see below), otherwise, the function will return an error.
-- __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 1 below).
+- __`attempts`__: If this is the first __attempt to sync and overlay videos__, enter `1`. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see Figure 1 below), otherwise, the function will return an error.
+- __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 1 below).
 - __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
 - __`newname`__: __Give the composite video a new name__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
@@ -119,7 +119,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
 ```
 In the code above:
-- __`cam`__: Stands for "camera". Enter __the name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 2 below).
+- __`cam`__: Stands for "camera". Enter __the name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 2 below).
 - __`newname`__: __Give the cropped video a new name__. 
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
@@ -186,8 +186,8 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: If this is the first __attempt to sync and juxtapose videos__, enter `1`. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see below), otherwise, the function will return an error.
-- __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 4 below).
+- __`attempts`__: If this is the first __attempt to sync and juxtapose videos__, enter `1`. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see Figure 4 below), otherwise, the function will return an error.
+- __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 4 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
 - __`newname`__: __Give the new video a name__. 
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
@@ -241,8 +241,8 @@ join3side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: If this is the first __attempt to sync and juxtapose videos__, enter `1`. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see below), otherwise, the function will return an error.
-- __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be provided in the first column of the Excel file (see Figure 5 below).
+- __`attempts`__: If this is the first __attempt to sync and juxtapose videos__, enter `1`. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see Figure 5 below), otherwise, the function will return an error.
+- __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 5 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
 - __`cam3`__: Stands for "camera-3". Enter __the name of the third video__. In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
 - __`newname`__: __Give the new video a name__. 
