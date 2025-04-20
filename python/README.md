@@ -144,12 +144,11 @@ In Figure 2 above:
 - __Column G__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
 
 &nbsp;
-
-Figure 3 below provides a more detailed __explanation about the cropping details__.
+#
+#### Figure 3 
+An explanation about the cropping details with an example.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
-
-__Figure 3__: _An example of how to get the cropping details._
 
 In Figure 3 above: 
 - This is a screenshot of a movie with a dimension of 640 x 480. Imagine that we want to crop the area indicated by the white border.
@@ -219,12 +218,12 @@ In Figure 4 above:
 - __Column H__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
 - __Column I__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
 
-See Figure 3 above for a more helpful illustration on the cropping details.
+See [Figure 3](#figure-3) above for further explanations regarding cropping details.
 
 ---
 
 #### (4B) Juxtapose three videos
-The following code calls for the __`join3side`__ function to place three videos beside each other for comparison. See __Example 4A above__ to join two videos. 
+The following code calls for the __`join3side`__ function to place three videos beside each other for comparison. See [Example 4A](#4-juxtapose-videos) above to join two videos. 
 ```python
 from editvid import join3side
 join3side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -247,7 +246,7 @@ In the code above:
 - __`cam3`__: Stands for "camera-3". Enter __the name of the third video__. In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
 - __`newname`__: __Give the new video a name__. 
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
-- __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this example, Python will amplify the volume of videos that are named "sbr2". In this function, the other two videos will be muted automatically.
+- __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this function, the other two videos will be muted automatically.
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
