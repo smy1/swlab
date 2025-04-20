@@ -138,12 +138,11 @@ In Figure 2 above:
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the videos are stored. 
 - __Column B__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
 - __Column C__ (or the parameter __`end`__): Contains __the time at which the recording ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
-- __Column D__ (or the parameter __`x1`__) onwards requires a number to determine the area of the video that we want to crop. `x1` refers to __the start of the width__ of cropping area.
+- __Column D__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) below for an illustration.
 - __Column E__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
 - __Column F__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
 - __Column G__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
 
-&nbsp;
 #
 #### Figure 3 
 An explanation about the cropping details with an example.
@@ -213,12 +212,10 @@ In Figure 4 above:
 - __Column C__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of camera-1._
 - __Column D__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
 - __Column E__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. This parameter can be left blank if the parameter `attempts` gets an argument of `1`. 
-- __Column F__ (or the parameter __`x1`__) onwards requires a number to determine the area of the video that we want to crop. This parameter can be left blank (and will be disregarded even if it is not blank) if the parameter `crop_who` is `no`. `x1` refers to __the start of the width__ of cropping area.
+- __Column F__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) above for an illustration. This parameter (and those that follow) can be left blank if the parameter `crop_who` is `no`.
 - __Column G__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
 - __Column H__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
 - __Column I__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
-
-See [Figure 3](#figure-3) above for further explanations regarding cropping details.
 
 ---
 
