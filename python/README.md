@@ -41,7 +41,7 @@ __1. When manually providing arguments:__
 
 __2. Before syncing videos:__
 > [!IMPORTANT]
-> In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (which means that the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
+> In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video, hence, the function will sync the two videos by cutting the first 9 seconds of the second video.
 
 ---
 
@@ -88,11 +88,11 @@ In the code above:
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
+- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
 &nbsp;
 
-In the __Excel file for the `overlay` function__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function. While these names in the Excel file can be changed to something else that is more intuitive (or even in another language), the information _must_ be in entered in this order.  
+In the __Excel file for the `overlay` function__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function.  
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="250">
 
@@ -100,7 +100,7 @@ __Figure 1__: _An example of an Excel file for the overlay function._
 
 In Figure 1 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the base video and top video are stored. 
-- __Column B__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of the top video._ The function will calculate the time difference between the two videos and adjust the start time of the base video. This adjustment is not always perfect, hence, we will have to correct for any discrepancy by providing information to the column "corr" (see below).
+- __Column B__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of the top video._ 
 - __Column C__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
 - __Column D__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the base video is slower (i.e., lags behind the top video), give a positive number__. This information can be left blank if the parameter `attempts` gets an argument of `1`. 
 
@@ -124,7 +124,7 @@ In the code above:
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
+- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
 &nbsp;
 
@@ -145,7 +145,7 @@ In Figure 2 above:
 
 #
 #### Figure 3 
-An explanation about the cropping details with an example.
+An illustration that explains about the cropping details.
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
 
@@ -196,11 +196,11 @@ In the code above:
 - __`match_time`__: If the start time of the two videos is different and we __need Python to calculate the time difference between the videos__, enter `yes`. The name of the videos must then end with their respective start time (e.g., 01M03S). If this is not necessary (i.e., the time of both videos is already synced), leave it as `no`.
 - __`resize_yes`__: If we __want to resize the videos__, enter `yes`. The main video will then be downsized to 0.7 while the other video will be downsized to 0.4. If we enter `no`, the videos will be of equal sizes. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.  
+- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.  
 
 &nbsp;
 
-In the __Excel file for the `join2side` function__, we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
+In the __Excel file for the `join2side` function__, we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`). 
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="250">
 
@@ -246,11 +246,11 @@ In the code above:
 - __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this function, the other two videos will be muted automatically.
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for how to manually pass arguments to these parameters.
+- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
 &nbsp;
 
-In the __Excel file for the `join3side` function__, we should have six columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr1`, `corr2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
+In the __Excel file for the `join3side` function__, we should have six columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr1`, `corr2`).   
 
 <img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join3.png" width=auto height="250">
 
