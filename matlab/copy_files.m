@@ -4,9 +4,9 @@
 clear all
 
 %% folder setup
-SourceFolder='C:\Users\user\Desktop\from desktop\matlab\cflu\nirsdata\mochi_data_20250322';
-nirsFolder='C:\Users\user\Desktop\from desktop\matlab\cflu\nirsdata\alldata'; %where the copied snirf files should be stored
-triFolder='C:\Users\user\Desktop\from desktop\matlab\cflu\nirsdata\tri'; %where the copied tri files should be stored
+SourceFolder='C:\Users\user\Desktop\mochi\mochi_data_20250322';
+nirsFolder='C:\Users\user\Desktop\mochi\alldata'; %where the copied snirf files should be stored
+triFolder='C:\Users\user\Desktop\mochi\tri'; %where the copied tri files should be stored
 
 %% Check table for excluded data
 mdata=readtable('mochi_id.xlsx','Sheet','mochi');
@@ -37,7 +37,7 @@ for i=1:length(dirinfo)
             else
                 if isempty(tmpfile)
                     fprintf(['No snirf file is found in ' dirinfo(i).name '. \n'])
-                elseif strcmp(subfile(end-17:end-4), '2025-02-24\a17') %special case:same adult, different day
+                elseif strcmp(subfile(end-17:end-4), '2025-02-24\a17') %special case: same adult, different day
                     copyfile([subfile filesep tmpfile(j).name],...
                         [nirsFolder filesep tmpfile(j).name(1:3) '_201' tmpfile(j).name(8:13)]);
                 else
