@@ -4,5 +4,6 @@ This repo contains codes that I wrote to automatise some tasks for projects that
 _Last update: 25.04.2025_
 
 ## List of scripts
-1. Python: [Edit videos](https://github.com/smy1/swlab/blob/main/python/)
-2. Jupyter: [Automatise coding of parental utterances](https://github.com/smy1/swlab/blob/main/script/)
+1. [Edit videos](https://github.com/smy1/swlab/blob/main/python/)
+2. [Transcribe audio files](https://github.com/smy1/swlab/blob/main/script/) (using Whisper)
+3. [Code parents' shared reading practice](https://github.com/smy1/swlab/blob/main/DR-AI/) (using GEMINI)
