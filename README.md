@@ -6,4 +6,4 @@ _Last update: 05.05.2025_
 ## List of scripts
 1. [Edit videos](https://github.com/smy1/swlab/blob/main/python/)
 2. [Transcribe audio files](https://github.com/smy1/swlab/blob/main/script/) (using Whisper)
-3. [Code parents' shared reading practice](https://github.com/smy1/swlab/blob/main/DR-AI/) (using GEMINI)
+3. [Code parents' shared reading practice](https://github.com/smy1/auto-peer/blob/main/) 
