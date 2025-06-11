@@ -4,6 +4,6 @@ This repo contains codes that I wrote to automatise some tasks for projects that
 _Last update: 05.05.2025_
 
 ## List of scripts
-1. [Edit videos](https://github.com/smy1/swlab/blob/main/python/)
-2. [Transcribe audio files](https://github.com/smy1/swlab/blob/main/script/) (using Whisper)
+1. [Edit videos](https://github.com/smy1/swlab/blob/main/python/) (using Python)
+2. [Transcribe audio files](https://github.com/smy1/swlab/blob/main/script/) (using OpenAI's Whisper)
 3. [Code parents' shared reading practice](https://github.com/smy1/auto-peer/blob/main/) 
