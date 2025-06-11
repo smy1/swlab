@@ -88,7 +88,7 @@ In the code above:
 - __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
 - __`newname`__: __Give the composite video a new name__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
-- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
+- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
@@ -123,7 +123,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
 In the code above:
 - __`cam`__: Stands for "camera". Enter __the name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 2 below).
 - __`newname`__: __Give the cropped video a new name__. 
-- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
+- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
 - __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
@@ -190,7 +190,7 @@ In the code above:
 - __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 4 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
 - __`newname`__: __Give the new video a name__. 
-- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
+- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1` or `cam2`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored.  
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`mute_who`__: Enter __the name of the video that should be muted__ (the name should be the same as that given for either `cam1` or `cam2`). Leave it as `no` if neither video should be muted. 
@@ -244,7 +244,7 @@ In the code above:
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
 - __`cam3`__: Stands for "camera-3". Enter __the name of the third video__. In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
 - __`newname`__: __Give the new video a name__. 
-- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 mintues), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
+- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this function, the other two videos will be muted automatically.
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
