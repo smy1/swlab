@@ -18,7 +18,8 @@ Installation can be done in the command prompt (for Windows users, type "command
 ```
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed
-pip show <package name> ## check whether a particular package (and what version) has been install 
+pip show <package name> ## check whether a particular package (and what version) has been install
+pip install glob2 ## required to search for files in a folder
 pip install openpyxl ## required if we want python to extract information from an excel file
 pip install opencv-python ## required for resizing videos if using MoviePy v1.0
 pip install DateTime ## required when syncing the timing of two videos
