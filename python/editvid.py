@@ -397,7 +397,7 @@ def join3side(folder, attempts, cam1, cam2, cam3, newname, dur, amplify_who, amp
             corr1.append(i.value)
 
         corr2=[] ##manually correct out-of-sync videos
-        list_corr2 = sheet["e"]
+        list_corr2 = sheet["f"]
         for i in list_corr2[1:]:
             corr2.append(i.value)
 
