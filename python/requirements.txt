@@ -1,0 +1,6 @@
+#pip install glob2 ## required to search for files in a folder
+pip install openpyxl==3.1.5 ## required if we want python to extract information from an excel file
+pip install opencv-python==4.9.0.80 ## required for resizing videos if using MoviePy v1.0
+#pip install DateTime ## required when syncing the timing of two videos
+#pip install pathlib ## required for Python to locate a path of a file
+pip install moviepy==1.0.3
