@@ -13,8 +13,11 @@ All my scripts use MoviePy (a Python reference tool) to edit videos in bulk, all
 ---
 
 ## Installation and requirements
-In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.
-Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
+In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.  
+Download the `requirements.txt` file and run the following code: 
+`pip install -r requirements.txt`
+
+<!--Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
 ```
 python --version ## check python version
 pip install --upgrade pip setuptools wheel ## check whether pip is installed
@@ -24,13 +27,13 @@ pip install openpyxl ## required if we want python to extract information from a
 pip install opencv-python ## required for resizing videos if using MoviePy v1.0
 pip install DateTime ## required when syncing the timing of two videos
 pip install pathlib ## required for Python to locate a path of a file
+## The code below allows you to install either the earlier or the latest version.
+pip install moviepy==1.0.3 ## this installs the older version
+pip install moviepy ## this installs the latest version
 ```
+-->
 >[!NOTE]
->When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. The code below allows you to install either the earlier or the latest version.
->```
->pip install moviepy==1.0.3 ## this installs the older version
->pip install moviepy ## this installs the latest version
->```
+>When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. 
 
 ### Important points
 I run all my code in the terminal of [Kate](https://kate-editor.org/) (Windows PowerShell) instead of IDLE because somehow, my code doesn't run in the latter. I have never used other source code editors before, but there is no reason why my code won't run in the terminal of other editors (such as [VS Code](https://code.visualstudio.com/)).  
