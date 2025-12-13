@@ -1,0 +1,4 @@
+glob2 ## required to search for files in a folder
+openpyxl==3.1.5 ## required if we want python to extract information from an excel file
+opencv-python==4.9.0.80 ## required for resizing videos if using MoviePy v1.0
+moviepy==1.0.3
