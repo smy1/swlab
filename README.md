@@ -100,7 +100,7 @@ In the code above:
 
 In the __Excel file for the `overlay` function__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function.  
 
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_overlay.png" width=auto height="250">
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_overlay.png" width=auto height="250">
 
 __Figure 1__: _An example of an Excel file for the overlay function._  
 
@@ -136,7 +136,7 @@ In the code above:
 
 In the __Excel file for the `crop` function__, we should have seven columns that correspond to the last few parameters of this function (i.e., `children`, `start`, `end`, `x1`, `x2`, `y1`, and `y2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
 
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_crop.png" width=auto height="250">
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_crop.png" width=auto height="250">
 
 __Figure 2__: _An example of an Excel file for the crop function._
 
@@ -153,7 +153,7 @@ In Figure 2 above:
 #### Figure 3 
 An illustration that explains about the cropping details.
 
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_annotated.png" width=auto height="230">
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_annotated.png" width=auto height="230">
 
 In Figure 3 above: 
 - This is a screenshot of a movie with a dimension of 640 x 480. Imagine that we want to crop the area indicated by the white border.
@@ -208,7 +208,7 @@ In the code above:
 
 In the __Excel file for the `join2side` function__, we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`). 
 
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join2.png" width=auto height="250">
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_join2.png" width=auto height="250">
 
 __Figure 4__: _An example of an Excel file for the join2side function._
 
@@ -258,7 +258,7 @@ In the code above:
 
 In the __Excel file for the `join3side` function__, we should have six columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr1`, `corr2`).   
 
-<img src="https://github.com/smy1/swlab/blob/main/script/py_eg_xl_join3.png" width=auto height="250">
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_join3.png" width=auto height="250">
 
 __Figure 5__: _An example of an Excel file for the join3side function._
 
