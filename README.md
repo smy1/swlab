@@ -3,5 +3,5 @@ This repo contains codes that I wrote to automatise video-editing tasks for proj
 
 ## List of scripts
 1. [Edit videos](https://github.com/smy1/swlab/blob/main/python/) (using Python)
-2. [Transcribe audio files](https://github.com/smy1/swlab/blob/main/script/) (using OpenAI's Whisper)
+2. Transcribe audio files (opens another [repository](https://github.com/smy1/auto-peer/blob/main/transcribe-audio/audio2xlsx.ipynb))
 3. Code parents' shared reading practice (opens another [repository](https://github.com/smy1/auto-peer/blob/main/))
