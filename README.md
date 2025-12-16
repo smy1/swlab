@@ -1,7 +1,12 @@
 # Edit videos in bulk using Python 
-Most of my video-editing scripts are compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code.  For other video-editing scripts that have _not_ been compiled, see [here](./obsolete/). 
+This repo contains codes that I wrote to automatise video-editing tasks for projects that I lead as a postdoc in CBDL-Lab (09.2023 - 12.2025). Most of my video-editing scripts are compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code.  
 
 All my scripts use MoviePy (a Python reference tool) to edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file (see [examples below](#examples)) or by manually entering the arguments (see the [examples.py](./examples.py) script). 
+
+> [!TIP]
+> For other video-editing scripts that have _not_ been compiled, see [here](./obsolete/).
+> To transcribe audio files, see [here](https://github.com/smy1/auto-peer/blob/main/transcribe-audio/).
+> To code parents' shared reading practice automatically, see [here](https://github.com/smy1/auto-peer/blob/main/).
 
 - [Installation and requirements](#installation-and-requirements)
 - [__Example 1__](#1-merge-videos): Join videos together
