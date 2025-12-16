@@ -1,5 +1,5 @@
 # Edit videos in bulk using Python 
-Most of my video-editing scripts are compiled into a module called [editvid_v1.py](./editvid_v1.py). This module should be downloaded and stored in the same folder as where we will be running our code.  For other video-editing scripts that have _not_ been compiled, see [here](./obsolete/). 
+Most of my video-editing scripts are compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code.  For other video-editing scripts that have _not_ been compiled, see [here](./obsolete/). 
 
 All my scripts use MoviePy (a Python reference tool) to edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file (see [examples below](#examples)) or by manually entering the arguments (see the [examples.py](./examples.py) script). 
 
