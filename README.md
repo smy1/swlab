@@ -23,26 +23,12 @@ This will enable you to run Python in the terminal of code editors such as [Kate
 in the terminal of your editor: `python --version`  
 2. Create a project folder, then download and store the [requirements.txt](./requirements.txt) file there. Open a new file in your editor, store it in the same folder and type the following in the terminal: 
 `pip install -r requirements.txt`
+3. Once this is done, you can paste the example codes below in your editor. To run the code, simply type `python <name of this editor file>.py` in the terminal.
 
-<!--Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
-```
-python --version ## check python version
-pip install --upgrade pip setuptools wheel ## check whether pip is installed
-pip show <package name> ## check whether a particular package (and what version) has been install
-pip install glob2 ## required to search for files in a folder
-pip install openpyxl ## required if we want python to extract information from an excel file
-pip install opencv-python ## required for resizing videos if using MoviePy v1.0
-pip install DateTime ## required when syncing the timing of two videos
-pip install pathlib ## required for Python to locate a path of a file
-## The code below allows you to install either the earlier or the latest version.
-pip install moviepy==1.0.3 ## this installs the older version
-pip install moviepy ## this installs the latest version
-```
--->
+### Some important points
 >[!NOTE]
 >When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. 
 
-### Important points
 __1. When manually providing arguments:__
 > [!IMPORTANT]  
 > For parameters that expects a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list, otherwise, the function will return an error.
