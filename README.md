@@ -18,8 +18,10 @@ All my scripts use MoviePy (a Python reference tool) to edit videos in bulk, all
 ---
 
 ## Installation and requirements
-In order to run the functions in this module, Python and the relevant packages need to be installed. I wrote these codes in Python 3.12.4.  
-Download the `requirements.txt` file and run the following code: 
+1. Start with the installation of Python (see [here](https://www.python.org/downloads/release/python-31210/) for the version that I used). When installing Python, __remember to check the box that says "Add python.exe to PATH".__ 
+This will enable you to run Python in the terminal of code editors such as [Kate](https://kate-editor.org/) and [VS Code](https://code.visualstudio.com/). Check whether the Python installation is successful by typing the following code
+in the terminal of your editor: `python --version`  
+2. Create a project folder, then download and store the [requirements.txt](./requirements.txt) file there. Open a new file in your editor, store it in the same folder and type the following in the terminal: 
 `pip install -r requirements.txt`
 
 <!--Installation can be done in the command prompt (for Windows users, type "command prompt" or "cmd" in the search box):
@@ -41,8 +43,6 @@ pip install moviepy ## this installs the latest version
 >When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences. 
 
 ### Important points
-I run all my code in the terminal of [Kate](https://kate-editor.org/) (Windows PowerShell) instead of IDLE because somehow, my code doesn't run in the latter. I have never used other source code editors before, but there is no reason why my code won't run in the terminal of other editors (such as [VS Code](https://code.visualstudio.com/)).  
-
 __1. When manually providing arguments:__
 > [!IMPORTANT]  
 > For parameters that expects a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list, otherwise, the function will return an error.
