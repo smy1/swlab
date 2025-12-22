@@ -33,9 +33,6 @@ in the terminal of your editor: `python --version`
 > __2. Before syncing videos:__  
 > In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video. My code below will then sync the two videos by cutting the first 9 seconds of the second video.
 
-> [!TIP]
-> If all the arguments for a list-type parameter are the same (e.g., all 65 videos have the same start time of 0 second), a shortcut is to use `start = [0] * 65` instead of typing `0` 65 times.
-
 ---
 
 ## Examples
