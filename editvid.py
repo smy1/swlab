@@ -1,6 +1,11 @@
-## Affiliation: SW-Lab, Dept of CFS, NTNU
-## Date: 14.04.2025
-## Author: MY Sia (with lots of help from the web, see README.md for more)
+'''
+Date: 14.04.2025
+Author: MY Sia
+
+See https://github.com/smy1/edit-videos for example scripts on
+either manually passing arguments to the parameters
+or passing arguments by loading an excel file.
+'''
 
 ##import necessary packages
 import glob

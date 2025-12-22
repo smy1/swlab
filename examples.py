@@ -1,10 +1,11 @@
-#### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Date: 14.04.2025
-#### Author: MY Sia
 '''
-Example scripts to use the "editvid" function by manually passing arguments to the parameters. 
-Requires MoviePy v1.0.3. 
-See https://github.com/smy1/swlab/tree/main/python#readme on passing arguments by loading an excel file.
+Date: 14.04.2025
+Author: MY Sia
+
+Below are example scripts to use the "editvid" module
+by manually passing arguments to the parameters.
+See https://github.com/smy1/edit-videos for more, such as
+on passing arguments by loading an excel file.
 '''
 
 ##------------------------##
@@ -20,20 +21,6 @@ merge(folder="C:/Users/user/Desktop/mc_vid", ##set path to the project folder
 ##EXAMPLE 2: SYNC AND OVERLAY VIDEOS
 ##Sync and overlay a downsized "top" video on a "base" video
 ##Required directory: project folder -> "child" subfolder -> videos
-
-##EXAMPLE 2a: Pass arguments by loading an excel file (see GitHub for more)
-from editvid import overlay
-overlay(folder = "C:/Users/user/Desktop/mc_vid",
-        attempts = 1, 
-        bgcam = "baby", 
-        topcam = "screen", 
-        newname = "OMI", 
-        propsize = 0.25,
-        dur = None, 
-        excel = "C:/Users/user/Desktop/mc_vid/example_overlay.xlsx",
-        children=None, start=None, end=None, corr=None)
-
-##EXAMPLE 2b: Manually pass arguments to the parameters
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", ##set path to the project folder
         attempts = 1, ##if 1: "corr" below will be disregarded; if 2 or larger: "corr" will be needed
