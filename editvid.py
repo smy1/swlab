@@ -53,10 +53,14 @@ def merge(folder, children, camera):
                     video_list.append(clip)
                 joined = concatenate_videoclips(video_list)
                 joined = joined.set_fps(fps=30)
-                ##render output
-                first_frame = file_list[0][-21:-15]
                 cam = cam.lower()
-                joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
+                ##render output
+                try: ##if the name of the recording has time duration
+                    first_frame = file_list[0][-21:-15]
+                    joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
+                except:
+                    first_frame = "00M00S"
+                    joined.write_videofile(f"{folder}/{child}/{child}_{cam}_{first_frame}.mp4")
 
 
 def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
