@@ -23,15 +23,19 @@ in the terminal of your editor: `python --version`
 3. Once this is done, you can paste whichever [example codes below](#examples) that is relevant to you in that new editor file. Then, to run the code, simply type `python <name of this editor file>.py` in the terminal.
 
 ### Some important points
->[!NOTE]
->When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences, if you wish to use the latest moviepy module. 
-
 > [!IMPORTANT]
-> __1. When manually providing arguments:__  
+> __1. Before running any code below:__  
+> Make sure that the directory shown in the terminal is the same as that of the project folder or the editor file. You may do this by first specifying the directory `cd <directory path here>` or
+> set the terminal directory to be always the same as your file. In Kate, it would be _settings_ -> _configure Kate_ -> _terminal_ -> select _"synchronise the terminal with the current document"_
+>  
+> __2. When manually providing arguments:__  
 > For parameters that expect a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list; otherwise, the function will return an error.
 > 
-> __2. Before syncing videos:__  
+> __3. Before syncing videos:__  
 > In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video. My code below will then sync the two videos by cutting the first 9 seconds of the second video.
+
+>[!NOTE]
+>When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences, if you wish to use the latest moviepy module. 
 
 ---
 
