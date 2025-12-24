@@ -55,7 +55,11 @@ In the code above:
 - In short, the storage path of the short videos should be something in the line of ___"main project folder" -> "first level (child) subfolder" -> "second level (camera) subfolder" -> "videos to be concatenated"___. By passing these subfolders into the function, all the videos in them will be processed automatically. The concatenated videos will be named after their respective second-level subfolder.
 
 >[!TIP]
->If a subfolder or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible subfolders even if the combination of first and second level subfolders exist only for some but not other videos - it would not crash the function.
+> - If a subfolder or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible subfolders even if the combination of first and second level subfolders exist only for some but not other videos - it would not crash the function.  
+> - This `merge` function is written specially for certain Xiaomi Security Cameras ([2K](https://www.mi.com/global/product/mi-360-home-security-camera-2k/specs/), 
+[1080p](https://www.mi.com/global/product/mi-360-camera-1080p/specs/), 
+[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). Specifically, this function extracts the initial time indicated in the name of the camera recording and adds it to the name of the concatenated video. If your video files are named differently, this function will assume the initial time to be 00M00S.
+> - To concatenate recordings from Xiaomi Security Cameras that store recordings in 10 seconds (e.g., [2K (Magnetic Mount)](https://www.mi.com/global/product/mi-camera-2k-magnetic-mount/specs/)), see this [script](./obsolete/merge-clips.py). For the newer security cameras that store recordings in longer duration (in terms of several minutes), see this [script](./obsolete/merge-vid2.py).
 
 ---
 
