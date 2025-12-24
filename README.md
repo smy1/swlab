@@ -20,18 +20,16 @@ This will enable you to run Python in the terminal of code editors such as [Kate
 in the terminal of your editor: `python --version`  
 2. Create a project folder, then download and store the [requirements.txt](./requirements.txt) file there. Open a new file in your editor, save it in that folder and type the following in the terminal: 
 `pip install -r requirements.txt`
-3. Once this is done, you can paste whichever [example codes below](#examples) that is relevant to you in that new editor file. Then, to run the code, simply type `python <name of this editor file>.py` in the terminal.
+3. Once this is done, __start by checking the directory shown in the terminal__. Change it so that it leads to the project folder. You may do this by specifying the directory `cd <directory path of the folder>` or 
+   setting the terminal directory to be always the same as your editor file. In Kate, it would be _settings_ -> _configure Kate_ -> _terminal_ -> select _"synchronise the terminal with the current document"_
+5. Finally, you can paste whichever [example codes below](#examples) that is relevant to you in that new editor file. Then, to run the code, simply type `python <name of this editor file>.py` in the terminal.
 
 ### Some important points
 > [!IMPORTANT]
-> __1. Before running any code below:__  
-> Make sure that the directory shown in the terminal is the same as that of the project folder or the editor file. You may do this by first specifying the directory `cd <directory path here>` or
-> set the terminal directory to be always the same as your file. In Kate, it would be _settings_ -> _configure Kate_ -> _terminal_ -> select _"synchronise the terminal with the current document"_
->  
-> __2. When manually providing arguments:__  
+> __1. When manually providing arguments:__  
 > For parameters that expect a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list; otherwise, the function will return an error.
 > 
-> __3. Before syncing videos:__  
+> __2. Before syncing videos:__  
 > In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video. My code below will then sync the two videos by cutting the first 9 seconds of the second video.
 
 >[!NOTE]
