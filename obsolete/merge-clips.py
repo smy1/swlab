@@ -1,13 +1,14 @@
-#### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Project: Peekaboo (aka Omi2)
-#### Date: 21.06.2024 (long count: 13.0.11.12.0, 5 Ajpu')
-#### Author: MY Sia (with lots of help from the web, see README.md for more)
+'''
+Date: 21.06.2024
+Author: MY Sia
+See https://github.com/smy1/edit-videos for more.
 
-#### Aim of script: Concatenate second-long videos which are stored in sub-"minute"-folder; batch process several children
-##Input: Multiple videos (each has a duration of a few seconds) stored in a sub-"minute"-folder (i.e., these videos add up to be about 1 minute) within a camera folder
-##Output: A single video per child
-##Recommended directory: project folder -> child folder -> camera folder -> minute folder -> short videos (e.g., <desktop>/Peekaboo/P01/BABY/37/<videos>)
-##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README.md for more.
+Aim of script: Concatenate second-long videos which are stored in sub-"minute"-folder; batch process several children
+Input: Multiple videos (each has a duration of a few seconds) stored in a sub-"minute"-folder (i.e., these videos add up to be about 1 minute) within a camera folder
+Output: A single video per child
+Recommended directory: project folder -> child folder -> camera folder -> minute folder -> short videos (e.g., <desktop>/Peekaboo/P01/BABY/37/<videos>)
+Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed.
+'''
 
 ########################################
 #### START HERE:

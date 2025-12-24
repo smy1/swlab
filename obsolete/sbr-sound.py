@@ -1,13 +1,14 @@
-#### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Project: MoChi
-#### Date: 07.02.2025
-#### Author: MY Sia
+'''
+Date: 07.02.2025
+Author: MY Sia
+See https://github.com/smy1/edit-videos for more.
 
-#### Aim of script: Mute the SBR video and replace the audio with an mp3 file
-##Input: A merged video showing a parent-child dyad and the corresponding recording file
-##Output: A single video per child with better sound quality
-##Recommended directory: project folder -> child folder -> videos/audios
-##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README.md for more.
+Aim of script: Mute the SBR video and replace the audio with an mp3 file
+Input: A merged video showing a parent-child dyad and the corresponding recording file
+Output: A single video per child with better sound quality
+Recommended directory: project folder -> child folder -> videos/audios
+Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed.
+'''
 
 ########################################
 #### START HERE:

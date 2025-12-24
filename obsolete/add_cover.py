@@ -1,14 +1,17 @@
-#### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Project: MoChi
-#### Date: 17.04.2025
-#### Author: MY Sia (with lots of help from the following websites)
-## https://zulko.github.io/moviepy/v1.0.3/examples/moving_letters.html
-## https://imagemagick.org/script/download.php#windows
-## https://stackoverflow.com/a/74701556
+'''
+Date: 17.04.2025
+Author: MY Sia
+See https://github.com/smy1/edit-videos for more.
 
-#### Aim of script: Add a frontcover to the main video, personalised with the child's name
-##Recommended directory: project folder -> "child" subfolder -> videos
-##Requirement: a blank background picture and a small lab logo picture (both stored in the project folder)
+Special help from references below:
+https://zulko.github.io/moviepy/v1.0.3/examples/moving_letters.html
+https://imagemagick.org/script/download.php#windows
+https://stackoverflow.com/a/74701556
+
+Aim of script: Add a frontcover to the main video, personalised with the child's name
+Recommended directory: project folder -> "child" subfolder -> videos
+Requirement: a blank background picture and a small lab logo picture (both stored in the project folder).
+'''
 
 #### Load packages and set parameters
 from moviepy.config import change_settings

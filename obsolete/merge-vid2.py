@@ -1,13 +1,14 @@
-#### Affiliation: SW-Lab, Dept of CFS, NTNU
-#### Project: Crocodile (aka Peek2)
-#### Date: 16.12.2025
-#### Author: MY Sia
+'''
+Date: 16.12.2025
+Author: MY Sia
+See https://github.com/smy1/edit-videos for more.
 
-#### Aim of script: Concatenate a few videos; batch process several children
-##Input: 2-3 videos stored in a camera folder
-##Output: A single video per child
-##Recommended directory: project folder -> child folder -> camera folder -> videos (e.g., <desktop>/Croc/P01/BABY/<videos>)
-##Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed. See README.md for more.
+Aim of script: Concatenate a few videos; batch process several children
+Input: 2-3 videos stored in a camera folder
+Output: A single video per child
+Recommended directory: project folder -> child folder -> camera folder -> videos (e.g., <desktop>/Croc/P01/BABY/<videos>)
+Requirement: This script was written using Python 3.12.4. Various Python modules need to be installed.
+'''
 
 ########################################
 #### START HERE:
