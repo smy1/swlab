@@ -1,5 +1,5 @@
 # Edit videos in bulk using Python 
-This repo contains codes that I wrote to automatise video-editing tasks for CBDL-Lab (when I was a postdoc there, 09.2023 - 12.2025). Most of my video-editing scripts are compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code.  
+This repo contains codes that I wrote to automatise video-editing tasks when I was a postdoc in CBDL-Lab (09.2023 - 12.2025). Most of my video-editing scripts are compiled into a module called [editvid.py](./editvid.py). This module should be downloaded and stored in the same folder as where we will be running our code.  
 
 All my scripts use MoviePy (a Python reference tool) to edit videos in bulk, allowing the video-editing task to be automatised. Arguments can be provided to the functions in two ways, either by loading an excel file (see [examples below](#examples)) or by manually entering the arguments (see the [examples.py](./examples.py) script). 
 
@@ -57,9 +57,6 @@ In the code above:
 >[!TIP]
 >If a subfolder or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible subfolders even if the combination of first and second level subfolders exist only for some but not other videos - it would not crash the function.
 
-> [!IMPORTANT]
-> This function adds a starting time (--M--S) to the name of the output video. This time information is extracted from the names of the short, truncated videos, produced from the recordings of Xiaomi security cameras (v Cxx). If the videos that you concatenate do not have such information, this function will either crash or produce a weird looking video file name.
-> 
 ---
 
 ### 2. Overlay videos
