@@ -1,5 +1,5 @@
 '''
-Date: 14.04.2025
+Date: 14.04.2025 (last updated: 26.12.2025)
 Author: MY Sia
 
 See https://github.com/smy1/edit-videos for example scripts on
@@ -121,12 +121,22 @@ def overlay(folder, attempts, bgcam, topcam, newname, propsize, dur,
             screen_vid = VideoFileClip(screen_list[0])
             screen_vid = screen_vid.resize(propsize).margin(5) ##add a 5px border
             ##calculate the time difference between videos
-            t_baby = baby_list[0][-10:-5]
-            t_baby = t_baby.replace("M", ":")
-            t_baby = datetime.strptime(t_baby, "%M:%S")
-            t_screen = screen_list[0][-10:-5]
-            t_screen = t_screen.replace("M", ":")
-            t_screen = datetime.strptime(t_screen, "%M:%S")
+            try:
+                t_baby = baby_list[0][-10:-5]
+                t_baby = t_baby.replace("M", ":")
+                t_baby = datetime.strptime(t_baby, "%M:%S")
+            except:
+                print(f"""WARNING: No timestamp found in {baby_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {bgcam}_00M05S.mp4\n""")
+                t_baby = datetime.strptime("00:00", "%M:%S")
+            try:
+                t_screen = screen_list[0][-10:-5]
+                t_screen = t_screen.replace("M", ":")
+                t_screen = datetime.strptime(t_screen, "%M:%S")
+            except:
+                print(f"""WARNING: No timestamp found in {screen_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {topcam}_00M05S.mp4\n""")
+                t_screen = datetime.strptime("00:00", "%M:%S")
             diff = t_screen - t_baby
             diff = diff.total_seconds()
             ##sync & overlay videos
@@ -308,12 +318,22 @@ def join2side(folder, attempts, cam1, cam2, newname, dur, amplify_who, amplify, 
                 vid2 = vid2.crop(x1=x1[n], x2=x2[n], y1=y1[n], y2=y2[n])
             ##calculate the time difference between videos
             if match_time == "yes":
-                t_vid1 = vid1_list[0][-10:-5]
-                t_vid1 = t_vid1.replace("M", ":")
-                t_vid1 = datetime.strptime(t_vid1, "%M:%S")
-                t_vid2 = vid2_list[0][-10:-5]
-                t_vid2 = t_vid2.replace("M", ":")
-                t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+                try:
+                    t_vid1 = vid1_list[0][-10:-5]
+                    t_vid1 = t_vid1.replace("M", ":")
+                    t_vid1 = datetime.strptime(t_vid1, "%M:%S")
+                except:
+                    print(f"""WARNING: No timestamp found in {vid1_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {cam1}_00M05S.mp4\n""")
+                t_vid1 = datetime.strptime("00:00", "%M:%S")
+                try:
+                    t_vid2 = vid2_list[0][-10:-5]
+                    t_vid2 = t_vid2.replace("M", ":")
+                    t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+                except:
+                    print(f"""WARNING: No timestamp found in {vid1_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {cam1}_00M05S.mp4\n""")
+                t_vid2 = datetime.strptime("00:00", "%M:%S")
                 diff = t_vid1 - t_vid2
                 diff = diff.total_seconds()
             else:
@@ -435,21 +455,36 @@ def join3side(folder, attempts, cam1, cam2, cam3, newname, dur, amplify_who, amp
         else:
             ##prepare cam1
             vid1 = VideoFileClip(vid1_list[0])
-            t_vid1 = vid1_list[0][-10:-5]
-            t_vid1 = t_vid1.replace("M", ":")
-            t_vid1 = datetime.strptime(t_vid1, "%M:%S")
+            try:
+                t_vid1 = vid1_list[0][-10:-5]
+                t_vid1 = t_vid1.replace("M", ":")
+                t_vid1 = datetime.strptime(t_vid1, "%M:%S")
+            except:
+                print(f"""WARNING: No timestamp found in {vid1_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {cam1}_00M05S.mp4\n""")
+                t_vid1 = datetime.strptime("00:00", "%M:%S")
             ##prepare cam2
             vid2 = VideoFileClip(vid2_list[0])
-            t_vid2 = vid2_list[0][-10:-5]
-            t_vid2 = t_vid2.replace("M", ":")
-            t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+            try:
+                t_vid2 = vid2_list[0][-10:-5]
+                t_vid2 = t_vid2.replace("M", ":")
+                t_vid2 = datetime.strptime(t_vid2, "%M:%S")
+            except:
+                print(f"""WARNING: No timestamp found in {vid2_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {cam2}_00M05S.mp4\n""")
+                t_vid2 = datetime.strptime("00:00", "%M:%S")
             diff1 = t_vid1 - t_vid2
             diff1 = diff1.total_seconds()
             ##prepare cam3
             vid3 = VideoFileClip(vid3_list[0])
-            t_vid3 = vid3_list[0][-10:-5]
-            t_vid3 = t_vid3.replace("M", ":")
-            t_vid3 = datetime.strptime(t_vid3, "%M:%S")
+            try:
+                t_vid3 = vid3_list[0][-10:-5]
+                t_vid3 = t_vid3.replace("M", ":")
+                t_vid3 = datetime.strptime(t_vid3, "%M:%S")
+            except:
+                print(f"""WARNING: No timestamp found in {vid3_list[0][len(folder)+len(child)+2:]}.
+Will assume it to be 00:00. Example of a video name with timestamp: {cam3}_00M05S.mp4\n""")
+                t_vid3 = datetime.strptime("00:00", "%M:%S")
             diff2 = t_vid1 - t_vid3
             diff2 = diff2.total_seconds()
             ##sync & clip videos
