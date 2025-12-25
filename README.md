@@ -29,10 +29,6 @@ in the terminal of your editor: `python --version`
 > __When manually providing arguments:__  
 > For parameters that expect a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list; otherwise, the function will return an error.
 
-> [!TIP]
-> __Before syncing videos:__  
-> When using functions that sync videos (i.e., the functions [overlay](#2-overlay-videos) and [join](#4-juxtapose-videos) below), __the names of the videos must end with the timestamp (in minutes and seconds) of the first frame__, for example, "video_56M09S.mp4" (here, the first frame of this video occured at the 56th minute and 9th second of some hour). Otherwise, the function will produce a warning message stating that no timestamp is found and that 00:00 will be assumed.
-
 >[!NOTE]
 >When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences, if you wish to use the latest moviepy module. 
 
@@ -83,9 +79,9 @@ In the code above:
 - __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
 - __`newname`__: __Give the composite video a new name__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
-- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
+- __`dur`__: Stands for __"duration". If the recorded task has a standard duration__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave this argument as `None`. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
+- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
 &nbsp;
 
@@ -97,9 +93,12 @@ __Figure 1__: _An example of an Excel file for the overlay function._
 
 In Figure 1 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the base video and top video are stored. 
-- __Column B__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of the top video._ 
-- __Column C__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
+- __Column B__ (or the parameter __`start`__): Contains __the time at which the recording of top video started__ (in seconds).  
+- __Column C__ (or the parameter __`end`__): Contains __the time at which the recording of top video ended__ (again, in seconds). This can be left blank if the duration of all top video recordings is the same (see the parameter `dur` above).
 - __Column D__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the base video is slower (i.e., lags behind the top video), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
+
+> [!TIP]
+> For this `overlay` function to work properly, __the names of the videos should end with a timestamp (in minutes and seconds)__, for example, "video_56M09S.mp4". Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync.
 
 ---
 
@@ -121,7 +120,7 @@ In the code above:
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
+- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
 &nbsp;
 
@@ -133,8 +132,8 @@ __Figure 2__: _An example of an Excel file for the crop function._
 
 In Figure 2 above:
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the videos are stored. 
-- __Column B__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
-- __Column C__ (or the parameter __`end`__): Contains __the time at which the recording ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
+- __Column B__ (or the parameter __`start`__): Contains __the time at which the recording started__ (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
+- __Column C__ (or the parameter __`end`__): Contains __the time at which the recording ended__ (again, in seconds). This can be left blank if the duration of all video recordings is the same (see the parameter `dur` above).
 - __Column D__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) below for an illustration.
 - __Column E__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
 - __Column F__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
@@ -193,7 +192,7 @@ In the code above:
 - __`match_time`__: If the start time of the two videos is different and we __need Python to calculate the time difference between the videos__, enter `yes`. The name of the videos must then end with their respective start time (e.g., 01M03S). If this is not necessary (i.e., the time of both videos is already synced), leave it as `no`.
 - __`resize_yes`__: If we __want to resize the videos__, enter `yes`. The main video will then be downsized to 0.7 while the other video will be downsized to 0.4. If we enter `no`, the videos will be of equal sizes. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.  
+- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.  
 
 &nbsp;
 
@@ -206,13 +205,16 @@ __Figure 4__: _An example of an Excel file for the join2side function._
 In Figure 4 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the two camera-1 and camera-2 videos are stored. 
 - __Column B__ (or the parameter __`main`__): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1` and `cam2`. The video identified as the main camera will be displayed larger than the other video. 
-- __Column C__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of camera-1._
-- __Column D__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
+- __Column C__ (or the parameter __`start`__): Contains __the time at which the recording of camera-1 started__ (in seconds).  
+- __Column D__ (or the parameter __`end`__): Contains __the time at which the recording of camera-1 ended__ (again, in seconds). This can be left blank if the duration of all camera-1 recordings is the same (see the parameter `dur` above).
 - __Column E__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
 - __Column F__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) above for an illustration. This parameter (and those that follow) can be left blank if the parameter `crop_who` is `no`.
 - __Column G__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
 - __Column H__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
 - __Column I__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
+
+> [!TIP]
+> For this `join2side` function to work properly, __the names of the videos should end with a timestamp (in minutes and seconds)__, for example, "video_56M09S.mp4". Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync.
 
 ---
 
@@ -243,7 +245,7 @@ In the code above:
 - __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this function, the other two videos will be muted automatically.
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave them as `None` here since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
+- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
 
 &nbsp;
 
@@ -256,10 +258,13 @@ __Figure 5__: _An example of an Excel file for the join3side function._
 In Figure 5 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the three camera-1, camera-2, and camera-3 videos are stored. 
 - __Column B__ (or the parameter __`main`__): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1`, `cam2`, and `cam3`. The video identified as the main camera will be displayed larger than the other video. 
-- __Column C__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have three video recordings, use the start time of camera-1._
-- __Column D__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
+- __Column C__ (or the parameter __`start`__): Contains __the time at which the recording of camera-1 started__ (in seconds).  
+- __Column D__ (or the parameter __`end`__): Contains __the time at which the recording of camera-1 ended__ (again, in seconds). This can be left blank if the duration of all camera-1 recordings is the same (see the parameter `dur` above).
 - __Column E__ (or the parameter __`corr1`__): Contains numbers (in seconds) to correct for out-of-sync camera-2. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
 - __Column F__ (or the parameter __`corr2`__): Contains numbers (in seconds) to correct for out-of-sync camera-3. __If the camera-3 is slower (i.e., lags behind camera-1), give a positive number__. 
+
+> [!TIP]
+> For this `join3side` function to work properly, __the names of the videos should end with a timestamp (in minutes and seconds)__, for example, "video_56M09S.mp4". Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync.
 
 ---
 
