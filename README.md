@@ -30,7 +30,7 @@ in the terminal of your editor: `python --version`
 > For parameters that expect a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list; otherwise, the function will return an error.
 > 
 > __2. Before syncing videos:__  
-> In order for the functions to sync videos successfully, __the names of the videos must end with the time (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video. My code below will then sync the two videos by cutting the first 9 seconds of the second video.
+> In order for the functions to sync videos successfully, __the names of the videos must end with the timestamp (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video. My code below will then sync the two videos by cutting the first 9 seconds of the second video.
 
 >[!NOTE]
 >When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences, if you wish to use the latest moviepy module. 
@@ -56,7 +56,7 @@ In the code above:
 > - If a subfolder or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible subfolders even if the combination of first and second level subfolders exist only for some but not other videos - it would not crash the function.  
 > - This `merge` function is written specially for certain Xiaomi Security Cameras ([2K](https://www.mi.com/global/product/mi-360-home-security-camera-2k/specs/), 
 [1080p](https://www.mi.com/global/product/mi-360-camera-1080p/specs/), 
-[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). Specifically, this function extracts the initial time indicated in the name of the camera recording and adds it to the name of the concatenated video. If your video files are named differently, this function will assume the initial time to be 00M00S.
+[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). Specifically, this function extracts the initial timestamp indicated in the name of the camera recording and adds it to the name of the concatenated video. If your video files are named differently, this function will assume the initial timestamp to be 00M00S.
 > - To concatenate recordings from Xiaomi Security Cameras that store recordings in 10 seconds (e.g., [2K (Magnetic Mount)](https://www.mi.com/global/product/mi-camera-2k-magnetic-mount/specs/)), see this [script](./obsolete/merge-clips.py). For the newer security cameras that store recordings in longer duration (in terms of several minutes), see this [script](./obsolete/merge-vid2.py).
 
 ---
@@ -77,7 +77,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: __The number of attempts in syncing videos__. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see Figure 1 below), otherwise, the function will return an error.
+- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 1 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
 - __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 1 below).
 - __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
 - __`newname`__: __Give the composite video a new name__. 
@@ -98,7 +98,7 @@ In Figure 1 above:
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the base video and top video are stored. 
 - __Column B__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of the top video._ 
 - __Column C__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
-- __Column D__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the base video is slower (i.e., lags behind the top video), give a positive number__. This information can be left blank if the parameter `attempts` gets an argument of `1`. 
+- __Column D__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the base video is slower (i.e., lags behind the top video), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
 
 ---
 
@@ -180,7 +180,7 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: __The number of attempts in syncing videos__. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see Figure 4 below), otherwise, the function will return an error.
+- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 4 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
 - __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 4 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
 - __`newname`__: __Give the new video a name__. 
@@ -207,7 +207,7 @@ In Figure 4 above:
 - __Column B__ (or the parameter __`main`__): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1` and `cam2`. The video identified as the main camera will be displayed larger than the other video. 
 - __Column C__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have two video recordings, use the start time of camera-1._
 - __Column D__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
-- __Column E__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. This parameter can be left blank if the parameter `attempts` gets an argument of `1`. 
+- __Column E__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
 - __Column F__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) above for an illustration. This parameter (and those that follow) can be left blank if the parameter `crop_who` is `no`.
 - __Column G__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
 - __Column H__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
@@ -233,7 +233,7 @@ join3side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: __The number of attempts in syncing videos__. If the number entered here is larger than 1, we need to pass arguments to the parameter `corr` (see Figure 5 below), otherwise, the function will return an error.
+- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameters `corr1` and `corr2` (see Figure 5 below) are skipped or not. If `attempts` is 1, any argument passed to the parameters `corr1` and `corr2` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameters `corr1` and `corr2`.
 - __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 5 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
 - __`cam3`__: Stands for "camera-3". Enter __the name of the third video__. In this example, Python will search for a video file that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
@@ -257,7 +257,7 @@ In Figure 5 above:
 - __Column B__ (or the parameter __`main`__): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1`, `cam2`, and `cam3`. The video identified as the main camera will be displayed larger than the other video. 
 - __Column C__ (or the parameter __`start`__): Contains __the time at which the task started__ (in seconds) in the video recording of each of the particpant. _Since we have three video recordings, use the start time of camera-1._
 - __Column D__ (or the parameter __`end`__): Contains __the time at which the task ended__ (again, in seconds). This can be left blank if the duration of the task is always the same for everyone (see the parameter `dur` above).
-- __Column E__ (or the parameter __`corr1`__): Contains numbers (in seconds) to correct for out-of-sync camera-2. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. This parameter can be left blank if the parameter `attempts` gets an argument of `1`. 
+- __Column E__ (or the parameter __`corr1`__): Contains numbers (in seconds) to correct for out-of-sync camera-2. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
 - __Column F__ (or the parameter __`corr2`__): Contains numbers (in seconds) to correct for out-of-sync camera-3. __If the camera-3 is slower (i.e., lags behind camera-1), give a positive number__. 
 
 ---
