@@ -26,11 +26,12 @@ in the terminal of your editor: `python --version`
 
 ### Some important points
 > [!IMPORTANT]
-> __1. When manually providing arguments:__  
+> __When manually providing arguments:__  
 > For parameters that expect a list (this usually means any argument that can be passed into the function by loading an excel file), even if there is only one argument that Python needs to deal with, the argument must be given within square brackets (e.g., `children = ["a62_c62"]`) so that Python treats it like a list; otherwise, the function will return an error.
-> 
-> __2. Before syncing videos:__  
-> In order for the functions to sync videos successfully, __the names of the videos must end with the timestamp (in minutes and seconds) of the first frame__, for example, 56M09S (i.e., the first frame of this video occured at the 56th minute and 9th second of some hour). If the second video's first frame occured at 56M00S, this means that it started recording 9 seconds before the first video. My code below will then sync the two videos by cutting the first 9 seconds of the second video.
+
+> [!TIP]
+> __Before syncing videos:__  
+> When using functions that sync videos (i.e., the functions [overlay](#2-overlay-videos) and [join](#4-juxtapose-videos) below), __the names of the videos must end with the timestamp (in minutes and seconds) of the first frame__, for example, "video_56M09S.mp4" (here, the first frame of this video occured at the 56th minute and 9th second of some hour). Otherwise, the function will produce a warning message stating that no timestamp is found and that 00:00 will be assumed.
 
 >[!NOTE]
 >When I first started writing these video-editing scripts, I used [MoviePy v1.0.3](https://zulko.github.io/moviepy/v1.0.3/). As of 2025, [MoviePy v2.0](https://zulko.github.io/moviepy/) has been released. See [here](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html) for details about the differences, if you wish to use the latest moviepy module. 
