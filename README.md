@@ -36,7 +36,7 @@ in the terminal of your editor: `python --version`
 
 ## Examples
 ### 1. Merge videos
-The following code calls for the __`merge`__ function to concatenate several videos into one long video. 
+The following code uses the __`merge`__ function to concatenate several videos into one long video. 
 ```python
 from editvid import merge
 merge(folder="C:/Users/user/Desktop/mc_vid", 
@@ -44,22 +44,22 @@ merge(folder="C:/Users/user/Desktop/mc_vid",
       camera=["BABY", "front", "SBR1", "SCREEN", "影片二"])
 ```
 In the code above:
-- __`folder`__: Enter __the path of the main project folder__. 
-- __`children`__: Enter __the names of first-level subfolders__. These subfolders should be stored directly within the main project folder. 
-- __`camera`__: Enter __the names of second-level subfolders__. These subfolders should be stored within the first-level  subfolders. Within these subfolders should be all the short, truncated videos that we want to concatenate into one complete long video.
-- In short, the storage path of the short videos should be something in the line of ___"main project folder" -> "first level (child) subfolder" -> "second level (camera) subfolder" -> "videos to be concatenated"___. By passing these subfolders into the function, all the videos in them will be processed automatically. The concatenated videos will be named after their respective second-level subfolder.
+- __`folder`__: __The path to the main project folder__ that contains all subfolders.  
+- __`children`__: __A list of first-level subfolders__ in the main project folder.  
+- __`camera`__: __A list of second-level subfolders__ in the first-level subfolders. These should contain the video clips that you want to concatenate.  
+- In short, the videos should be stored in a path like this: ___main project folder -> first-level subfolder -> second-level subfolder -> videos to be concatenated___. The final concatenated videos will be named after their respective second-level subfolder and stored in their respective first-level subfolder.
 
 >[!TIP]
-> - If a subfolder or video does not exist, the function will just return a statement that there is nothing to merge for that child's camera. This means that we can list all the possible subfolders even if the combination of first and second level subfolders exist only for some but not other videos - it would not crash the function.  
-> - This `merge` function is written specially for certain Xiaomi Security Cameras ([2K](https://www.mi.com/global/product/mi-360-home-security-camera-2k/specs/), 
+> - If a subfolder or video does not exist, the function will simply return a message saying there's nothing to merge for that particular camera. This means you can list all possible subfolders. The function won’t crash if some subfolders are missing.  
+> - This `merge` function is designed specifically for certain Xiaomi Security Cameras ([2K](https://www.mi.com/global/product/mi-360-home-security-camera-2k/specs/), 
 [1080p](https://www.mi.com/global/product/mi-360-camera-1080p/specs/), 
-[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). Specifically, this function extracts the initial timestamp indicated in the name of the camera recording and adds it to the name of the concatenated video. If your video files are named differently, this function will assume the initial timestamp to be 00M00S.
+[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). It extracts the timestamp from the camera recording's name and adds it to the name of the concatenated video. If your video files are named differently, this function will assume the timestamp to be 00M00S.
 > - To concatenate recordings from Xiaomi Security Cameras that store recordings in 10 seconds (e.g., [2K (Magnetic Mount)](https://www.mi.com/global/product/mi-camera-2k-magnetic-mount/specs/)), see this [script](./obsolete/merge-clips.py). For the newer security cameras that store recordings in longer duration (in terms of several minutes), see this [script](./obsolete/merge-vid2.py).
 
 ---
 
 ### 2. Crop videos
-The following code calls for the __`crop`__ function to crop a video. 
+The following code uses the __`crop`__ function to crop a video. 
 ```python
 from editvid import crop
 crop(folder = "C:/Users/user/Desktop/mc_vid",
@@ -71,6 +71,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
      children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
 ```
 In the code above:
+- __`folder`__: __The path to the main project folder__ that contains all subfolders.   
 - __`cam`__: Stands for "camera". Enter __the name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 1 below).
 - __`newname`__: __Give the cropped video a new name__. 
 - __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
@@ -86,7 +87,7 @@ _An example of an Excel file for the crop function._
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_crop.png" width=auto height="250">
 
 In Figure 1 above:
-- __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the videos are stored. 
+- __Column A__ (or the parameter __`children`__): __A list of first-level subfolders__ in the main project folder. These should contain the videos that you want to crop.  
 - __Column B__ (or the parameter __`start`__): Contains __the time at which the recording started__ (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
 - __Column C__ (or the parameter __`end`__): Contains __the time at which the recording ended__ (again, in seconds). This can be left blank if the duration of all video recordings is the same (see the parameter `dur` above).
 - __Column D__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 2](#figure-2) below for an illustration.
@@ -113,7 +114,7 @@ In Figure 2 above:
 ---
 
 ### 3. Overlay videos
-The following code calls for the __`overlay`__ function to overlay one video on top of another and create a composite video. 
+The following code uses the __`overlay`__ function to overlay one video on top of another and create a composite video. 
 ```python
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -127,7 +128,7 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
         children=None, start=None, end=None, corr=None) 
 ```
 In the code above:
-- __`folder`__: Enter __the path of the main project folder__. 
+- __`folder`__: __The path to the main project folder__ that contains all subfolders.  
 - __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 3 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
 - __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 3 below).
 - __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
@@ -145,7 +146,7 @@ _An example of an Excel file for the overlay function._
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_overlay.png" width=auto height="250">
 
 In Figure 3 above: 
-- __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the base video and top video are stored. 
+- __Column A__ (or the parameter __`children`__): __A list of first-level subfolders__ in the main project folder. These should contain videos that you want to work on.  
 - __Column B__ (or the parameter __`start`__): Contains __the time at which the recording of top video started__ (in seconds).  
 - __Column C__ (or the parameter __`end`__): Contains __the time at which the recording of top video ended__ (again, in seconds). This can be left blank if the duration of all top video recordings is the same (see the parameter `dur` above).
 - __Column D__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the base video is slower (i.e., lags behind the top video), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
@@ -157,7 +158,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__  
-The following code calls for the __`join2side`__ function to place two videos side-by-side for comparison. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
+The following code used the __`join2side`__ function to place two videos side-by-side for comparison. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
 ```python
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -176,7 +177,7 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
         children=None, main=None, start=None, end=None, corr=None, x1=None, x2=None, y1=None, y2=None)
 ```
 In the code above:
-- __`folder`__: Enter __the path of the main project folder__. 
+- __`folder`__: __The path to the main project folder__ that contains all subfolders.  
 - __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 4 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
 - __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 4 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "side" in the name. These videos should be stored together with camera-1 videos.
@@ -199,7 +200,7 @@ _An example of an Excel file for the join2side function._
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_join2.png" width=auto height="250">
 
 In Figure 4 above: 
-- __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the two camera-1 and camera-2 videos are stored. 
+- __Column A__ (or the parameter __`children`__): __A list of first-level subfolders__ in the main project folder. These should contain the videos (i.e., camera-1 and camera-2) that you want to juxtapose.  
 - __Column B__ (or the parameter __`main`__): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1` and `cam2`. The video identified as the main camera will be displayed larger than the other video. 
 - __Column C__ (or the parameter __`start`__): Contains __the time at which the recording of camera-1 started__ (in seconds).  
 - __Column D__ (or the parameter __`end`__): Contains __the time at which the recording of camera-1 ended__ (again, in seconds). This can be left blank if the duration of all camera-1 recordings is the same (see the parameter `dur` above).
@@ -215,7 +216,7 @@ In Figure 4 above:
 ---
 
 #### (4B) Juxtapose three videos
-The following code calls for the __`join3side`__ function to place three videos beside each other for comparison. See [Example 4A](#4-juxtapose-videos) above to join two videos. 
+The following code uses the __`join3side`__ function to place three videos beside each other for comparison. See [Example 4A](#4-juxtapose-videos) above to join two videos. 
 ```python
 from editvid import join3side
 join3side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -231,7 +232,7 @@ join3side(folder = "C:/Users/user/Desktop/mc_vid",
         children=None, main=None, start=None, end=None, corr1=None, corr2=None)
 ```
 In the code above:
-- __`folder`__: Enter __the path of the main project folder__. 
+- __`folder`__: __The path to the main project folder__ that contains all subfolders.  
 - __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameters `corr1` and `corr2` (see Figure 5 below) are skipped or not. If `attempts` is 1, any argument passed to the parameters `corr1` and `corr2` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameters `corr1` and `corr2`.
 - __`cam1`__: Stands for "camera-1". Enter __the name of the first video__. In this example, Python will search for a video file that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 5 below).
 - __`cam2`__: Stands for "camera-2". Enter __the name of the second video__. In this example, Python will search for a video file that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
@@ -251,7 +252,7 @@ _An example of an Excel file for the join3side function._
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_join3.png" width=auto height="250">
 
 In Figure 5 above: 
-- __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the three camera-1, camera-2, and camera-3 videos are stored. 
+- __Column A__ (or the parameter __`children`__): __A list of first-level subfolders__ in the main project folder. These should contain the videos (i.e., camera-1, camera-2, and camera-3) that you want to juxtapose.  
 - __Column B__ (or the parameter __`main`__): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1`, `cam2`, and `cam3`. The video identified as the main camera will be displayed larger than the other video. 
 - __Column C__ (or the parameter __`start`__): Contains __the time at which the recording of camera-1 started__ (in seconds).  
 - __Column D__ (or the parameter __`end`__): Contains __the time at which the recording of camera-1 ended__ (again, in seconds). This can be left blank if the duration of all camera-1 recordings is the same (see the parameter `dur` above).
