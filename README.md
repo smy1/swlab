@@ -6,9 +6,9 @@ All my scripts use MoviePy (a Python reference tool) to edit videos in bulk, all
 For __other video-editing scripts__ that have _not_ been compiled, see [here](./obsolete/). To __transcribe audio files__, see [here](https://github.com/smy1/auto-peer/blob/main/transcribe-audio/). To __code parents' shared reading practice__ automatically, see [here](https://github.com/smy1/auto-peer/blob/main/).
 
 - [Installation and requirements](#installation-and-requirements)
-- [__Example 1__](#1-merge-videos): Join videos together
-- [__Example 2__](#2-overlay-videos): Sync and display a smaller video on top of a bigger one
-- [__Example 3__](#3-crop-videos): Crop videos
+- [__Example 1__](#1-merge-videos): Join videos together into a long one
+- [__Example 2__](#2-crop-videos): Crop videos
+- [__Example 3__](#3-overlay-videos): Sync and display a smaller video on top of a bigger one
 - [__Example 4__](#4-juxtapose-videos): Sync and display videos beside each other
 - [Helpful resources](#helpful-resources) (I wouldn't have been able to write these scripts without them)
 
@@ -58,7 +58,61 @@ In the code above:
 
 ---
 
-### 2. Overlay videos
+### 2. Crop videos
+The following code calls for the __`crop`__ function to crop a video. 
+```python
+from editvid import crop
+crop(folder = "C:/Users/user/Desktop/mc_vid",
+     cam = "front",
+     newname = "solo",
+     dur = 183,
+     amplify = 5, 
+     excel = "C:/Users/user/Desktop/mc_vid/example_crop.xlsx",
+     children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
+```
+In the code above:
+- __`cam`__: Stands for "camera". Enter __the name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 1 below).
+- __`newname`__: __Give the cropped video a new name__. 
+- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
+- __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
+- __`excel`__: Enter __the path and name of the relevant Excel file__. 
+- __other parameters__: Leave these as `None` since the function will extract values from the Excel file. See [examples.py](./examples.py) if you wish to manually pass arguments to these parameters instead of using an Excel file.
+
+#
+In the __Excel file for the `crop` function__, we should have seven columns that correspond to the last few parameters of this function (i.e., `children`, `start`, `end`, `x1`, `x2`, `y1`, and `y2`, see Figure 1 below). 
+
+__Figure 1__  
+_An example of an Excel file for the crop function._  
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_crop.png" width=auto height="250">
+
+In Figure 1 above:
+- __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the videos are stored. 
+- __Column B__ (or the parameter __`start`__): Contains __the time at which the recording started__ (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
+- __Column C__ (or the parameter __`end`__): Contains __the time at which the recording ended__ (again, in seconds). This can be left blank if the duration of all video recordings is the same (see the parameter `dur` above).
+- __Column D__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 2](#figure-2) below for an illustration.
+- __Column E__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
+- __Column F__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
+- __Column G__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
+
+#
+#### Figure 2 
+_An illustration that explains about the cropping details._  
+<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_annotated.png" width=auto height="230">
+
+In Figure 2 above: 
+- This is a screenshot of a movie with a dimension of 640 x 480. Imagine that we want to crop the area indicated by the white border.
+- To get __x1 and x2__: Given that the width of the movie is 640, we can gauge the other points along the x-axis by dividing the screenshot by halves. This gives us a value of _120 for x1_ and _480 for x2_.
+- To get __y1 and y2__: Likewise, knowing that the height of the movie is 480, we can gauge the other points along the y-axis. This gives us a value of _360 for y2_. Since we do not want to cut the top, _y1 will be 0_.
+
+>[!TIP]
+>The dimension of a video can be obtained by checking its properties. We can also get this information using moviepy:
+>```python
+>(w, h) = vid.size ##gives the width and heigth of a video that is named "vid"
+>```
+
+---
+
+### 3. Overlay videos
 The following code calls for the __`overlay`__ function to overlay one video on top of another and create a composite video. 
 ```python
 from editvid import overlay
@@ -74,24 +128,23 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: Enter __the path of the main project folder__. 
-- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 1 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
-- __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 1 below).
+- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 3 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
+- __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 3 below).
 - __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
 - __`newname`__: __Give the composite video a new name__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
 - __`dur`__: Stands for __"duration". If the recorded task has a standard duration__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave this argument as `None`. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
+- __other parameters__: Leave these as `None` since the function will extract values from the Excel file. See [examples.py](./examples.py) if you wish to manually pass arguments to these parameters instead of using an Excel file.
 
-&nbsp;
+#
+In the __Excel file for the `overlay` function__, we should have four columns that correspond to the last few parameters of this function (i.e., `children`, `start`, `end`, and `corr`, see Figure 3 below).  
 
-In the __Excel file for the `overlay` function__, we should have four columns, the first row being the names of these columns: "children", "start", "end", and "corr". These columns are essentially the last few parameters of this function.  
-
+__Figure 3__  
+_An example of an Excel file for the overlay function._  
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_overlay.png" width=auto height="250">
 
-__Figure 1__: _An example of an Excel file for the overlay function._  
-
-In Figure 1 above: 
+In Figure 3 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the base video and top video are stored. 
 - __Column B__ (or the parameter __`start`__): Contains __the time at which the recording of top video started__ (in seconds).  
 - __Column C__ (or the parameter __`end`__): Contains __the time at which the recording of top video ended__ (again, in seconds). This can be left blank if the duration of all top video recordings is the same (see the parameter `dur` above).
@@ -99,62 +152,6 @@ In Figure 1 above:
 
 > [!TIP]
 > For this `overlay` function to work properly, __the names of the videos should end with a timestamp (in minutes and seconds)__, for example, "video_56M09S.mp4". Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync.
-
----
-
-### 3. Crop videos
-The following code calls for the __`crop`__ function to crop a video. 
-```python
-from editvid import crop
-crop(folder = "C:/Users/user/Desktop/mc_vid",
-     cam = "front",
-     newname = "solo",
-     dur = 183,
-     amplify = 5, 
-     excel = "C:/Users/user/Desktop/mc_vid/example_crop.xlsx",
-     children=None, start=None, end=None, x1=None, x2=None, y1=None, y2=None)
-```
-In the code above:
-- __`cam`__: Stands for "camera". Enter __the name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 2 below).
-- __`newname`__: __Give the cropped video a new name__. 
-- __`dur`__: Stands for __"duration". If the recorded task has a standard length__ (e.g., 3 minutes), enter the duration here in seconds (i.e., 180). If the duration of the recorded task differs between participants, leave it as `None`. 
-- __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
-- __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
-
-&nbsp;
-
-In the __Excel file for the `crop` function__, we should have seven columns that correspond to the last few parameters of this function (i.e., `children`, `start`, `end`, `x1`, `x2`, `y1`, and `y2`). While these names can be changed to something else that is more intuitive (or even written in another language), the information _must_ be in entered in this order.  
-
-<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_crop.png" width=auto height="250">
-
-__Figure 2__: _An example of an Excel file for the crop function._
-
-In Figure 2 above:
-- __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the videos are stored. 
-- __Column B__ (or the parameter __`start`__): Contains __the time at which the recording started__ (in seconds) in the video recording of each of the particpant. This is assuming that we also want to clip the video in additional to cropping it.
-- __Column C__ (or the parameter __`end`__): Contains __the time at which the recording ended__ (again, in seconds). This can be left blank if the duration of all video recordings is the same (see the parameter `dur` above).
-- __Column D__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) below for an illustration.
-- __Column E__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
-- __Column F__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
-- __Column G__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
-
-#
-#### Figure 3 
-An illustration that explains about the cropping details.
-
-<img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_annotated.png" width=auto height="230">
-
-In Figure 3 above: 
-- This is a screenshot of a movie with a dimension of 640 x 480. Imagine that we want to crop the area indicated by the white border.
-- To get __x1 and x2__: Given that the width of the movie is 640, we can gauge the other points along the x-axis by dividing the screenshot by halves. This gives us a value of _120 for x1_ and _480 for x2_.
-- To get __y1 and y2__: Likewise, knowing that the height of the movie is 480, we can gauge the other points along the y-axis. This gives us a value of _360 for y2_. Since we do not want to cut the top, _y1 will be 0_.
-
->[!TIP]
->The dimension of a video can be obtained by checking its properties. We can also get this information using moviepy:
->```python
->(w, h) = vid.size ##gives the width and heigth of a video that is named "vid"
->```
 
 ---
 
@@ -189,18 +186,17 @@ In the code above:
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`mute_who`__: Enter __the name of the video that should be muted__ (the name should be the same as that given for either `cam1` or `cam2`). Leave it as `no` if neither video should be muted. 
 - __`crop_who`__: Enter __the name of the video that should be cropped__ (the name should be the same as that given for either `cam1` or `cam2`). Leave it as `no` if neither video should be cropped, and the parameters `x1`, `x2`, `y1`, and `y2` below will be ignored. 
-- __`match_time`__: If the start time of the two videos is different and we __need Python to calculate the time difference between the videos__, enter `yes`. The name of the videos must then end with their respective start time (e.g., 01M03S). If this is not necessary (i.e., the time of both videos is already synced), leave it as `no`.
+- __`match_time`__: If the start time of the two videos is different and we __need Python to calculate the time difference between the videos__, enter `yes`. The name of the videos must end with their respective starting timestamp (e.g., "video_01M03S.mp4"). Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync. If syncing of the videos is not necessary (e.g., the videos are already synced), leave this parameter as `no`.
 - __`resize_yes`__: If we __want to resize the videos__, enter `yes`. The main video will then be downsized to 0.7 while the other video will be downsized to 0.4. If we enter `no`, the videos will be of equal sizes. 
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.  
+- __other parameters__: Leave these as `None` since the function will extract values from the Excel file. See [examples.py](./examples.py) if you wish to manually pass arguments to these parameters instead of using an Excel file.
 
-&nbsp;
+#
+In the __Excel file for the `join2side` function__, we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`, see Figure 4 below).  
 
-In the __Excel file for the `join2side` function__, we should have nine columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr`, `x1`, `x2`, `y1`, and `y2`). 
-
+__Figure 4__  
+_An example of an Excel file for the join2side function._  
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_join2.png" width=auto height="250">
-
-__Figure 4__: _An example of an Excel file for the join2side function._
 
 In Figure 4 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the two camera-1 and camera-2 videos are stored. 
@@ -208,7 +204,7 @@ In Figure 4 above:
 - __Column C__ (or the parameter __`start`__): Contains __the time at which the recording of camera-1 started__ (in seconds).  
 - __Column D__ (or the parameter __`end`__): Contains __the time at which the recording of camera-1 ended__ (again, in seconds). This can be left blank if the duration of all camera-1 recordings is the same (see the parameter `dur` above).
 - __Column E__ (or the parameter __`corr`__, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
-- __Column F__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 3](#figure-3) above for an illustration. This parameter (and those that follow) can be left blank if the parameter `crop_who` is `no`.
+- __Column F__ (or the parameter __`x1`__) refers to __the start of the width__ of cropping area. See [Figure 2](#figure-2) above for an illustration. This parameter (and those that follow) can be left blank if the parameter `crop_who` is `no`.
 - __Column G__ (or the parameter __`x2`__) refers to __the end of the width__ of cropping area.
 - __Column H__ (or the parameter __`y1`__) refers to __the start of the height__ of cropping area.
 - __Column I__ (or the parameter __`y2`__) refers to __the end of the height__ of cropping area.
@@ -245,15 +241,14 @@ In the code above:
 - __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this function, the other two videos will be muted automatically.
 - __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
 - __`excel`__: Enter __the path and name of the relevant Excel file__. 
-- __other parameters__: Leave these as `None` since the arguments are found in the Excel file. See the [examples.py](./examples.py) script for an example on manually passing arguments to these parameters.
+- __other parameters__: Leave these as `None` since the function will extract values from the Excel file. See [examples.py](./examples.py) if you wish to manually pass arguments to these parameters instead of using an Excel file.
 
-&nbsp;
+#
+In the __Excel file for the `join3side` function__, we should have six columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr1`, `corr2`, see Figure 5 below).  
 
-In the __Excel file for the `join3side` function__, we should have six columns that correspond to the last few parameters of this function (i.e., `children`, `main`, `start`, `end`, `corr1`, `corr2`).   
-
+__Figure 5__  
+_An example of an Excel file for the join3side function._  
 <img src="https://github.com/smy1/swlab/blob/main/misc/py_eg_xl_join3.png" width=auto height="250">
-
-__Figure 5__: _An example of an Excel file for the join3side function._
 
 In Figure 5 above: 
 - __Column A__ (or the parameter __`children`__): Contains __the names of subfolders__ in which the three camera-1, camera-2, and camera-3 videos are stored. 
