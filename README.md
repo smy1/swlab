@@ -114,7 +114,7 @@ In Figure 2 above:
 ---
 
 ### 3. Overlay videos
-The following code uses the __`overlay`__ function to overlay one video on top of another and create a composite video. 
+The following code uses the __`overlay`__ function to sync and overlay one video on top of another to create a composite video. 
 ```python
 from editvid import overlay
 overlay(folder = "C:/Users/user/Desktop/mc_vid", 
@@ -131,7 +131,7 @@ In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.  
 - __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 3 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
 - __`bgcam`__: __The name of the video that will be used as the background__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These background videos should be stored in their respective subfolders, which must be passed to the parameter `children` (see Figure 3 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be synced___.
-- __`topcam`__: __The name of the video that will be placed on top__ in the composite video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored in their respective subfolders (together with the base videos), which must be passed to the parameter `children` (see Figure 3 below).
+- __`topcam`__: __The name of the video that will be placed on top__ in the composite video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored in their respective subfolders (together with the base videos).
 - __`newname`__: __Give the composite video a new name__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
 - __`dur`__: __The duration (in seconds)__ of the top video to be clipped. If the clipping duration differs between top videos, leave this as `None` and pass information to the parameter `end` below.   
@@ -158,7 +158,7 @@ In Figure 3 above:
 
 ### 4. Juxtapose videos
 __(4A) Juxtapose two videos__  
-The following code used the __`join2side`__ function to place two videos side-by-side for comparison. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
+The following code uses the __`join2side`__ function to sync and place two videos beside each other. See [Example 4B](#4b-juxtapose-three-videos) below to join three videos. 
 ```python
 from editvid import join2side
 join2side(folder = "C:/Users/user/Desktop/mc_vid",
@@ -216,7 +216,7 @@ In Figure 4 above:
 ---
 
 #### (4B) Juxtapose three videos
-The following code uses the __`join3side`__ function to place three videos beside each other for comparison. See [Example 4A](#4-juxtapose-videos) above to join two videos. 
+The following code uses the __`join3side`__ function to sync and place three videos beside each other. See [Example 4A](#4-juxtapose-videos) above to join two videos. 
 ```python
 from editvid import join3side
 join3side(folder = "C:/Users/user/Desktop/mc_vid",
