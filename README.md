@@ -72,7 +72,7 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.   
-- __`cam`__: __The name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders, which must be passed to the parameter `children` (see Figure 1 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be cropped___.
+- __`cam`__: __The name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders, which must be passed to the parameter `children` (see Figure 1 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be cropped___.  
 - __`newname`__: __Give the cropped video a new name__. 
 - __`dur`__: __The duration (in seconds)__ of the video to be clipped. If the clipping duration differs between videos, leave this as `None` and pass information to the parameter `end` below.  
 - __`amplify`__: A higher value __increases the volume of the video__. A value of `1` keeps the volume unchanged, while a value of `0` mutes the video.  
@@ -130,8 +130,8 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.  
 - __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 3 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
-- __`bgcam`__: Stands for "background-camera". Enter __the name of the video that will be used as the "base"__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These base videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 3 below).
-- __`topcam`__: Stands for "top-camera". Enter __the name of the video that will be overlaid on top__ of the base video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored together with the base videos.
+- __`bgcam`__: __The name of the video that will be used as the background__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These background videos should be stored in their respective subfolders, which must be passed to the parameter `children` (see Figure 3 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be synced___.
+- __`topcam`__: __The name of the video that will be placed on top__ in the composite video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored in their respective subfolders (together with the base videos), which must be passed to the parameter `children` (see Figure 3 below).
 - __`newname`__: __Give the composite video a new name__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
 - __`dur`__: __The duration (in seconds)__ of the top video to be clipped. If the clipping duration differs between top videos, leave this as `None` and pass information to the parameter `end` below.   
