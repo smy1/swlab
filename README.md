@@ -53,7 +53,7 @@ In the code above:
 > - If a subfolder or video does not exist, the function will simply return a message saying there's nothing to merge for that particular camera. This means you can list all possible subfolders. The function won’t crash if some subfolders are missing.  
 > - This `merge` function is designed specifically for certain Xiaomi Security Cameras ([2K](https://www.mi.com/global/product/mi-360-home-security-camera-2k/specs/), 
 [1080p](https://www.mi.com/global/product/mi-360-camera-1080p/specs/), 
-[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). It extracts the timestamp from the camera recording's name and adds it to the name of the concatenated video. If your video files are named differently, this function will assume the timestamp to be 00M00S.
+[C400](https://www.mi.com/global/product/xiaomi-smart-camera-c400/specs/)). It extracts the timestamp from the camera recording's name and adds it to the name of the concatenated video. If your videos are named differently, this function will assume the timestamp to be 00M00S.
 > - To concatenate recordings from Xiaomi Security Cameras that store recordings in 10 seconds (e.g., [2K (Magnetic Mount)](https://www.mi.com/global/product/mi-camera-2k-magnetic-mount/specs/)), see this [script](./obsolete/merge-clips.py). For the newer security cameras that store recordings in longer duration (in terms of several minutes), see this [script](./obsolete/merge-vid2.py).
 
 ---
@@ -72,8 +72,8 @@ crop(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.   
-- __`cam`__: __The name of the video that needs to be cropped__. In this example, Python will search for a video file that has the word "front" in the name. These videos should be stored in their respective subfolders, which must be passed to the parameter `children` (see Figure 1 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be cropped___.  
-- __`newname`__: __Give the cropped video a new name__. 
+- __`cam`__: __The name of the video that needs to be cropped__. In this example, Python will search for a video with "front" in the name. These videos should be stored in their respective subfolders (see parameter `children` in Figure 1 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be cropped___.  
+- __`newname`__: __The name for the cropped video__. 
 - __`dur`__: __The duration (in seconds)__ of the video to be clipped. If the clipping duration differs between videos, leave this as `None` and pass information to the parameter `end` below.  
 - __`amplify`__: A higher value __increases the volume of the video__. A value of `1` keeps the volume unchanged, while a value of `0` mutes the video.  
 - __`excel`__: __The path to the Excel file__ that contains the cropping details of each video. 
@@ -129,10 +129,10 @@ overlay(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.  
-- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 3 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
-- __`bgcam`__: __The name of the video that will be used as the background__ of the composite video. In this example, Python will search for a video file that has the word "baby" in the name. These background videos should be stored in their respective subfolders, which must be passed to the parameter `children` (see Figure 3 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be synced___.
-- __`topcam`__: __The name of the video that will be placed on top__ in the composite video. In this example, Python will search for a video file that has the word "screen" in the name. These top videos should be stored in their respective subfolders (together with the base videos).
-- __`newname`__: __Give the composite video a new name__. 
+- __`attempts`__: __The number of attempts in syncing videos__. If `attempts` is 1, any argument passed to the parameter `corr` below (see Figure 3) will be ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
+- __`bgcam`__: __The name of the video that will be used as the background__ of the composite video. In this example, Python will search for a video with "baby" in the name. These background videos should be stored in their respective subfolders (see parameter `children` in Figure 3 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be synced___.
+- __`topcam`__: __The name of the video that will be placed on top__ in the composite video. In this example, Python will search for a video with "screen" in the name. These top videos should be stored together with the background videos.
+- __`newname`__: __The name for the composite video__. 
 - __`propsize`__: Stands for "proportion-size". __How small should be top video be?__ In this example, `0.25` means 25% of its original size.
 - __`dur`__: __The duration (in seconds)__ of the top video to be clipped. If the clipping duration differs between top videos, leave this as `None` and pass information to the parameter `end` below.   
 - __`excel`__: __The path to the Excel file__ that contains the overlaying details of each video. 
@@ -149,7 +149,7 @@ In Figure 3 above:
 - __Column A__ (`children`): __A list of first-level subfolders__ in the main project folder. These should contain videos that you want to work on.  
 - __Column B__ (`start`): __The start time (in seconds)__ of the clipped top video.  
 - __Column C__ (`end`): __The end time (in seconds)__ of the clipped top video. This can be left blank if the clipping duration of all top videos is the same (see the parameter `dur` above).
-- __Column D__ (`corr`, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the base video is slower (i.e., lags behind the top video), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
+- __Column D__ (`corr`): __Adjustment (in seconds) to correct syncing issues__. ___If the background video lags behind the top video, give a positive number___. This parameter will be ignored if the parameter `attempts` above has a value of `1`.
 
 > [!TIP]
 > For this `overlay` function to work properly, __the names of the videos should end with a timestamp (in minutes and seconds)__, for example, "video_56M09S.mp4". Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync.
@@ -178,17 +178,17 @@ join2side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.  
-- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameter `corr` (see Figure 4 below) is skipped or not. If `attempts` is 1, any arguments passed to the parameter `corr` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
-- __`cam1`__: Stands for "camera-1". __The name of the first video that will be juxtaposed__. In this example, Python will search for a video that has the word "front" in the name. These camera-1 videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 4 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be juxtaposed___.  
-- __`cam2`__: Stands for "camera-2". __The name of the second video that will be juxtaposed__. In this example, Python will search for a video that has the word "side" in the name. These videos should be stored together with camera-1 videos.
-- __`newname`__: __Give the new video a name__. 
+- __`attempts`__: __The number of attempts in syncing videos__. If `attempts` is 1, any argument passed to the parameter `corr` below (see Figure 4) will be ignored, while if `attempts` is larger than 1, the function will expect a value for the parameter `corr`.
+- __`cam1`__: __The name of the first video that will be juxtaposed__. In this example, Python will search for a video with "front" in the name. These camera-1 videos should be stored in their respective subfolders (see parameter `children` in Figure 4 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be juxtaposed___.  
+- __`cam2`__: __The name of the second video that will be juxtaposed__. In this example, Python will search for a video with "side" in the name. These camera-2 videos should be stored together with camera-1 videos.
+- __`newname`__: __The name for the juxtaposed video__. 
 - __`dur`__: __The duration (in seconds)__ of camera-1 videos to be clipped. If the clipping duration differs between camera-1 videos, leave this as `None` and pass information to the parameter `end` below.
-- __`amplify_who`__: __The name of the video that should be amplified__ (the name given in either `cam1` or `cam2`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored.  
-- __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
-- __`mute_who`__: __The name of the video that should be muted__ (the name given in either `cam1` or `cam2`). Leave it as `no` if neither video should be muted. 
-- __`crop_who`__: __The name of the video that should be cropped__ (the name given in either `cam1` or `cam2`). Leave it as `no` if neither video should be cropped, and the parameters `x1`, `x2`, `y1`, and `y2` below will be ignored. 
-- __`match_time`__: If the start time of the two videos is different and we __need Python to calculate the time difference between the videos__, enter `yes`. The name of the videos must end with their respective starting timestamp (e.g., "video_01M03S.mp4"). Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync. If syncing of the videos is not necessary (e.g., the videos are already synced), leave this parameter as `no`.
-- __`resize_yes`__: If we __want to resize the videos__, enter `yes`. The main video will then be downsized to 0.7 while the other video will be downsized to 0.4. If we enter `no`, the videos will be of equal sizes. 
+- __`amplify_who`__: __The name of the video that should be amplified__. Leave this as `no` if neither video should be amplified.  
+- __`amplify`__: A higher value __increases the volume of the video__. A value of `1` keeps the volume unchanged, while a value of `0` mutes the video.  
+- __`mute_who`__: __The name of the video that should be muted__. Leave it as `no` if neither video should be muted. 
+- __`crop_who`__: __The name of the video that should be cropped__. Leave it as `no` if neither video should be cropped. See parameters `x1`, `x2`, `y1`, and `y2` below for cropping details. 
+- __`match_time`__: __Should the videos be synced__ based on their timestamps? If `yes`, the name of the videos must end with their respective starting timestamp (e.g., "video_01M03S.mp4"). Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed".
+- __`resize_yes`__: __Should the videos be resized__? If `yes`, the main video will then be downsized to 70% and the other video to 40%. If `no`, the videos will be of equal sizes. 
 - __`excel`__: __The path to the Excel file__ that contains the juxtaposing details of each video.  
 - __other parameters__: Leave these as `None`, as the function will automatically extract the values from the Excel file. If you prefer to manually input these values, see [examples.py](./examples.py).  
 
@@ -201,11 +201,11 @@ _An example of an Excel file for the join2side function._
 
 In Figure 4 above: 
 - __Column A__ (`children`): __A list of first-level subfolders__ in the main project folder. These should contain the videos (i.e., camera-1 and camera-2) that you want to juxtapose.  
-- __Column B__ (`main`): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1` and `cam2`. The video identified as the main camera will be displayed larger than the other video. 
+- __Column B__ (`main`): __The name of the main video__. The main video will be displayed larger in the final juxtaposed video. 
 - __Column C__ (`start`): __The start time (in seconds)__ of the clipped camera-1 video.  
 - __Column D__ (`end`): __The end time (in seconds)__ of the clipped camera-1 video. This can be left blank if the clipping duration of all camera-1 videos is the same (see the parameter `dur` above).  
-- __Column E__ (`corr`, which stands for "correction"): Contains numbers (in seconds) to correct for out-of-sync videos. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
-- __Column F__ (`x1`): __The starting point of the cropping area’s width__. See [Figure 2](#figure-2) above for an illustration. This parameter (and those that follow) will be ignored if the parameter `crop_who` is `no`.
+- __Column E__ (`corr`): __Adjustment (in seconds) to correct syncing issues__. ___If camera-2 lags behind camera-1, give a positive number___. This parameter will be ignored if the parameter `attempts` above has a value of `1`. 
+- __Column F__ (`x1`): __The starting point of the cropping area’s width__. See [Figure 2](#figure-2) above for an illustration. This parameter (and those that follow) will be ignored if the parameter `crop_who` above is `no`.
 - __Column G__ (`x2`): __The endpoint of the cropping area’s width__.  
 - __Column H__ (`y1`): __The starting point of the cropping area’s height__.  
 - __Column I__ (`y2`): __The endpoint of the cropping area’s height__.  
@@ -233,14 +233,14 @@ join3side(folder = "C:/Users/user/Desktop/mc_vid",
 ```
 In the code above:
 - __`folder`__: __The path to the main project folder__ that contains all subfolders.  
-- __`attempts`__: __The number of attempts in syncing videos__. This parameter determines whether the parameters `corr1` and `corr2` (see Figure 5 below) are skipped or not. If `attempts` is 1, any argument passed to the parameters `corr1` and `corr2` is ignored, while if `attempts` is larger than 1, the function will expect a value for the parameters `corr1` and `corr2`.
-- __`cam1`__: __The name of the first video that will be juxtaposed__. In this example, Python will search for a video that has the word "sbr1" in the name. These videos should be stored in their respective subfolders. The names of these subfolders must be passed to the parameter `children` (see Figure 5 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be juxtaposed___.  
-- __`cam2`__: __The name of the second video that will be juxtaposed__. In this example, Python will search for a video that has the word "sbr2" in the name. These videos should be stored together with cam1 videos.
-- __`cam3`__: __The name of the third video that will be juxtaposed__. In this example, Python will search for a video that has the word "sbr3" in the name. These videos should be stored together with cam1 & cam2 videos.
-- __`newname`__: __Give the new video a name__. 
+- __`attempts`__: __The number of attempts in syncing videos__. If `attempts` is 1, any argument passed to the parameters `corr1` and `corr2` below (see Figure 5) will be ignored, while if `attempts` is larger than 1, the function will expect a value for the parameters `corr1` and `corr2`.
+- __`cam1`__: __The name of the first video that will be juxtaposed__. In this example, Python will search for a video with "sbr1" in the name. These camera-1 videos should be stored in their respective subfolders (see parameter `children` in Figure 5 below). In other words, the videos should be stored in a path like this: ___main project folder -> subfolder -> videos to be juxtaposed___.  
+- __`cam2`__: __The name of the second video that will be juxtaposed__. In this example, Python will search for a video with "sbr2" in the name. These camera-2 videos should be stored together with camera-1 videos.
+- __`cam3`__: __The name of the third video that will be juxtaposed__. In this example, Python will search for a video with "sbr3" in the name. These camera-3 videos should be stored together with camera-1 & camera-2 videos.
+- __`newname`__: __The name for the juxtaposed video__. 
 - __`dur`__: __The duration (in seconds)__ of the camera-1 video to be clipped. If the clipping duration differs between camera-1 videos, leave this as `None` and pass information to the parameter `end` below.  
-- __`amplify_who`__: Enter __the name of the video that should be amplified__ (the name should be the same as that given for either `cam1`, `cam2`, or `cam3`). Leave it as `no` if neither video should be amplified, and the parameter `amplify` below will be ignored. In this function, the other two videos will be muted automatically.
-- __`amplify`__: The higher the number we enter here, the louder the video would be. An argument of `1` means that the volume is unchanged while an argument of `0` means that the video will be muted.
+- __`amplify_who`__: __The name of the video that should be amplified__. Leave this as `no` if no video should be amplified.
+- __`amplify`__: A higher value __increases the volume of the video__. A value of `1` keeps the volume unchanged, while a value of `0` mutes the video.  
 - __`excel`__: __The path to the Excel file__ that contains the juxtaposing details of each video.  
 - __other parameters__: Leave these as `None`, as the function will automatically extract the values from the Excel file. If you prefer to manually input these values, see [examples.py](./examples.py).  
 
@@ -253,11 +253,11 @@ _An example of an Excel file for the join3side function._
 
 In Figure 5 above: 
 - __Column A__ (`children`): __A list of first-level subfolders__ in the main project folder. These should contain the videos (i.e., camera-1, camera-2, and camera-3) that you want to juxtapose.  
-- __Column B__ (`main`): Contains __the name of the video camera that has the best angle of recording__. These names should be the same as that entered for the parameters `cam1`, `cam2`, and `cam3`. The video identified as the main camera will be displayed larger than the other video. 
+- __Column B__ (`main`): __The name of the main video__. The main video will be displayed larger in the final juxtaposed video. 
 - __Column C__ (`start`): __The start time (in seconds)__ of the clipped camera-1 video.  
 - __Column D__ (`end`): __The end time (in seconds)__ of the clipped camera-1 video. This can be left blank if the clipping duration of all camera-1 videos is the same (see the parameter `dur` above).  
-- __Column E__ (`corr1`): Contains numbers (in seconds) to correct for out-of-sync camera-2. __If the camera-2 is slower (i.e., lags behind camera-1), give a positive number__. If the parameter `attempts` above has a value of `1`, any argument provided here will be skipped. Likewise, if the parameter `attempts` above has a value that is larger than `1` and no argument is provided here, the function will crash.
-- __Column F__ (`corr2`): Contains numbers (in seconds) to correct for out-of-sync camera-3. __If the camera-3 is slower (i.e., lags behind camera-1), give a positive number__. 
+- __Column E__ (`corr1`): __Adjustment (in seconds) to correct syncing issues__. ___If camera-2 lags behind camera-1, give a positive number___. This parameter will be ignored if the parameter `attempts` above has a value of `1`. 
+- __Column F__ (`corr2`): ___If camera-3 lags behind camera-1, give a positive number___.  
 
 > [!TIP]
 > For this `join3side` function to work properly, __the names of the videos should end with a timestamp (in minutes and seconds)__, for example, "video_56M09S.mp4". Otherwise, the function will produce a warning message stating that "no timestamp is found and that 00:00 will be assumed". This may cause the videos to be out of sync.
